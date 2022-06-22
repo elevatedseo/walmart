@@ -1,0 +1,20 @@
+{
+    "walmart_bopis_queue": {
+        "column": {
+            "queue_id": true,
+            "entity_type": true,
+            "entity_id": true,
+            "error_code": true,
+            "total_retries": true,
+            "error_message": true,
+            "status": true,
+            "operation_type": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "BOPIS_QUEUE_ENTITY_TYPE_ENTITY_ID": true
+        }
+    }
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="bopis">
+            <tab>service</tab>
+            <resource>Walmart_BopisLogging::api_logging</resource>
+            <group id="logging" translate="label" type="text" sortOrder="60" showInDefault="1">
+                <label>Logging</label>
+                <frontend_model>Walmart\BopisBase\Block\System\Config\Form\Custom</frontend_model>
+                <fieldset_css>bopis-custom-group</fieldset_css>
+                <depends>
+                    <field id="bopis/general/enabled">1</field>
+                </depends>
+                <field id="debug" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Debug Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

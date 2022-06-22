@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="walmart_bopis_checkout_pick_in_store_get_pickup_option_for_order"
+                type="Walmart\BopisCheckoutPickInStore\Plugin\Sales\Order\GetPickupOptionForOrderPlugin"/>
+        <plugin name="walmart_bopis_checkout_pick_in_store_save_pickup_option_for_order"
+                type="Walmart\BopisCheckoutPickInStore\Plugin\Sales\Order\SavePickupOptionForOrderPlugin"/>
+    </type>
+    <type name="Magento\Quote\Model\ResourceModel\Quote\Address\Collection">
+        <plugin name="walmart_bopis_checkout_pick_in_store_add_pickup_location_to_quote_address"
+                type="Walmart\BopisCheckoutPickInStore\Plugin\Quote\AddressCollection\GetPickupOptionInformationPlugin" sortOrder="21" />
+    </type>
+    <type name="Magento\Quote\Model\ResourceModel\Quote\Address">
+        <plugin name="walmart_bopis_checkout_pick_in_store_load_pickup_option_for_quote_address"
+                type="Walmart\BopisCheckoutPickInStore\Plugin\Quote\Address\LoadPickupOptionForQuoteAddress" sortOrder="31" />
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address">
+        <plugin name="walmart_bopis_checkout_pick_in_store_manage_assignment_of_pickup_option_to_quote_address"
+                type="Walmart\BopisCheckoutPickInStore\Plugin\Quote\Address\ManageAssignmentOfPickupOptionToQuoteAddress" sortOrder="21" />
+    </type>
+    <type name="Magento\InventoryInStorePickupQuote\Model\ToQuoteAddress">
+        <plugin name="walmart_bopis_checkout_pick_in_store_assignment_of_pickup_option_when_converting_address"
+                type="Walmart\BopisCheckoutPickInStore\Plugin\Quote\AssignmentOfPickupOptionWhenConvertingAddress" sortOrder="10" />
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address\ToOrder">
+        <plugin name="walmart_bopis_checkout_pick_in_store_set_pickup_option_to_order_during_address_conversion"
+                type="Walmart\BopisCheckoutPickInStore\Plugin\Quote\SetPickupOptionToOrder" sortOrder="21" />
+    </type>
+    <type name="Magento\Quote\Model\ValidationRules\QuoteValidationComposite">
+        <arguments>
+            <argument name="validationRules" xsi:type="array">
+                <item name="WmtBopisPickupOptionQuoteValidationRule" xsi:type="object">Walmart\BopisCheckoutPickInStore\Model\Quote\ValidationRule\PickupOptionQuoteValidationRule</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Quote\Model\Quote\TotalsCollector">
+        <plugin name="walmart_bopis_checkout_pick_in_store_set_shipping_description"
+                type="Walmart\BopisCheckoutPickInStore\Plugin\Quote\Address\SetShippingDescription" sortOrder="100" />
+    </type>
+    <type name="Magento\InventoryInStorePickupShippingApi\Model\Carrier\GetCarrierTitle">
+        <plugin name="walmart_bopis_checkout_pick_in_store_get_carrier_title"
+                type="Walmart\BopisCheckoutPickInStore\Plugin\Carrier\GetCarrierTitlePlugin"
+                sortOrder="20" />
+    </type>
+    <type name="Magento\InventoryInStorePickupShippingApi\Model\IsInStorePickupDeliveryCartInterface">
+        <plugin name="walmart_bopis_checkout_disable_validation_on_virtual_cart"
+                type="Walmart\BopisCheckoutPickInStore\Plugin\InventoryInStorePickupShippingApi\Model\IsInStorePickupDeliveryCartPlugin" />
+    </type>
+</config>

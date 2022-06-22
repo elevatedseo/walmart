@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="inventory_source">
+        <column xsi:type="boolean" name="is_wmt_bopis_synced" nullable="false" default="0" comment="Is Source Bopis Synced"/>
+        <column xsi:type="text" name="sync_error" nullable="true" comment="Sync Errors"/>
+    </table>
+</schema>

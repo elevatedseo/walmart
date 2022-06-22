@@ -1,0 +1,51 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+use Walmart\BopisPreferredLocationFrontend\ViewModel\PreferredLocation;
+
+/**
+ * @var Escaper $escaper
+ * @var Template $block
+ * @var SecureHtmlRenderer $secureRenderer
+ * @var PreferredLocation $viewModel
+ */
+$viewModel = $block->getViewModel();
+if (!$viewModel) {
+    return '';
+}
+$isEnabled = $viewModel->isEnabled();
+if (!$isEnabled) {
+    return '';
+}
+?>
+<script type="text/javascript">
+    window.checkoutConfig = window.checkoutConfig || {};
+</script>
+<div id="bopis-modal" class="bopis-modal" data-bind="scope: 'bopis-modal'"  data-mage-init='{
+    "Walmart_BopisPreferredLocationFrontend/js/bopis-modal": {
+        "modalOptions": {
+            "title": "<?= $escaper->escapeHtmlAttr(__('Select Store for Pickup')) ?>",
+            "trigger": "[data-role=bopis-modal-trigger]",
+            "modalClass": "location-popup",
+            "responsive": true,
+            "innerScroll": true,
+            "buttons": []
+        }
+    }}'>
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "#bopis-modal": {
+            "Magento_Ui/js/core/app": <?= /* @escapeNotVerified */ $block->getJsLayout();?>
+        }
+    }
+</script>
+

@@ -1,0 +1,21 @@
+{
+    "name": "walmart/module-magento-bopis-location-check-in-api",
+    "description": "This module defines a web API endpoint for receiving check-in requests from customers, and forwarding those requests to the Walmart ChaaS.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisLocationCheckInApi\\": ""
+        }
+    }
+}

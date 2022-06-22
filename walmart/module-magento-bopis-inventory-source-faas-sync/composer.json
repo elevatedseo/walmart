@@ -1,0 +1,26 @@
+{
+    "name": "walmart/module-magento-bopis-inventory-source-faas-sync",
+    "description": "This module is responsible for sending information about Retail Store Locations configured in Adobe Commerce to the Walmart FaaS, such as the address, supported pick-up options, and operating hours.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-base": "^1.0.0",
+        "walmart/bopis-sdk": "^1.0.0",
+        "walmart/module-magento-bopis-inventory-source-api": "^1.0.0",
+        "walmart/module-magento-bopis-logging": "^1.0.0",
+        "walmart/module-magento-bopis-api-connector": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisInventorySourceFaasSync\\": ""
+        }
+    }
+}

@@ -1,0 +1,68 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+// @codingStandardsIgnoreFile
+
+use Magento\InventoryInStorePickupSalesAdminUi\ViewModel\CreateOrder\SourcesForm;
+use Walmart\BopisCheckoutPickInStoreAdminUi\ViewModel\CreateOrder\PickupOptionsForm;
+
+/**
+ * @var Magento\Backend\Block\Template $block
+ * @var SourcesForm $viewModel
+ */
+$viewModel = $block->getViewModel();
+if (!$viewModel) {
+    return '';
+}
+$sources = $viewModel->getPickupSourcesOptionsList();
+if (empty($sources)) {
+    return '';
+}
+/**
+ * @var Magento\Backend\Block\Template $block
+ * @var PickupOptionsForm $pickupOptionsViewModel
+ */
+$pickupOptionsViewModel = $block->getPickupOptionsViewModel();
+if (!$pickupOptionsViewModel) {
+    return '';
+}
+$pickupOptionsBySource = $pickupOptionsViewModel->getPickupOptionsBySourceList();
+if (empty($pickupOptionsBySource)) {
+    return '';
+}
+?>
+<fieldset class="admin__fieldset payment-method"
+          id="shipping_form_pickup_location_source" style="display: none"
+>
+    <div class="admin__field">
+        <label class="label admin__field-label" for="pickup_location_source">
+            <span><?= $block->escapeHtml(__('Pickup Location Source')) ?></span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="pickup_location_source" name="pickup_location_source"
+                    class="select admin__control-select">
+                <?php foreach ($sources as $code => $name): ?>
+                    <option value="<?= $block->escapeHtml($code) ?>">
+                        <?= $block->escapeHtml($name) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+    <div class="admin__field">
+        <label class="label admin__field-label" for="pickup_option">
+            <span><?= $block->escapeHtml(__('Pickup Option')) ?></span>
+        </label>
+        <div class="admin__field-control control">
+            <select id="pickup_option" name="pickup_option" class="select admin__control-select">
+                <?php foreach ($pickupOptionsBySource as $optionCode => $optionName): ?>
+                    <option value="<?= $block->escapeHtml($optionCode) ?>">
+                        <?= $block->escapeHtml($optionName) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+</fieldset>

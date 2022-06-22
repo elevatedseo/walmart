@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <bopis>
+            <order_synchronization>
+                <barcode_source>sku</barcode_source>
+                <barcode_type>SKU</barcode_type>
+                <max_number_of_items>100</max_number_of_items>
+            </order_synchronization>
+        </bopis>
+    </default>
+</config>

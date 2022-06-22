@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Walmart_BopisOperationQueueAdminUi::walmart_bopisoperationqueueadminui_bopis_queue"
+             title="Store Fulfillment Queue Management"
+             module="Walmart_BopisOperationQueueAdminUi"
+             sortOrder="30"
+             resource="Walmart_BopisOperationQueueAdminUi::walmart_bopisoperationqueueadminui_bopis_queue"
+             parent="Magento_Backend::system_tools"
+             action="wct-fulfillment/grid/index"
+             dependsOnConfig="bopis/general/enabled"/>
+    </menu>
+</config>

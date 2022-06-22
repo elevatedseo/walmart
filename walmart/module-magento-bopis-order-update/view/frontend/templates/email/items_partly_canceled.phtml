@@ -1,0 +1,87 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate
+// @codingStandardsIgnoreFile
+
+/**
+ * @var $block \Magento\Sales\Block\Order\Email\Items
+ * @var $escaper \Magento\Framework\Escaper
+ **/
+?>
+<?php $_order = $block->getOrder() ?>
+<?php if ($_order): ?>
+    <?php $_items = $_order->getAllItems(); ?>
+    <table class="email-items">
+        <thead>
+        <tr>
+            <th class="item-info">
+                <?php if ($block->getActionType() == Walmart\BopisOrderUpdateApi\Model\StatusAction::ACTION_PICKED): ?>
+                    <?= $escaper->escapeHtml(__('Ready for Pickup Items')) ?>
+                <?php elseif ($block->getActionType()
+                              == Walmart\BopisOrderUpdateApi\Model\StatusAction::ACTION_DISPENSED): ?>
+                    <?= $escaper->escapeHtml(__('Delivered Items')) ?>
+                <?php endif; ?>
+            </th>
+            <th class="item-qty">
+                <?= $escaper->escapeHtml(__('Qty')) ?>
+            </th>
+            <th class="item-price">
+                <?= $escaper->escapeHtml(__('Price')) ?>
+            </th>
+        </tr>
+        </thead>
+        <?php foreach ($_items as $_item): ?>
+            <tbody>
+            <?= $block->getReadyItemHtml($_item) ?>
+            </tbody>
+        <?php endforeach; ?>
+    </table>
+    <table class="email-items">
+        <thead>
+        <tr>
+            <th class="item-info">
+                <?= $escaper->escapeHtml(__('Canceled Items')) ?>
+            </th>
+            <th class="item-qty">
+                <?= $escaper->escapeHtml(__('Qty')) ?>
+            </th>
+            <th class="item-price">
+                <?= $escaper->escapeHtml(__('Price')) ?>
+            </th>
+        </tr>
+        </thead>
+        <?php foreach ($_items as $_item): ?>
+            <tbody>
+            <?= $block->getCanceledItemHtml($_item) ?>
+            </tbody>
+        <?php endforeach; ?>
+        <tfoot class="order-totals">
+        <?= $block->getChildHtml('order_totals') ?>
+        </tfoot>
+    </table>
+    <?php if ($this->helper(\Magento\GiftMessage\Helper\Message::class)
+                  ->isMessagesAllowed('order', $_order, $_order->getStore())
+              && $_order->getGiftMessageId()
+    ): ?>
+        <?php $_giftMessage = $this->helper(\Magento\GiftMessage\Helper\Message::class)
+            ->getGiftMessage($_order->getGiftMessageId()); ?>
+        <?php if ($_giftMessage): ?>
+            <br />
+            <table class="message-gift">
+                <tr>
+                    <td>
+                        <h3><?= $escaper->escapeHtml(__('Gift Message for this Order')) ?></h3>
+                        <strong><?= $escaper->escapeHtml(__('From:')) ?></strong> <?= $escaper->escapeHtml($_giftMessage->getSender()) ?>
+                        <br /><strong><?= $escaper->escapeHtml(__('To:')) ?></strong> <?= $escaper->escapeHtml($_giftMessage->getRecipient()) ?>
+                        <br /><strong><?= $escaper->escapeHtml(__('Message:')) ?></strong>
+                        <br /><?= $escaper->escapeHtml($_giftMessage->getMessage()) ?>
+                    </td>
+                </tr>
+            </table>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

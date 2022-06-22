@@ -1,0 +1,21 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ *
+ * @var $block \Magento\Framework\View\Element\Template
+ * @var $escaper \Magento\Framework\Escaper
+ **/
+?>
+
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Walmart_BopisCheckoutPickInStoreAdminUi/order/create/load-pickup-options": {
+            "updatePickupOptionsUrl": "<?= $escaper->escapeUrl(
+                $block->getUrl('sales/order_create/loadPickupOptions')
+            ); ?>"
+        }
+    }
+}
+</script>

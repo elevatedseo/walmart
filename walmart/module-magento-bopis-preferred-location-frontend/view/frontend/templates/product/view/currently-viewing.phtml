@@ -1,0 +1,34 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+
+use Magento\Framework\Escaper;
+use Magento\Catalog\Block\Product\View;
+use Walmart\BopisPreferredLocationFrontend\ViewModel\PreferredLocation;
+
+/**
+ * @var Escaper $escaper
+ * @var View $block
+ * @var PreferredLocation $viewModel
+ */
+$viewModel = $block->getViewModel();
+if (!$viewModel) {
+    return '';
+}
+$isEnabled = $viewModel->isEnabled();
+if (!$isEnabled) {
+    return '';
+}
+$product = $block->getProduct();
+?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Walmart_BopisPreferredLocationFrontend/js/currently-viewing": {
+                "sku": "<?= $escaper->escapeJs($product->getSku()) ?>"
+            }
+        }
+    }
+</script>

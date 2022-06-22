@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+            <block class="Walmart\BopisStoreAssociateAdminUi\Block\Adminhtml\Role\Edit" name="adminhtml.user.editroles">
+                <block class="Walmart\BopisStoreAssociateAdminUi\Block\Adminhtml\Role\Tab\Edit" name="adminhtml.role.tab.rolesedit">
+                    <arguments>
+                        <argument name="json_serializer" xsi:type="object">Magento\User\ViewModel\JsonSerializer</argument>
+                    </arguments>
+                </block>
+                <action method="addTabAfter">
+                    <argument name="name" xsi:type="string">account</argument>
+                    <argument name="block" xsi:type="string">adminhtml.role.tab.rolesedit</argument>
+                    <argument name="after" xsi:type="string">info</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Walmart\BopisStoreAssociateAdminUi\Block\Adminhtml\Buttons" name="adminhtml.user.role.buttons" template="Walmart_BopisStoreAssociateAdminUi::role/info.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Walmart\BopisStoreAssociateTfaApi\Api\Data\AssociateTfaConfigInterface"
+                type="Walmart\BopisStoreAssociateTfa\Model\AssociateTfaConfig" />
+    <preference for="Walmart\BopisStoreAssociateTfaApi\Api\AssociateTfaConfigRepositoryInterface"
+                type="Walmart\BopisStoreAssociateTfa\Model\AssociateTfaConfigRepository" />
+    <preference for="Walmart\BopisStoreAssociateTfaApi\Api\Data\AssociateTfaConfigSearchResultsInterface"
+                type="Walmart\BopisStoreAssociateTfa\Model\AssociateTfaConfigSearchResults" />
+    <preference for="Walmart\BopisStoreAssociateTfaApi\Api\GoogleConfigureInterface"
+                type="Walmart\BopisStoreAssociateTfa\Model\GoogleConfigure"/>
+    <preference for="Walmart\BopisStoreAssociateTfaApi\Api\GoogleAuthenticateInterface"
+                type="Walmart\BopisStoreAssociateTfa\Model\GoogleAuthenticate"/>
+    <preference for="Walmart\BopisStoreAssociateTfaApi\Api\Data\GoogleConfigureResponseInterface"
+                type="Walmart\BopisStoreAssociateTfa\Model\GoogleConfigureResponse"/>
+</config>

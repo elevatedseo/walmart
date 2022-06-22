@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="sales_email_order_ready_for_pickup_template"
+              label="Bopis Order Ready for Pickup" file="ready_for_pickup.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_ready_for_pickup_guest_template"
+              label="Bopis Order Ready for Pickup For Guest" file="ready_for_pickup_guest.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_ready_for_pickup_alternate_template"
+              label="Bopis Order Ready for Pickup For Alternate Pickup Contact" file="ready_for_pickup_alternate.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_has_been_picked_up_template"
+              label="Bopis Order Has Been Picked Up" file="order_picked.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_has_been_picked_up_guest_template"
+              label="Bopis Order Has Been Picked Up For Guest" file="order_picked_guest.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_canceled_template"
+              label="Bopis Order Canceled" file="order_canceled.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_canceled_guest_template"
+              label="Bopis Order Canceled For Guest" file="order_canceled_guest.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_canceled_alternate_template"
+              label="Bopis Order Canceled For For Alternate Pickup Contact" file="order_canceled_alternate.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_creditmemo_template" label="Bopis New Credit Memo" file="creditmemo_new.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_creditmemo_guest_template" label="Bopis New Credit Memo for Guest"
+              file="creditmemo_new_guest.html" type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_invoice_template" label="Bopis New Invoice" file="invoice_new.html" type="html"
+              module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_invoice_guest_template" label="Bopis New Invoice for Guest"
+              file="invoice_new_guest.html" type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_template" label="Bopis New Order" file="order_new.html" type="html"
+              module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_guest_template" label="Bopis New Order for Guest" file="order_new_guest.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_in_store_template" label="Bopis New Order In Store Delivery" file="order_new_in_store.html" type="html"
+              module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_in_store_guest_template" label="Bopis New Order In Store Delivery for Guest" file="order_new_in_store_guest.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_ship_to_store_template" label="Bopis Order with Ship To Store products"
+              file="order_ship_to_store.html" type="html" module="Walmart_BopisOrderUpdate" area="adminhtml"/>
+    <template id="sales_email_magento_rma_template" label="Bopis New RMA" file="rma_new.html" type="html"
+              module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_magento_rma_guest_template" label="Bopis New RMA for Guest" file="rma_new_guest.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_magento_rma_auth_template" label="Bopis RMA Authorization" file="rma_auth.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_magento_rma_auth_guest_template" label="Bopis RMA Authorization for Guest"
+              file="rma_auth_guest.html" type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_delayed_template" label="Bopis Order Delayed" file="order_delayed.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_delayed_guest_template" label="Bopis Order Delayed For Guest"
+              file="order_delayed_guest.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_partly_canceled_template" label="Bopis Picked Order Partly Canceled"
+              file="order_partly_canceled.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_partly_canceled_guest_template" label="Bopis Picked Order Partly Canceled For Guest"
+              file="order_partly_canceled_guest.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_partly_canceled_alternate_template"
+              label="Bopis Picked Order Partly Canceled For Alternate Pickup Contact"
+              file="order_partly_canceled_alternate.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_partly_canceled_dispensed_template" label="Bopis Dispensed Order Partly Canceled"
+              file="dispensed_order_partly_canceled.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_partly_canceled_dispensed_guest_template" label="Bopis Dispensed Order Partly Canceled For Guest"
+              file="dispensed_order_partly_canceled_guest.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+    <template id="sales_email_order_partly_canceled_dispensed_alternate_template"
+              label="Bopis Dispensed Order Partly Canceled For Alternate Pickup Contact"
+              file="dispensed_order_partly_canceled_alternate.html"
+              type="html" module="Walmart_BopisOrderUpdate" area="frontend"/>
+</config>

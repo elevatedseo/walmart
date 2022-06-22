@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="walmart_bopis_inventory_pickup_option_order" resource="sales" engine="innodb">
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="false" identity="true" comment="Order ID" />
+        <column xsi:type="varchar" name="pickup_option" nullable="false" comment="Pickup Option"/>
+        <constraint xsi:type="foreign" referenceId="BOPIS_INVENTORY_PICKUP_OPTION_ORDER_ORDER_ID_SALES_ORDER_ENTITY_ID"
+                    table="walmart_bopis_inventory_pickup_option_order" column="order_id" referenceTable="sales_order"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="order_id"/>
+        </constraint>
+    </table>
+    <table name="walmart_bopis_inventory_pickup_option_quote_address" resource="checkout" engine="innodb">
+        <column xsi:type="int" name="address_id" unsigned="true" nullable="false" identity="true" comment="Quote Address ID"/>
+        <column xsi:type="varchar" name="pickup_option" nullable="false" comment="Pickup Option"/>
+        <constraint xsi:type="foreign" referenceId="BOPIS_INV_PICKUP_OPTION_QUOTE_ADDR_ADDR_ID_QUOTE_ADDR_ADDR_ID"
+                    table="walmart_bopis_inventory_pickup_option_quote_address" column="address_id" referenceTable="quote_address"
+                    referenceColumn="address_id" onDelete="CASCADE"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="address_id"/>
+        </constraint>
+    </table>
+</schema>

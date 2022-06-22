@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+   <event name="checkout_cart_add_product_complete">
+        <observer name="validateStockAfterAddToCart" instance="Walmart\BopisPreferredLocationFrontend\Model\QuoteStockValidatorObserver" />
+    </event>
+    <event name="checkout_cart_update_item_complete">
+        <observer name="validateStockCheckoutCartUpdateItemComplete" instance="Walmart\BopisPreferredLocationFrontend\Model\QuoteStockValidatorObserver" />
+    </event>
+    <event name="controller_action_predispatch_checkout_onepage_index">
+        <observer name="validateStockControllerActionPostdispatchCheckoutIndexIndex" instance="Walmart\BopisPreferredLocationFrontend\Model\QuoteStockValidatorObserver" />
+    </event>
+    <event name="controller_action_postdispatch_checkout_cart_index">
+        <observer name="validateStockControllerActionPostdispatchCheckoutCartIndex" instance="Walmart\BopisPreferredLocationFrontend\Model\QuoteStockValidatorObserver" />
+    </event>
+</config>

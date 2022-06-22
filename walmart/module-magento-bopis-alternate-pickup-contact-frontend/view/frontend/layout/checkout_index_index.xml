@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="store-pickup" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="bopis-store-selector" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="pickup-contact" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Walmart_BopisAlternatePickupContactFrontend/js/view/pickup-contact</item>
+                                                            <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                            <item name="displayArea" xsi:type="string">pickup-contact</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="template" xsi:type="string">Walmart_BopisAlternatePickupContactFrontend/pickup-contact</item>
+                                                            </item>
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="pickup-contact-form-fields" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">uiComponent</item>
+                                                                    <item name="displayArea" xsi:type="string">pickup-contact-form-fields</item>
+                                                                    <item name="children" xsi:type="array">
+                                                                        <item name="firstname" xsi:type="array">
+                                                                            <item name="component" xsi:type="string">Magento_Ui/js/form/element/abstract</item>
+                                                                            <item name="config" xsi:type="array">
+                                                                                <item name="customScope" xsi:type="string">pickupContactForm</item>
+                                                                                <item name="template" xsi:type="string">ui/form/field</item>
+                                                                                <item name="elementTmpl" xsi:type="string">ui/form/element/input</item>
+                                                                            </item>
+                                                                            <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                            <item name="dataScope" xsi:type="string">pickupContactForm.firstname</item>
+                                                                            <item name="label" xsi:type="string" translate="true">First name</item>
+                                                                            <item name="sortOrder" xsi:type="string">1</item>
+                                                                            <item name="validation" xsi:type="array">
+                                                                                <item name="required-entry" xsi:type="string">true</item>
+                                                                            </item>
+                                                                        </item>
+                                                                        <item name="lastname" xsi:type="array">
+                                                                            <item name="component" xsi:type="string">Magento_Ui/js/form/element/abstract</item>
+                                                                            <item name="config" xsi:type="array">
+                                                                                <item name="customScope" xsi:type="string">pickupContactForm</item>
+                                                                                <item name="template" xsi:type="string">ui/form/field</item>
+                                                                                <item name="elementTmpl" xsi:type="string">ui/form/element/input</item>
+                                                                            </item>
+                                                                            <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                            <item name="dataScope" xsi:type="string">pickupContactForm.lastname</item>
+                                                                            <item name="label" xsi:type="string" translate="true">Last name</item>
+                                                                            <item name="sortOrder" xsi:type="string">2</item>
+                                                                            <item name="validation" xsi:type="array">
+                                                                                <item name="required-entry" xsi:type="string">true</item>
+                                                                            </item>
+                                                                        </item>
+                                                                    </item>
+                                                                </item>
+                                                                <item name="pickup-contact-form-preferred-fields" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">uiComponent</item>
+                                                                    <item name="displayArea" xsi:type="string">pickup-contact-form-preferred-fields</item>
+                                                                    <item name="children" xsi:type="array">
+                                                                        <item name="email" xsi:type="array">
+                                                                            <item name="component" xsi:type="string">Magento_Ui/js/form/element/abstract</item>
+                                                                            <item name="config" xsi:type="array">
+                                                                                <item name="customScope" xsi:type="string">pickupContactForm</item>
+                                                                                <item name="template" xsi:type="string">ui/form/field</item>
+                                                                                <item name="elementTmpl" xsi:type="string">ui/form/element/input</item>
+                                                                            </item>
+                                                                            <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                            <item name="dataScope" xsi:type="string">pickupContactForm.email</item>
+                                                                            <item name="label" xsi:type="string" translate="true">Email</item>
+                                                                            <item name="sortOrder" xsi:type="string">1</item>
+                                                                            <item name="validation" xsi:type="array">
+                                                                                <item name="required-entry" xsi:type="string">true</item>
+                                                                            </item>
+                                                                        </item>
+                                                                        <item name="telephone" xsi:type="array">
+                                                                            <item name="component" xsi:type="string">Magento_Ui/js/form/element/abstract</item>
+                                                                            <item name="config" xsi:type="array">
+                                                                                <item name="customScope" xsi:type="string">pickupContactForm</item>
+                                                                                <item name="template" xsi:type="string">ui/form/field</item>
+                                                                                <item name="elementTmpl" xsi:type="string">ui/form/element/input</item>
+                                                                            </item>
+                                                                            <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                            <item name="dataScope" xsi:type="string">pickupContactForm.telephone</item>
+                                                                            <item name="label" xsi:type="string" translate="true">Phone number</item>
+                                                                            <item name="sortOrder" xsi:type="string">2</item>
+                                                                        </item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
+

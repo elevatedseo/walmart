@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Walmart\BopisInventoryCatalogApi\Api\InventoryAvailabilityServiceInterface">
+        <plugin name="walmart_bopis_preferred_location_frontend_add_cart_products_to_request"
+                type="Walmart\BopisPreferredLocationFrontend\Plugin\InventoryAvailabilityRequestPlugin"
+                sortOrder="20" />
+    </type>
+    <type name="Walmart\BopisPreferredLocationFrontend\Plugin\InventoryAvailabilityRequestPlugin">
+        <arguments>
+            <argument name="quoteSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Quote\Model\ValidationRules\QuoteValidationComposite">
+        <arguments>
+            <argument name="validationRules" xsi:type="array">
+                <item name="BopisStockValidation" xsi:type="object">Walmart\BopisPreferredLocationFrontend\Model\QuoteStockValidator</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

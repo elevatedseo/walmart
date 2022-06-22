@@ -1,0 +1,321 @@
+//
+// @author    Blue Acorn iCi <code@blueacornici.com>
+// @copyright Walmart Commerce Technologies. All Rights Reserved.
+//
+
+//
+//  Variables
+//  _____________________________________________
+
+@stock-status__in-stock__color: #238564;
+@stock-status__out-of-stock__color: @primary__color;
+@stock-status__partially-stock__color: #E68619;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .panel.header {
+        .bopis-link-wrapper a {
+            .lib-link(
+                @_link-color: @header-panel__text-color,
+                @_link-text-decoration: none,
+                @_link-color-visited: @header-panel__text-color,
+                @_link-text-decoration-visited: none,
+                @_link-color-hover: @header-panel__text-color,
+                @_link-text-decoration-hover: underline,
+                @_link-color-active: @header-panel__text-color,
+                @_link-text-decoration-active: underline
+            );
+        }
+    }
+
+    .bopis-link-wrapper {
+        & {
+            display: inline-block;
+        }
+
+        a.selected {
+            margin-left: @indent__s;
+            opacity: .5;
+        }
+
+        a.selected:hover {
+            opacity: 1;
+        }
+    }
+
+    .bopis-modal {
+        & {
+            padding-bottom: @modal-popup__padding;
+        }
+
+        .col {
+            margin: @indent__s 0;
+        }
+
+        .bopis-location-map iframe {
+            width: 100%;
+            min-height: 25rem;
+        }
+    }
+
+    .bopis-location-items {
+        & {
+            .lib-list-reset-styles();
+            max-height: 35rem;
+            margin: @indent__s 0;
+            overflow: auto;
+        }
+
+        .bopis-location-name {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-box-align(flex-start);
+            justify-content: space-between;
+            font-weight: @font-weight__semibold;
+            margin-bottom: @indent__s;
+        }
+
+        .location-stock-status {
+            & {
+                .lib-vendor-prefix-flex-shrink(0);
+                padding-left: @indent__base;
+                position: relative;
+            }
+
+            &::before {
+                content: '';
+                display: block;
+                width: @indent__s;
+                height: @indent__s;
+                position: absolute;
+                left: @indent__base / 2;
+                top: 50%;
+                .lib-css(transform, translate(-50%, -50%), 1);
+                border-radius: @indent__s;
+                background: currentColor;
+            }
+
+            &.in_stock {
+                color: @stock-status__in-stock__color;
+            }
+
+            &.partially_stocked {
+                color: @stock-status__partially-stock__color;
+            }
+
+            &.out_of_stock {
+                color: @stock-status__out-of-stock__color;
+            }
+        }
+
+        .bopis-location-address {
+            opacity: .7;
+        }
+
+        .bopis-location-item {
+            & {
+                .lib-vendor-prefix-display(flex);
+                .lib-vendor-box-align(flex-start);
+                margin: 0;
+                border-top: @border-width__base solid @border-color__base;
+            }
+
+            &.out_of_stock {
+                opacity: .5;
+                pointer-events: none;
+            }
+
+            .checkout-index-index & {
+                &.no-stock {
+                    display: none;
+                }
+            }
+
+            .detail-label {
+                display: block;
+                width: 100%;
+                padding: @indent__base @indent__s;
+                cursor: pointer;
+            }
+
+            input[type="radio"] {
+                margin-left: @indent__xs;
+                margin-top: @indent__m - 2px;
+            }
+        }
+
+        .pickup-options {
+            .lib-list-reset-styles();
+            display: block;
+            margin-top: @indent__s;
+        }
+
+        .pickup-option {
+            & {
+                display: inline-block;
+                padding: @indent__xs @indent__base @indent__xs 0;
+                position: relative;
+                padding-left: 3.5rem;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 50%;
+                display: inline-block;
+                width: 2.4rem;
+                height: 2.4rem;
+                background-repeat: no-repeat;
+                background-position: center;
+                .lib-css(transform, translateY(-50%), 1);
+            }
+
+            &.curbside::before {
+                background-image: url('@{baseDir}Walmart_BopisBase/images/car.svg');
+            }
+
+            &.in_store:before {
+                background-image: url('@{baseDir}Walmart_BopisBase/images/store.svg');
+            }
+        }
+    }
+
+    .bopis-out-of-stock {
+        .trigger {
+            & {
+                width: 100%;
+                position: relative;
+                padding: @indent__s 0;
+                padding-right: @indent__base;
+                color: @error__color;
+                box-sizing: border-box;
+                font-weight: @font-weight__semibold;
+                cursor: pointer;
+            }
+
+            .lib-icon-font(
+                @_icon-font-content: @icon-down,
+                @_icon-font-position: after
+            );
+
+            &:after {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                .lib-css(transform, translateY(-50%), 1);
+            }
+        }
+
+        &.active .trigger {
+            .lib-icon-font-symbol(
+                @_icon-font-content: @icon-up,
+                @_icon-font-position: after
+            );
+        }
+
+        .product-item {
+            .lib-vendor-prefix-display(flex);
+            margin: 0;
+            padding: @indent__s 0;
+        }
+
+        .product-item-photo {
+            width: 6rem;
+            margin-right: @indent__s;
+        }
+
+        .product-item-details {
+            .lib-vendor-prefix-flex-grow(1);
+        }
+    }
+
+     .bopis-disclaimer {
+         .lib-tooltip();
+
+         .tooltip-toggle {
+             .lib-icon-font(
+                 @icon-help,
+                 @_icon-font-size: 21px
+             );
+         }
+     }
+}
+
+//
+//  Tablet
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .modals-wrapper .modal-popup.location-popup .modal-inner-wrap {
+        width: 90%;
+    }
+
+    .bopis-modal {
+        & {
+            .lib-vendor-prefix-display(flex);
+        }
+
+        .col {
+            width: 50%;
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-direction(column);
+            margin: @indent__base;
+        }
+
+        .bopis-location-map iframe {
+            min-height: 50rem;
+        }
+
+        .bopis-location-list {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-direction(column);
+            .lib-vendor-prefix-flex-grow(1);
+        }
+
+        .actions-toolbar {
+            margin-top: auto;
+            text-align: right;
+        }
+
+        .primary,
+        .action.primary {
+            margin: 0;
+            float: right;
+        }
+    }
+
+    .bopis-location-search {
+        & {
+            position: relative;
+        }
+
+        .field {
+            margin: 0;
+        }
+
+        .action.submit {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .modals-wrapper .modal-popup.location-popup .modal-inner-wrap {
+        width: 75%;
+        max-width: @layout__max-width;
+        margin-right: auto;
+        margin-left: auto;
+        left: 0;
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "name": "walmart/module-magento-bopis-checkout-pick-in-store",
+    "description": "This module provides enhancements to the native platform BOPIS capabilities during checkout, such as displaying the earliest available pick-up window for the order.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-base": "^1.0.0",
+        "walmart/module-magento-bopis-checkout-pick-in-store-api": "^1.0.0",
+        "walmart/module-magento-bopis-inventory-source-admin-ui": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisCheckoutPickInStore\\": ""
+        }
+    }
+}

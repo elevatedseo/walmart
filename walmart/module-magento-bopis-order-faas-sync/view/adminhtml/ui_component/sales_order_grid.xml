@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="sales_order_columns">
+        <column name="bopis_queue_status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Walmart\BopisOperationQueue\Model\Config\Queue\Status"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">BOPIS - Order Sync Status</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

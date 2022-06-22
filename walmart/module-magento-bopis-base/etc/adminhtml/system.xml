@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="bopis" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Store Fulfillment by Walmart Commerce Technologies</label>
+            <tab>service</tab>
+            <group id="walmart_information" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <frontend_model>Walmart\BopisBase\Block\Adminhtml\System\Config\Information</frontend_model>
+                <fieldset_css>bopis-custom-group</fieldset_css>
+            </group>
+            <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1">
+                <fieldset_css>bopis-custom-group</fieldset_css>
+            </group>
+        </section>
+        <section id="carriers">
+            <group id="instore">
+                <frontend_model>Walmart\BopisBase\Block\Adminhtml\System\Config\InStoreLabel</frontend_model>
+                <group id="walmart_information" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Walmart\BopisBase\Block\Adminhtml\System\Config\InStoreHeader</frontend_model>
+                    <fieldset_css>bopis-custom-group</fieldset_css>
+                </group>
+                <field id="active">
+                    <frontend_model>Walmart\BopisBase\Block\System\Config\Form\HiddenField</frontend_model>
+                </field>
+                <field id="name">
+                    <frontend_model>Walmart\BopisBase\Block\System\Config\Form\HiddenField</frontend_model>
+                </field>
+                <field id="title">
+                    <frontend_model>Walmart\BopisBase\Block\System\Config\Form\HiddenField</frontend_model>
+                </field>
+                <field id="price">
+                    <frontend_model>Walmart\BopisBase\Block\System\Config\Form\HiddenField</frontend_model>
+                </field>
+                <field id="search_radius">
+                    <frontend_model>Walmart\BopisBase\Block\System\Config\Form\HiddenField</frontend_model>
+                </field>
+                <field id="specificerrmsg">
+                    <frontend_model>Walmart\BopisBase\Block\System\Config\Form\HiddenField</frontend_model>
+                </field>
+                <group id="basic_settings" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Basic Settings</label>
+                    <frontend_model>Walmart\BopisBase\Block\System\Config\Form\BopisGroup</frontend_model>
+
+                    <field id="active" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Enabled</label>
+                        <frontend_model>Walmart\BopisBase\Block\System\Config\Form\HiddenField</frontend_model>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>carriers/instore/active</config_path>
+                    </field>
+                    <field id="price" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Price</label>
+                        <validate>validate-number validate-zero-or-greater</validate>
+                        <config_path>carriers/instore/price</config_path>
+                    </field>
+                    <field id="search_radius" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Search Radius</label>
+                        <comment>Radius in kilometers for store pick-up search on storefront checkout.</comment>
+                        <validate>validate-number validate-zero-or-greater</validate>
+                        <config_path>carriers/instore/search_radius</config_path>
+                    </field>
+                    <field id="specificerrmsg" translate="label" type="textarea" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Displayed Error Message</label>
+                        <config_path>carriers/instore/specificerrmsg</config_path>
+                    </field>
+                </group>
+                <group id="delivery_methods" translate="label" type="text" sortOrder="100" showInDefault="1">
+                    <label>Delivery Methods</label>
+                    <frontend_model>Walmart\BopisBase\Block\System\Config\Form\BopisGroup</frontend_model>
+                    <fieldset_css>bopis-custom-group</fieldset_css>
+                    <field id="enabled_instore_pickup" sortOrder="10" translate="label" type="select" showInDefault="1" showInWebsite="1" canRestore="1">
+                        <label>Enable In-Store Pickup</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="enabled_curbside_pickup" sortOrder="10" translate="label" type="select" showInDefault="1" showInWebsite="1" canRestore="1">
+                        <label>Enable Curbside Pickup</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+                <group id="delivery_methods_titles" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <comment>Specify a name and description to display for each delivery method during checkout.</comment>
+                    <label>Delivery Method Titles</label>
+                    <frontend_model>Walmart\BopisBase\Block\System\Config\Form\BopisGroup</frontend_model>
+                    <fieldset_css>bopis-custom-group</fieldset_css>
+                    <field id="home_delivery_title" sortOrder="10" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Home Delivery Title</label>
+                    </field>
+                    <field id="home_delivery_description" sortOrder="20" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Home Delivery Description</label>
+                    </field>
+                    <field id="store_pickup_title" sortOrder="30" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Store Pickup Title</label>
+                    </field>
+                    <field id="store_pickup_description" sortOrder="40" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Store Pickup Description</label>
+                    </field>
+                    <field id="instore_pickup_title" sortOrder="50" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>In-Store Pickup Title</label>
+                    </field>
+                    <field id="curbside_pickup_title" sortOrder="60" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Curbside Pickup Title</label>
+                    </field>
+                    <field id="store_pickup_instructions" translate="label" type="textarea" sortOrder="70" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>In-Store Pickup Instructions</label>
+                        <validate>required</validate>
+                    </field>
+                    <field id="curbside_instructions" translate="label" type="textarea" sortOrder="80" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Curbside Pickup Instructions</label>
+                        <validate>required</validate>
+                    </field>
+                    <field id="pickup_lead_time" translate="label comment" type="text" sortOrder="90" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Estimated Pickup Lead Time</label>
+                        <comment>The number of minutes required before an order is received, fulfilled and ready to be picked up.</comment>
+                        <validate>required validate-digits</validate>
+                    </field>
+                    <field id="pickup_time_label" translate="label comment" type="text" sortOrder="100" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Estimated Pickup Time Label</label>
+                        <comment>Displays lead time to customer. Ex: 'Ready for Pickup in %1 minutes.' %1 is required to display lead time above.</comment>
+                        <validate>required bopis-pickup-time-label-validation</validate>
+                    </field>
+                    <field id="pickup_time_disclaimer" translate="label comment" type="textarea" sortOrder="110" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Pickup Time Disclaimer</label>
+                        <comment>The content displayed in the tooltip that would disclaim store hours, holidays, unexpected closers, etc</comment>
+                        <validate>required</validate>
+                    </field>
+                </group>
+                <group id="stock_availability_status_titles" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Stock Availability Status Titles</label>
+                    <comment>Specify a description to display for each Stock Availability status during checkout.</comment>
+                    <frontend_model>Walmart\BopisBase\Block\System\Config\Form\BopisGroup</frontend_model>
+                    <fieldset_css>bopis-custom-group</fieldset_css>
+                    <field id="in_stock" translate="label" type="text" sortOrder="10" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>In-Stock</label>
+                    </field>
+                    <field id="out_of_stock" translate="label" type="text" sortOrder="20" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Out-of Stock</label>
+                    </field>
+                    <field id="partially_in_stock" translate="label" type="text" sortOrder="30" showInDefault="1"
+                           showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Partially In-Stock</label>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

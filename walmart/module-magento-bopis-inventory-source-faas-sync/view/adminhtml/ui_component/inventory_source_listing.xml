@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <settings>
+        <buttons>
+            <button name="sync">
+                <url path="wct_fulfillment/location/sync"/>
+                <label translate="true">Synchronize Store Fulfilment Sources</label>
+            </button>
+        </buttons>
+    </settings>
+    <columns name="inventory_source_listing_columns">
+        <column name="is_wmt_bopis_synced"
+                component="Magento_Ui/js/grid/columns/select"
+                class="Walmart\BopisInventorySourceFaasSync\Ui\Component\Listing\Column\IsSynced"
+                sortOrder="160">
+            <settings>
+                <dataType>select</dataType>
+                <filter>select</filter>
+                <label translate="true">Is Synced</label>
+                <options>
+                    <option name="0" xsi:type="array">
+                        <item name="value" xsi:type="number">1</item>
+                        <item name="label" xsi:type="string" translate="true">Yes</item>
+                    </option>
+                    <option name="1" xsi:type="array">
+                        <item name="value" xsi:type="number">0</item>
+                        <item name="label" xsi:type="string" translate="true">No</item>
+                    </option>
+                </options>
+            </settings>
+        </column>
+    </columns>
+</listing>

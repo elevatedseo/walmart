@@ -1,0 +1,22 @@
+{
+    "name": "walmart/module-magento-bopis-alternate-pickup-contact-frontend",
+    "description": "This module represents the storefront UI features for the customer to enter alternative pick-up contact information during checkout.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-alternate-pickup-contact": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisAlternatePickupContactFrontend\\": ""
+        }
+    }
+}

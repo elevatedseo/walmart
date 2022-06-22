@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright 2022 Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/wct-fulfillment/inventory/product-availability/home-delivery/:sku" method="GET">
+        <service class="Walmart\BopisInventoryCatalogApi\Api\IsHomeDeliveryAvailableInterface" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/wct-fulfillment/inventory/product-availability/store-pickup/:sku" method="GET">
+        <service class="Walmart\BopisInventoryCatalogApi\Api\IsStorePickupAvailableInterface" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/wct-fulfillment/inventory/product-availability/home-delivery/" method="POST">
+        <service class="Walmart\BopisInventoryCatalogApi\Api\IsHomeDeliveryAvailableForSkusInterface" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/wct-fulfillment/inventory/product-availability/store-pickup/" method="POST">
+        <service class="Walmart\BopisInventoryCatalogApi\Api\IsStorePickupAvailableForSkusInterface" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="POST" url="/V1/wct-fulfillment/location/get-inventory-availability">
+        <service class="Walmart\BopisInventoryCatalogApi\Api\InventoryAvailabilityServiceInterface" method="execute"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

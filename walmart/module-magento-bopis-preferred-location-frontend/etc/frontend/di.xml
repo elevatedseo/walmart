@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Customer\Api\AccountManagementInterface">
+        <plugin name="walmart_bopis_preferred_location_frontend_set_user_selected_location"
+                type="Walmart\BopisPreferredLocationFrontend\Plugin\SetLocationAndDeliveryMethodPlugin"
+                sortOrder="20" />
+    </type>
+    <type name="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle">
+        <plugin name="walmart_bopis_preferred_location_frontend_add_option_id_to_sku_map_bundle_options"
+                type="Walmart\BopisPreferredLocationFrontend\Plugin\AddOptionIdToSkuMapToBundleOptions"
+                sortOrder="20" />
+    </type>
+    <type name="Magento\ConfigurableProduct\Block\Product\View\Type\Configurable">
+        <plugin name="walmart_bopis_preferred_location_frontend_add_option_id_to_sku_map_configurable_options"
+                type="Walmart\BopisPreferredLocationFrontend\Plugin\AddOptionIdToSkuMapToConfigurableOptions"
+                sortOrder="20" />
+    </type>
+</config>

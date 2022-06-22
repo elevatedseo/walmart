@@ -1,0 +1,50 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+declare(strict_types=1);
+
+use Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/**
+ * @var Template $block
+ * @var Escaper $escaper
+ */
+// @codingStandardsIgnoreFile
+
+/** @var CheckIn $viewModel */
+$viewModel = $block->getData('view_model');
+
+$location = $viewModel->getPickupLocation();
+$checkIn = $viewModel->getCheckIn();
+?>
+<?php if ($viewModel->isCurbside() && !$viewModel->isCheckInFinished()): ?>
+    <form action="<?= $escaper->escapeUrl($viewModel->getCheckinActionUrl()) ?>"
+          method="post"
+          id="pickup-checkin-form"
+          class="pickup-checkin-form curbside <?= $escaper->escapeHtmlAttr($viewModel->isCheckInStarted() ? 'started' : '') ?>"
+          data-mage-init='{"validation":{}}'
+          data-bind="scope:'pickup-checkin-form'">
+        <?= $block->getBlockHtml('formkey') ?>
+
+        <!-- ko template: getTemplate() --><!-- /ko -->
+
+        <div class="actions-toolbar curbside">
+            <button type="submit"
+                    class="action primary"
+                    title="<?= $escaper->escapeHtmlAttr(__($viewModel->isCheckInStarted() ? 'Update' : 'Submit')) ?>">
+                <span><?= $escaper->escapeHtml(__($viewModel->isCheckInStarted() ? 'Update' : 'Submit')) ?></span>
+            </button>
+        </div>
+    </form>
+    <script type="text/x-magento-init">
+    {
+        "#pickup-checkin-form": {
+            "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
+        }
+    }
+    </script>
+<?php endif; ?>

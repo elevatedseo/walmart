@@ -1,0 +1,10 @@
+{
+    "inventory_source_item": {
+        "column": {
+            "out_of_stock_threshold": true,
+            "out_of_stock_threshold_use_default": true,
+            "allow_store_pickup": true,
+            "allow_store_pickup_use_default": true
+        }
+    }
+}

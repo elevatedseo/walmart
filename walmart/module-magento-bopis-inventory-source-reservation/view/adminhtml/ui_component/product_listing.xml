@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="product_columns">
+        <column name="salable_quantity">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="componentDisabled" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </column>
+        <column name="source_quantity_with_reservation"
+                class="Walmart\BopisInventorySourceReservation\Ui\Component\Listing\Column\SourceQuantityWithReservation"
+                component="Walmart_BopisInventorySourceReservation/js/product/grid/cell/source-quantity-with-reservation"
+                sortOrder="77">
+            <settings>
+                <filter>false</filter>
+                <sortable>false</sortable>
+                <label translate="true">Salable Quantity</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

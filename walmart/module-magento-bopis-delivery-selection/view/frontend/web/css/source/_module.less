@@ -1,0 +1,76 @@
+//
+// @author    Blue Acorn iCi <code@blueacornici.com>
+// @copyright Walmart Commerce Technologies. All Rights Reserved.
+//
+
+//
+//  Variables
+//  _____________________________________________
+
+@delivery-method__label__padding: 4px 16px;
+@delivery-method__label__color: @color-white;
+@delivery-method__label__background: #238564;
+@delivery-method__label__border-radius: 8px;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .bopis-delivery-methods {
+        & {
+            margin: @indent__xl 0;
+        }
+
+        .delivery-methods-list {
+            .lib-list-reset-styles();
+        }
+
+        .label {
+            font-weight: @font-weight__semibold;
+            cursor: pointer;
+        }
+
+        .delivery-method {
+            & {
+                margin: @indent__base 0;
+            }
+        }
+
+        .bopis-validation-input {
+            position: absolute;
+            left: -1000px;
+            visibility: hidden;
+        }
+
+        .disabled {
+            opacity: .5;
+        }
+
+        .delivery-method-label {
+            font-weight: @font-weight__regular;
+            margin-left: @indent__s;
+            padding: @delivery-method__label__padding;
+            color: @delivery-method__label__color;
+            background: @delivery-method__label__background;
+            border-radius: @delivery-method__label__border-radius;
+            text-transform: uppercase;
+        }
+
+        .text-block,
+        .field.choice {
+            display: block;
+            margin: @indent__xs 0;
+        }
+    }
+
+    footer.modal-footer {
+        button.wct-action-button-as-link {
+            .lib-button-as-link(@_margin: true);
+
+            &.left-1 {
+                margin-left: 1em;
+            }
+        }
+    }
+}

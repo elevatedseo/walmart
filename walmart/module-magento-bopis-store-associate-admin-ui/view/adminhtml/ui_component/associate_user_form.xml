@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">associate_user_form.associate_user_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">User</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <dataScope>data</dataScope>
+        <namespace>associate_user_form</namespace>
+        <deps>
+            <dep>associate_user_form.associate_user_form_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="back">
+                <url path="*/*/"/>
+                <class>back</class>
+                <label translate="true">Back</label>
+            </button>
+            <button name="invalidate_sessions" class="Walmart\BopisStoreAssociateAdminUi\Block\Adminhtml\User\Edit\InvalidateSessionsButton"/>
+            <button name="invalidate_password" class="Walmart\BopisStoreAssociateAdminUi\Block\Adminhtml\User\Edit\InvalidatePasswordButton"/>
+            <button name="generate_new_password" class="Walmart\BopisStoreAssociateAdminUi\Block\Adminhtml\User\Edit\GenerateNewPasswordButton"/>
+            <button name="delete" class="Walmart\BopisStoreAssociateAdminUi\Block\Adminhtml\User\Edit\DeleteButton"/>
+            <button name="unlock_user" class="Walmart\BopisStoreAssociateAdminUi\Block\Adminhtml\User\Edit\UnlockUserButton"/>
+            <button name="save">
+                <class>primary</class>
+                <label translate="true">Save</label>
+            </button>
+        </buttons>
+    </settings>
+    <dataSource name="associate_user_form_data_source" component="Magento_Ui/js/form/provider">
+        <settings>
+            <submitUrl path="wct_fulfillment/user/save"/>
+        </settings>
+        <dataProvider class="Walmart\BopisStoreAssociateAdminUi\Ui\DataProvider\User\FormDataProvider" name="associate_user_form_data_source">
+            <settings>
+                <requestFieldName>user_id</requestFieldName>
+                <primaryFieldName>user_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="user">
+        <settings>
+            <label translate="true">Store Associate Information</label>
+        </settings>
+        <field name="user_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="is_active" formElement="checkbox" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>boolean</dataType>
+                <label translate="true">Is Active</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="username" formElement="input" sortOrder="20">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">User Name</label>
+            </settings>
+        </field>
+        <field name="firstname" formElement="input" sortOrder="30">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">First Name</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="lastname" formElement="input" sortOrder="40">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Last Name</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="role_id" formElement="select" sortOrder="50">
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Role</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Walmart\BopisStoreAssociateAdminUi\Model\Source\Role"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="all_locations" formElement="checkbox" sortOrder="60">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <switcherConfig>
+                    <rules>
+                        <rule name="0">
+                            <value>0</value>
+                            <actions>
+                                <action name="0">
+                                    <target>associate_user_form.associate_user_form.user.locations</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <value>1</value>
+                            <actions>
+                                <action name="0">
+                                    <target>associate_user_form.associate_user_form.user.locations</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                    <enabled>true</enabled>
+                </switcherConfig>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>boolean</dataType>
+                <label translate="true">Access to all locations</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="locations" sortOrder="70">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Walmart\BopisStoreAssociateAdminUi\Model\Source\Location</item>
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">required</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Locations</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="dataScope" xsi:type="string">locations</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">true</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="user_locale" formElement="select" sortOrder="80">
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Interface Locale</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Config\Model\Config\Source\Locale"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="active_from" formElement="date">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Active From</label>
+            </settings>
+            <formElements>
+                <date>
+                    <settings>
+                        <options>
+                            <option name="showsTime" xsi:type="boolean">true</option>
+                            <!-- todo: Magento does incorrect time converting during save. Think what to do-->
+                            <option name="dateFormat" xsi:type="string">Y-m-d</option>
+                            <option name="timeFormat" xsi:type="string">H:mm:ss</option>
+                        </options>
+                    </settings>
+                </date>
+            </formElements>
+        </field>
+        <field name="active_to" formElement="date">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Active To</label>
+            </settings>
+            <formElements>
+                <date>
+                    <settings>
+                        <options>
+                            <option name="showsTime" xsi:type="boolean">true</option>
+                            <option name="dateFormat" xsi:type="string">MMM d, YYYY</option>
+                            <option name="timeFormat" xsi:type="string">h:mm:ss</option>
+                        </options>
+                    </settings>
+                </date>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

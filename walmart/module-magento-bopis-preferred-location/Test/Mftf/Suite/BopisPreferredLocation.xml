@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suites xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:mftf:Suite/etc/suiteSchema.xsd">
+    <suite name="BopisPreferredLocation">
+        <include>
+            <test name="StorefrontGuestCustomerAddBundleProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontGuestCustomerAddConfigurableProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontGuestCustomerAddGroupedProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontGuestCustomerAddOutOfStockBundleProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontGuestCustomerAddOutOfStockConfigurableProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontGuestCustomerAddOutOfStockGroupedProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontGuestCustomerAddOutOfStockSimpleProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontGuestCustomerAddSimpleProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontGuestCustomerChangeShippingMethodType"/>
+            <test name="StorefrontGuestCustomerChangeShippingMethodTypeBundle"/>
+            <test name="StorefrontGuestCustomerChangeShippingMethodTypeConfigurable"/>
+            <test name="StorefrontGuestCustomerChangeShippingMethodTypeGrouped"/>
+            <test name="StorefrontGuestCustomerChangeStoreLocationBeforeAddingToCart"/>
+            <test name="StorefrontGuestCustomerChangeStoreLocationBeforeAddingToCartBundle"/>
+            <test name="StorefrontGuestCustomerChangeStoreLocationBeforeAddingToCartConfigurable"/>
+            <test name="StorefrontGuestCustomerChangeStoreLocationBeforeAddingToCartGrouped"/>
+            <test name="StorefrontGuestCustomerPlaceOrderWithBundleProductAndStorePickupMethod"/>
+            <test name="StorefrontGuestCustomerPlaceOrderWithConfigurableProductAndStorePickupMethod"/>
+            <test name="StorefrontGuestCustomerPlaceOrderWithGroupedProductAndStorePickupMethod"/>
+            <test name="StorefrontGuestCustomerPlaceOrderWithSimpleProductAndStorePickupMethod"/>
+            <test name="StorefrontLoggedInCustomerAddBundleProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontLoggedInCustomerAddConfigurableProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontLoggedInCustomerAddGroupedProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontLoggedInCustomerAddOutOfStockBundleProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontLoggedInCustomerAddOutOfStockConfigurableProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontLoggedInCustomerAddOutOfStockGroupedProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontLoggedInCustomerAddOutOfStockSimpleProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontLoggedInCustomerAddSimpleProductToCartWithStorePickupMethod"/>
+            <test name="StorefrontLoggedInCustomerPlaceOrderWithBundleProductAndStorePickupMethod"/>
+            <test name="StorefrontLoggedInCustomerPlaceOrderWithConfigurableProductAndStorePickupMethod"/>
+            <test name="StorefrontLoggedInCustomerPlaceOrderWithGroupedProductAndStorePickupMethod"/>
+            <test name="StorefrontLoggedInCustomerPlaceOrderWithSimpleProductAndStorePickupMethod"/>
+        </include>
+    </suite>
+</suites>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="sources">
+        <dynamicRows name="assigned_sources">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="map" xsi:type="array">
+                        <item name="allow_store_pickup" xsi:type="string">allow_store_pickup</item>
+                        <item name="out_of_stock_threshold" xsi:type="string">out_of_stock_threshold</item>
+                        <item name="allow_store_pickup_use_default" xsi:type="string">allow_store_pickup_use_default</item>
+                        <item name="out_of_stock_threshold_use_default" xsi:type="string">out_of_stock_threshold_use_default</item>
+                    </item>
+                </item>
+            </argument>
+            <container name="record">
+                <container>
+                    <field name="notify_stock_qty">
+                        <settings>
+                            <validation>
+                                <rule name="validate-number" xsi:type="boolean">true</rule>
+                            </validation>
+                        </settings>
+                    </field>
+                </container>
+                <container name="out_of_stock_threshold_container" component="Magento_Ui/js/form/components/group" sortOrder="70">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="label" xsi:type="string" translate="true">Out Of Stock Threshold</item>
+                            <item name="showLabel" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                    <field name="out_of_stock_threshold" formElement="input" sortOrder="10"
+                           component="Magento_InventoryLowQuantityNotificationAdminUi/js/components/notify-stock-qty">
+                        <settings>
+                            <dataType>text</dataType>
+                            <dataScope>out_of_stock_threshold</dataScope>
+                            <labelVisible>false</labelVisible>
+                            <validation>
+                                <rule name="validate-number" xsi:type="boolean">true</rule>
+                            </validation>
+                            <imports>
+                                <link name="notifyStockQtyUseDefault">${$.parentName}.out_of_stock_threshold_use_default:checked</link>
+                                <link name="manageStock">!${ $.provider }:data.product.stock_data.manage_stock</link>
+                            </imports>
+                        </settings>
+                    </field>
+                    <field name="out_of_stock_threshold_use_default" component="Magento_InventoryLowQuantityNotificationAdminUi/js/components/use-config-settings" formElement="checkbox" sortOrder="20">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="valueFromConfig" xsi:type="object">Magento\CatalogInventory\Model\Source\StockConfiguration</item>
+                                <item name="keyInConfiguration" xsi:type="string">min_qty</item>
+                                <item name="default" xsi:type="number">1</item>
+                            </item>
+                        </argument>
+                        <settings>
+                            <labelVisible>false</labelVisible>
+                            <dataScope>out_of_stock_threshold_use_default</dataScope>
+                            <links>
+                                <link name="linkedValue">${$.provider}:${$.parentScope}.out_of_stock_threshold</link>
+                            </links>
+                            <imports>
+                                <link name="disabled">!${ $.provider }:data.product.stock_data.manage_stock</link>
+                            </imports>
+                        </settings>
+                        <formElements>
+                            <checkbox class="Magento\InventoryLowQuantityNotificationAdminUi\Ui\Component\Product\Form\Element\UseConfigSettings">
+                                <settings>
+                                    <description translate="true">Use Default</description>
+                                    <valueMap>
+                                        <map name="false" xsi:type="string">0</map>
+                                        <map name="true" xsi:type="string">1</map>
+                                    </valueMap>
+                                </settings>
+                            </checkbox>
+                        </formElements>
+                    </field>
+                </container>
+                <container name="allow_store_pickup_container" component="Magento_Ui/js/form/components/group" sortOrder="71">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="label" xsi:type="string" translate="true">Allow Store Pickup</item>
+                            <item name="showLabel" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                    <field name="allow_store_pickup" formElement="select" sortOrder="10">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="rawOptions" xsi:type="boolean">true</item>
+                            </item>
+                        </argument>
+                        <settings>
+                            <dataType>text</dataType>
+                            <labelVisible>false</labelVisible>
+                            <dataScope>allow_store_pickup</dataScope>
+                            <imports>
+                                <link name="disabled">${$.parentName}.allow_store_pickup_use_default:checked</link>
+                            </imports>
+                        </settings>
+                        <formElements>
+                            <select>
+                                <settings>
+                                    <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                                </settings>
+                            </select>
+                        </formElements>
+                    </field>
+                    <field name="allow_store_pickup_use_default" component="Magento_InventoryLowQuantityNotificationAdminUi/js/components/use-config-settings" formElement="checkbox" sortOrder="20">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="valueFromConfig" xsi:type="object">Magento\CatalogInventory\Model\Source\StockConfiguration</item>
+                                <item name="keyInConfiguration" xsi:type="string">location_allow_store_pickup</item>
+                                <item name="default" xsi:type="number">1</item>
+                            </item>
+                        </argument>
+                        <settings>
+                            <labelVisible>false</labelVisible>
+                            <dataScope>allow_store_pickup_use_default</dataScope>
+                        </settings>
+                        <formElements>
+                            <checkbox class="Magento\CatalogInventory\Ui\Component\Product\Form\Element\UseConfigSettings">
+                                <settings>
+                                    <description translate="true">Use Default</description>
+                                    <valueMap>
+                                        <map name="false" xsi:type="string">0</map>
+                                        <map name="true" xsi:type="string">1</map>
+                                    </valueMap>
+                                </settings>
+                            </checkbox>
+                        </formElements>
+                    </field>
+                </container>
+            </container>
+        </dynamicRows>
+    </fieldset>
+</form>

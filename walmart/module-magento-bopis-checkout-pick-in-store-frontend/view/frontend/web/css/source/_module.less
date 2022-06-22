@@ -1,0 +1,111 @@
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+
+//
+//  Component _module
+//  _____________________________________________
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    #store-pickup {
+        &.selected-store-pickup {
+            ~ #shipping,
+            ~ #opc-shipping_method {
+                .lib-visually-hidden();
+            }
+        }
+    }
+
+    .pickup-store {
+        .pickup-options {
+            .lib-list-reset-styles();
+        }
+
+        .pickup-option-title {
+           & {
+               display: block;
+               margin-bottom: @indent__s;
+               padding-left: 3rem;
+               font-size: @font-size__l;
+               font-weight: @font-weight__semibold;
+               position: relative;
+           }
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 50%;
+                display: inline-block;
+                width: 2.4rem;
+                height: 2.4rem;
+                background-repeat: no-repeat;
+                background-position: center;
+                .lib-css(transform, translateY(-50%), 1);
+            }
+        }
+
+        .curbside .pickup-option-title::before {
+            background-image: url('@{baseDir}Walmart_BopisBase/images/car.svg');
+        }
+
+        .in_store .pickup-option-title::before {
+            background-image: url('@{baseDir}Walmart_BopisBase/images/store.svg');
+        }
+
+        .pickup-option-description {
+            word-break: break-word;
+        }
+
+        .pickup-option {
+            & {
+                width: 100%;
+                margin: @indent__base 0;
+            }
+
+            input {
+                margin-top: @indent__xs;
+                margin-right: @indent__s;
+            }
+
+            .field {
+                height: 100%;
+            }
+
+            .label {
+                .lib-vendor-prefix-display(flex);
+                height: 100%;
+                padding: @indent__base;
+                border: @border-width__base solid @border-color__base;
+                box-sizing: border-box;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+//
+//  Tablet +
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .pickup-store {
+        .pickup-options {
+            .lib-vendor-prefix-display(flex);
+            justify-content: space-between;
+        }
+
+        .pickup-option {
+            width: calc(~'50% - @{indent__s}');
+        }
+    }
+}

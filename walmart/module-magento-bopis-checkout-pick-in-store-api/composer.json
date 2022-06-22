@@ -1,0 +1,21 @@
+{
+    "name": "walmart/module-magento-bopis-checkout-pick-in-store-api",
+    "description": "This module defines the internal API specifications for in-store pickup option management.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisCheckoutPickInStoreApi\\": ""
+        }
+    }
+}

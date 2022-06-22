@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\InventoryApi\Api\SourceRepositoryInterface">
+        <plugin name="walmart_bopis_inventory_source_api_load_store_pickup_on_get_list"
+                type="Walmart\BopisInventorySourceApi\Plugin\InventoryApi\SourceRepository\LoadStorePickupOnGetListPlugin"/>
+        <plugin name="walmart_bopis_inventory_source_api_load_store_pickup_on_get"
+                type="Walmart\BopisInventorySourceApi\Plugin\InventoryApi\SourceRepository\LoadStorePickupOnGetPlugin"/>
+        <plugin name="walmart_bopis_inventory_source_api_save_store_pickup_links"
+                type="Walmart\BopisInventorySourceApi\Plugin\InventoryApi\SourceRepository\SaveStorePickupPlugin"/>
+    </type>
+    <preference for="Walmart\BopisInventorySourceApi\Api\Data\PickupLocationInterface"
+                type="Walmart\BopisInventorySourceApi\Model\PickupLocation"/>
+    <preference for="Walmart\BopisInventorySourceApi\Api\InventorySourceParkingSpotRepositoryInterface"
+                type="Walmart\BopisInventorySourceApi\Model\InventorySourceParkingSpotRepository"/>
+    <preference for="Walmart\BopisInventorySourceApi\Api\Data\InventorySourceParkingSpotInterface"
+                type="Walmart\BopisInventorySourceApi\Model\InventorySourceParkingSpot"/>
+    <preference for="Walmart\BopisInventorySourceApi\Api\Data\InventorySourceParkingSpotSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Walmart\BopisInventorySourceApi\Api\InventorySourceOpeningHoursRepositoryInterface"
+                type="Walmart\BopisInventorySourceApi\Model\InventorySourceOpeningHoursRepository"/>
+    <preference for="Walmart\BopisInventorySourceApi\Api\Data\InventorySourceOpeningHoursInterface"
+                type="Walmart\BopisInventorySourceApi\Model\InventorySourceOpeningHours"/>
+    <preference for="Walmart\BopisInventorySourceApi\Api\Data\InventorySourceOpeningHoursSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Walmart\BopisInventorySourceApi\Api\GetShippingSourcesInterface"
+                type="\Walmart\BopisInventorySourceApi\Model\Source\Command\GetShippingSources" />
+    <preference for="Walmart\BopisInventorySourceApi\Api\GetEnabledSourcesInterface"
+                type="\Walmart\BopisInventorySourceApi\Model\Source\Command\GetEnabledSources" />
+    <preference for="Walmart\BopisInventorySourceApi\Api\GetShipToStoreSourcesInterface"
+                type="\Walmart\BopisInventorySourceApi\Model\Source\Command\GetShipToStoreSources" />
+    <preference for="Walmart\BopisInventorySourceApi\Api\GetWarehouseCodesBySkusInterface"
+                type="\Walmart\BopisInventorySourceApi\Model\GetWarehouseCodesBySkus" />
+    <type name="Walmart\BopisInventorySourceApi\Model\Mapper">
+        <arguments>
+            <argument name="map" xsi:type="array">
+                <item name="extension_attributes.allow_ship_to_store" xsi:type="boolean">false</item>
+                <item name="extension_attributes.use_as_shipping_source" xsi:type="boolean">true</item>
+                <item name="extension_attributes.store_pickup_enabled" xsi:type="boolean">true</item>
+                <item name="extension_attributes.curbside_enabled" xsi:type="boolean">true</item>
+                <item name="extension_attributes.pickup_lead_time" xsi:type="string"></item>
+                <item name="extension_attributes.pickup_time_label" xsi:type="string"></item>
+                <item name="extension_attributes.timezone" xsi:type="string">timezone</item>
+                <item name="extension_attributes.store_pickup_instructions" xsi:type="string"></item>
+                <item name="extension_attributes.curbside_instructions" xsi:type="string"></item>
+                <item name="extension_attributes.parking_spots_enabled" xsi:type="boolean">true</item>
+                <item name="extension_attributes.parking_spot_mandatory" xsi:type="boolean">true</item>
+                <item name="extension_attributes.custom_parking_spot_enabled" xsi:type="boolean">true</item>
+                <item name="extension_attributes.use_car_color" xsi:type="boolean">true</item>
+                <item name="extension_attributes.car_color_mandatory" xsi:type="boolean">false</item>
+                <item name="extension_attributes.use_car_make" xsi:type="boolean">true</item>
+                <item name="extension_attributes.car_make_mandatory" xsi:type="boolean">false</item>
+                <item name="extension_attributes.use_additional_information" xsi:type="boolean">true</item>
+                <item name="extension_attributes.additional_information_mandatory" xsi:type="boolean">false</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Walmart\BopisInventorySourceApi\Api\Data\PickupOpeningHoursInterface"
+                type="Walmart\BopisInventorySourceApi\Model\PickupOpeningHours"/>
+</config>

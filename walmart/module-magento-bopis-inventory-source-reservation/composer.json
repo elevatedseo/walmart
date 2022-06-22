@@ -1,0 +1,22 @@
+{
+    "name": "walmart/module-magento-bopis-inventory-source-reservation",
+    "description": "This module implements a modification to the behavior of the stock reservation model for Adobe Commerce which changes the reservation of inventory from the stock aggregate to stock source for qualifying BOPS orders.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-base": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisInventorySourceReservation\\": ""
+        }
+    }
+}

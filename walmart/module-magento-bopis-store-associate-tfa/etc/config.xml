@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <bopis>
+            <store_associate>
+                <twofactorauth>
+                    <enabled>1</enabled>
+                    <tfa_policy>optional</tfa_policy>
+                    <force_providers>google</force_providers>
+                </twofactorauth>
+            </store_associate>
+        </bopis>
+    </default>
+</config>

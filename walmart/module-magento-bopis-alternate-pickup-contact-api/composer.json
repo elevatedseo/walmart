@@ -1,0 +1,21 @@
+{
+    "name": "walmart/module-magento-bopis-alternate-pickup-contact-api",
+    "description": "This module defines the internal API specifications for management of authorized alternate pick-up contacts for an order.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisAlternatePickupContactApi\\": ""
+        }
+    }
+}

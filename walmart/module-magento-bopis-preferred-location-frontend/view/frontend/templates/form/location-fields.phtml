@@ -1,0 +1,40 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+
+use Magento\Framework\View\Element\Template;
+use Walmart\BopisPreferredLocationFrontend\ViewModel\PreferredLocation;
+
+/**
+ * @var Template $block
+ * @var PreferredLocation $viewModel
+ */
+$viewModel = $block->getViewModel();
+if (!$viewModel) {
+    return '';
+}
+$isEnabled = $viewModel->isEnabled();
+if (!$isEnabled) {
+    return '';
+}
+?>
+
+<div class="location-fields" data-bind="scope:'location-fields'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "location-fields": {
+                        "component": "Walmart_BopisPreferredLocationFrontend/js/view/form/location-fields",
+                        "template": "Walmart_BopisPreferredLocationFrontend/form/location-fields"
+                    }
+                }
+            }
+        }
+    }
+</script>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Sales\Model\ResourceModel\Order\Plugin\Authorization">
+        <plugin name="walmart_bopis_inventory_source_reservation_disable_authorization_for_source"
+                type="Walmart\BopisInventorySourceReservation\Plugin\Sales\Order\Plugin\AuthorizationPlugin"
+                sortOrder="10" />
+    </type>
+</config>

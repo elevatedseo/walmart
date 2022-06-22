@@ -1,0 +1,43 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+
+use Magento\Framework\View\Element\Template;
+use Magento\Sales\Api\Data\OrderAddressInterface;
+
+?>
+<?php /** @var $block Template */ ?>
+<?php
+$viewModel = $block->getData('view_model');
+$order = $viewModel->getOrder();
+if (!$order) {
+    return;
+}
+/** @var OrderAddressInterface $pickupContact */
+$pickupContact = $order->getExtensionAttributes()->getPickupContact();
+if (!$pickupContact) {
+    return;
+}
+?>
+
+<div class="block block-order-details-view">
+    <div class="block-title">
+        <strong><?= $block->escapeHtml(__('Pickup Contact')) ?></strong>
+    </div>
+    <div class="block-content">
+        <address>
+            <p>
+                <?= $block->escapeHtml(__($pickupContact->getFirstname())) ?>
+                <?= $block->escapeHtml(__($pickupContact->getLastname())) ?>
+            </p>
+            <p>
+                <?= $block->escapeHtml(__($pickupContact->getEmail())) ?>
+            </p>
+            <p>
+                <?= $block->escapeHtml(__($pickupContact->getTelephone())) ?>
+            </p>
+        </address>
+    </div>
+</div>

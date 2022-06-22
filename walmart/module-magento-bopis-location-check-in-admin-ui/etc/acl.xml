@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+<acl>
+    <resources>
+        <resource id="Magento_Backend::admin">
+            <resource id="Magento_Backend::system">
+                <resource id="Walmart_BopisLocationCheckInAdminUi::checkin_acl" title="Check-In" translate="title" sortOrder="60">
+                    <resource id="Walmart_BopisLocationCheckInAdminUi::carmake" title="All Car Makes" translate="title" sortOrder="10" />
+                    <resource id="Walmart_BopisLocationCheckInAdminUi::carcolor" title="All Car Colors" translate="title" sortOrder="10" />
+                </resource>
+            </resource>
+            </resource>
+    </resources>
+</acl>
+</config>

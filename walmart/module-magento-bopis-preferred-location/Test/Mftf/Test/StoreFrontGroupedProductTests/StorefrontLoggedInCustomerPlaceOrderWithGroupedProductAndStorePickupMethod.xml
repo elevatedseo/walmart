@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="StorefrontLoggedInCustomerPlaceOrderWithGroupedProductAndStorePickupMethod">
+        <annotations>
+            <stories value="As a customer I would like to order my grouped product so that I can pick it up at a specific location."/>
+            <title value="Place order with grouped product and store pickup method"/>
+            <description value="1) Create a source and stock and assign source to stock. 2) Create category. 3) Create a grouped product. 4) Assign source to product. 5) Create a customer. 6) Go to the product page on frontend. 7) Select Store Pickup method and select store. 8) Check that the store is selected. 9) Add product to cart. 10) Place Order. 11) Disable created source. 12) Delete product and category created."/>
+            <testCaseId value="WMTP-582"/>
+            <severity value="MAJOR"/>
+            <group value="checkout"/>
+        </annotations>
+
+        <before>
+            <!--Enable BOPIS Module and Instore Pickup before start testing -->
+            <magentoCLI command="config:set {{WCTEnabled.path}} {{WCTEnabled.value}}" stepKey="enableModule"/>
+            <magentoCLI command="config:set {{WCTInstorePickupEnabled.path}} {{WCTInstorePickupEnabled.value}}" stepKey="enableInstorePickup"/>
+
+            <!--Create a source and stock and assign source to stock -->
+            <createData entity="BopisStorePickupEnabledSource" stepKey="customSource"/>
+            <createData entity="BasicMsiStock1" stepKey="customStock"/>
+            <actionGroup ref="AdminLoginActionGroup" stepKey="loginToAdminArea"/>
+            <waitForPageLoad stepKey="waitForDashboardLoad"/>
+
+            <comment userInput="Assign source and sales channel to stock." stepKey="assignSourceToStockComment"/>
+            <amOnPage url="{{AdminManageStockPage.url}}" stepKey="navigateToStockListPage"/>
+            <waitForPageLoad time="30" stepKey="waitForStockGridLoad"/>
+            <actionGroup ref="SearchAdminDataGridByKeywordActionGroup" stepKey="searchCustomStockByName">
+                <argument name="keyword" value="$$customStock.stock[name]$$"/>
+            </actionGroup>
+            <click selector="{{AdminGridRow.editByValue($$customStock.stock[name]$$)}}" stepKey="clickEditCustomStock"/>
+            <waitForPageLoad time="30" stepKey="waitForStockEditPageLoad"/>
+            <selectOption selector="{{AdminEditStockSalesChannelsSection.websites}}" userInput="Main Website" stepKey="selectWebsiteAsSalesChannelForCustomStock"/>
+            <click selector="{{AdminEditStockSourcesSection.assignSources}}" stepKey="clickOnAssignSources"/>
+            <actionGroup ref="SearchAdminDataGridByKeywordActionGroup" stepKey="searchCustomSourceByName">
+                <argument name="keyword" value="$$customSource.source[name]$$"/>
+            </actionGroup>
+            <click selector="{{AdminGridRow.checkboxByValue($$customSource.source[name]$$)}}" stepKey="selectCustomSourceForCustomStock"/>
+            <click selector="{{AdminManageSourcesGridControls.done}}" stepKey="clickOnDoneCustomSourceAssignment"/>
+            <click selector="{{AdminGridMainControls.saveAndContinue}}" stepKey="saveCustomStock"/>
+
+            <!--Set Display Cart Summary to display items quantities -->
+            <magentoCLI command="config:set {{DisplayItemsQuantities.path}} {{DisplayItemsQuantities.value}}" stepKey="setDisplayCartSummary"/>
+
+            <!-- Create category -->
+            <createData entity="SimpleSubCategory" stepKey="category1"/>
+
+            <!-- Create  simple product 1 -->
+            <createData entity="SimpleProductHomeDeliveryAndStorePickup" stepKey="simpleProduct1">
+                <requiredEntity createDataKey="category1"/>
+            </createData>
+
+            <!-- Create  simple product 2 -->
+            <createData entity="SimpleProductHomeDeliveryAndStorePickup" stepKey="simpleProduct2">
+                <requiredEntity createDataKey="category1"/>
+            </createData>
+
+            <!-- Create grouped product -->
+            <createData entity="ApiGroupedProduct" stepKey="groupedProduct"/>
+            <createData entity="OneSimpleProductLink" stepKey="addProductOne">
+                <requiredEntity createDataKey="groupedProduct"/>
+                <requiredEntity createDataKey="simpleProduct1"/>
+            </createData>
+            <updateData entity="OneMoreSimpleProductLink" createDataKey="addProductOne" stepKey="addProductTwo">
+                <requiredEntity createDataKey="groupedProduct"/>
+                <requiredEntity createDataKey="simpleProduct2"/>
+            </updateData>
+        </before>
+        <after>
+            <actionGroup ref="DisableSourceActionGroup" stepKey="disableFirstCreatedSource">
+                <argument name="sourceCode" value="$$customSource.source[source_code]$$"/>
+            </actionGroup>
+            <deleteData createDataKey="simpleProduct1" stepKey="deleteProduct1"/>
+            <deleteData createDataKey="simpleProduct2" stepKey="deleteProduct2"/>
+            <deleteData createDataKey="groupedProduct" stepKey="deleteGroupProduct"/>
+            <deleteData createDataKey="category1" stepKey="deleteCategory1"/>
+            <magentoCLI command="config:set {{DisplayItemsQuantities.path}} {{DisplayItemsQuantities.value}}" stepKey="resetDisplayCartSummary"/>
+            <!--Disable BOPIS Module after testing -->
+            <magentoCLI command="config:set {{WCTEnabled.path}} 0" stepKey="disableModule"/>
+            <magentoCLI command="config:set {{WCTInstorePickupEnabled.path}} 0" stepKey="disableInstorePickup"/>
+            <actionGroup ref="AdminLogoutActionGroup" stepKey="logoutFromAdminArea"/>
+        </after>
+
+        <!-- Search for the product 1 and open in edit mode. -->
+        <amOnPage url="{{AdminProductEditPage.url($$simpleProduct1.id$$)}}" stepKey="openProductEditPageToAssignSources1"/>
+        <!-- Assign source to product 1. -->
+        <waitForPageLoad time="60" stepKey="waitForAssignSourcesToProduct1"/>
+        <actionGroup ref="AssignSourceToProductActionGroup" stepKey="assignFirstSourceToProduct1">
+            <argument name="sourceCode" value="$$customSource.source[source_code]$$"/>
+        </actionGroup>
+        <fillField selector="{{AdminProductSourcesGrid.rowQty('1')}}" userInput="100" stepKey="setProductQuantity1"/>
+        <click selector="{{AdminProductFormActionSection.saveButton}}" stepKey="saveProduct1"/>
+        <waitForPageLoad stepKey="waitForProductSave1"/>
+        <!-- See success message -->
+        <seeElement selector="{{AdminProductMessagesSection.successMessage}}" stepKey="seeSaveProductMessage1"/>
+
+        <!-- Search for the product 2 and open in edit mode. -->
+        <amOnPage url="{{AdminProductEditPage.url($$simpleProduct2.id$$)}}" stepKey="openProductEditPageToAssignSources2"/>
+        <!-- Assign source to product 2. -->
+        <waitForPageLoad time="60" stepKey="waitForAssignSourcesToProduct2"/>
+        <actionGroup ref="AssignSourceToProductActionGroup" stepKey="assignFirstSourceToProduct2">
+            <argument name="sourceCode" value="$$customSource.source[source_code]$$"/>
+        </actionGroup>
+        <fillField selector="{{AdminProductSourcesGrid.rowQty('1')}}" userInput="100" stepKey="setProductQuantity2"/>
+        <click selector="{{AdminProductFormActionSection.saveButton}}" stepKey="saveProduct2"/>
+        <waitForPageLoad stepKey="waitForProductSave2"/>
+        <!-- See success message -->
+        <seeElement selector="{{AdminProductMessagesSection.successMessage}}" stepKey="seeSaveProductMessage2"/>
+
+        <!--Register customer.-->
+        <actionGroup ref="RegisterCustomOnStorefrontActionGroup" stepKey="registerCustomer">
+            <argument name="Customer" value="Simple_US_Customer"/>
+            <argument name="storeCode" value="customStore.code"/>
+        </actionGroup>
+
+        <!-- Go to the product page -->
+        <amOnPage url="{{StorefrontProductPage.url($$groupedProduct.custom_attributes[url_key]$)}}" stepKey="amOnProduct1Page"/>
+
+        <!-- Select Store Pickup method and select store. -->
+        <actionGroup ref="SelectStorePickupAndStoreFromStorefrontProductPageActionGroup" stepKey="selectStorePickupAndStore" >
+            <argument name="sourceCode" value="$$customSource.source[source_code]$$"/>
+            <argument name="sourceName" value="$$customSource.source[name]$$"/>
+        </actionGroup>
+
+        <!-- Fill Quantity and add Product to the cart -->
+        <actionGroup ref="StorefrontAddTwoGroupedProductToTheCartActionGroup" stepKey="addGropedProductsToTheCart">
+            <argument name="product1" value="$$simpleProduct1.name$$"/>
+            <argument name="product2" value="$$simpleProduct2.name$$"/>
+            <argument name="qty1" value="1"/>
+            <argument name="qty2" value="2"/>
+        </actionGroup>
+
+        <!--Place order.-->
+        <actionGroup ref="GoToCheckoutFromMinicartActionGroup" stepKey="navigateToCheckoutPage"/>
+        <actionGroup ref="StorefrontPickInStoreNavigateToPaymentActionGroup" stepKey="navigateToPaymentStep"/>
+        <actionGroup ref="StorefrontPickInStoreGuestCustomerFillBillingAddressActionGroup" stepKey="fillAddress">
+            <argument name="customerVar" value="Simple_US_Customer"/>
+            <argument name="customerAddressVar" value="US_Address_TX"/>
+        </actionGroup>
+        <actionGroup ref="ClickPlaceOrderActionGroup" stepKey="clickOnPlaceOrder"/>
+        <waitForPageLoad stepKey="waitForSuccess"/>
+        <grabTextFrom selector="{{CheckoutSuccessMainSection.orderNumber22}}" stepKey="orderNumber"/>
+    </test>
+</tests>

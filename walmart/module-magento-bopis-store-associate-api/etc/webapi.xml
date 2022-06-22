@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/wct-fulfillment/associate/login" method="POST">
+        <service class="Walmart\BopisStoreAssociateApi\Api\LoginInterface" method="execute"/>
+        <resources>
+            <resource ref="Walmart_BopisStoreAssociate::user"/>
+        </resources>
+    </route>
+    <route url="/V1/wct-fulfillment/associate/passwordChange" method="POST">
+        <service class="Walmart\BopisStoreAssociateApi\Api\PasswordChangeInterface" method="execute"/>
+        <resources>
+            <resource ref="Walmart_BopisStoreAssociate::user"/>
+        </resources>
+    </route>
+    <route url="/V1/wct-fulfillment/associate/session/verify" method="GET">
+        <service class="Walmart\BopisStoreAssociateApi\Api\SessionVerifyInterface" method="execute"/>
+        <resources>
+            <resource ref="Walmart_BopisStoreAssociate::user"/>
+        </resources>
+    </route>
+</routes>

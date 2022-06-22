@@ -1,0 +1,22 @@
+{
+    "name": "walmart/module-magento-bopis-inventory-source-api",
+    "description": "This module defines the internal and web API specifications for management of retail store locations. Requires one or more companion implementation modules. ",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-base": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisInventorySourceApi\\": ""
+        }
+    }
+}

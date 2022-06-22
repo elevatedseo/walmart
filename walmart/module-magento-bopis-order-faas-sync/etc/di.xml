@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Walmart\BopisOrderFaasSync\Api\Data\OrderLineItemsInterface"
+                type="Walmart\BopisOrderFaasSync\Model\OrderLineItems" />
+    <preference for="Walmart\BopisOrderFaasSync\Api\OrderLineItemsRepositoryInterface"
+                type="Walmart\BopisOrderFaasSync\Model\OrderLineItemsRepository" />
+    <preference for="Walmart\BopisOrderFaasSync\Api\Data\OrderLineItemsSearchResultsInterface"
+                type="Walmart\BopisOrderFaasSync\Model\OrderLineItemsSearchResults" />
+
+    <preference for="Walmart\BopisOrderFaasSync\Api\CreationConfirmedInterface"
+                type="Walmart\BopisOrderFaasSync\Model\CreationConfirmed" />
+    <preference for="Walmart\BopisOrderFaasSync\Api\CancelConfirmedInterface"
+                type="Walmart\BopisOrderFaasSync\Model\CancelConfirmed" />
+    <preference for="Walmart\BopisOrderFaasSync\Api\ConfirmationStatusInterface"
+                type="Walmart\BopisOrderFaasSync\Model\ConfirmationStatus" />
+    <preference for="Walmart\BopisOrderFaasSync\Api\Confirmation\ReasonInterface"
+                type="Walmart\BopisOrderFaasSync\Model\Confirmation\Reason" />
+
+    <type name="Walmart\BopisOrderFaasSync\Model\ProcessOrders">
+        <arguments>
+            <argument name="operations" xsi:type="array">
+                <item name="new_order" xsi:type="object">Walmart\BopisOrderFaasSync\Model\Operation\NewOrder</item>
+                <item name="cancel_order" xsi:type="object">Walmart\BopisOrderFaasSync\Model\Operation\CancelOrder</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sales\Api\OrderManagementInterface">
+        <plugin name="walmart_bopis_order_faas_sync_add_order_to_operation_queue"
+                type="Walmart\BopisOrderFaasSync\Plugin\Order\PlaceAfterPlugin" sortOrder="1" disabled="false"/>
+    </type>
+    <type name="Magento\Sales\Api\Data\OrderInterface">
+        <plugin name="walmart_bopis_order_faas_sync_cancel_process"
+                type="Walmart\BopisOrderFaasSync\Plugin\OrderPlugin" sortOrder="1" disabled="false"/>
+    </type>
+    <type name="Magento\Sales\Model\Service\CreditmemoService">
+        <plugin name="walmart_bopis_order_faas_sync_creditmemo_create_queue_item"
+                type="Walmart\BopisOrderFaasSync\Plugin\Service\CreditmemoPlugin" />
+    </type>
+    <type name="Magento\Sales\Model\Order\Creditmemo">
+        <plugin name="walmart_bopis_order_faas_sync_creditmemo_can_refund"
+                type="Walmart\BopisOrderFaasSync\Plugin\Order\CreditmemoPlugin" />
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\Creditmemo\Create\Items">
+        <plugin name="walmart_bopis_order_faas_sync_disable_qty_edit"
+                type="Walmart\BopisOrderFaasSync\Plugin\Block\Adminhtml\Order\Creditmemo\Create\ItemsPlugin" />
+    </type>
+
+    <type name="Walmart\BopisOrderFaasSync\Plugin\Order\PlaceAfterPlugin">
+        <arguments>
+            <argument name="quoteSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+</config>

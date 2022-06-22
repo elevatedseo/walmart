@@ -1,0 +1,22 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+declare(strict_types=1);
+
+use Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/**
+ * @var Template $block
+ * @var Escaper $escaper
+ */
+
+/** @var CheckIn $viewModel */
+$viewModel = $block->getData('view_model');
+
+$checkIn = $viewModel->getCheckIn();
+?>
+<strong><?= $escaper->escapeHtml(__('#%1', $viewModel->getOrderNumber())) ?></strong>

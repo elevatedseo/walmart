@@ -1,0 +1,45 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+
+/** @var $block View */
+
+use Magento\Catalog\Block\Product\View;
+use Walmart\BopisDeliverySelection\ViewModel\ProductDeliveryMethods;
+
+$product = $block->getProduct();
+
+/** @var ProductDeliveryMethods $viewModel */
+$viewModel = $block->getData('view_model');
+
+$isHomeDeliveryMethodAvailable = $viewModel->isHomeDeliveryMethodAvailable($product);
+$isStorePickupMethodAvailable = $viewModel->isStorePickupMethodAvailable($product);
+$isStorePickupMethodVisible = $viewModel->isStorePickupVisible();
+
+//TODO: move this to general js that will pass values inside of a model
+?>
+<?php if ($product->isSaleable() && !$product->isVirtual()): ?>
+    <div id="methods-config" data-bind="scope:'methodsConfig'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <script type="text/x-magento-init">
+        {
+            "#methods-config": {
+                "Magento_Ui/js/core/app": {
+                     "components": {
+                        "methodsConfig": {
+                            "component": "Walmart_BopisDeliverySelection/js/view/product/methods-config",
+                            "config": {
+                                "home": <?= (int)$isHomeDeliveryMethodAvailable ?>,
+                                "instore": <?= (int)$isStorePickupMethodAvailable ?>,
+                                "instoreVisible": <?= (int)$isStorePickupMethodVisible ?>
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<?php endif; ?>

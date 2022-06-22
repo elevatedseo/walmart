@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Walmart_BopisOrderUpdate">
+        <sequence>
+            <module name="Magento_Sales"/>
+            <module name="Magento_Payment"/>
+            <module name="Magento_InventoryInStorePickupSales"/>
+            <module name="Magento_InventoryInStorePickupSalesApi"/>
+            <module name="Walmart_BopisBase" />
+            <module name="Walmart_BopisOrderUpdateApi"/>
+            <module name="Walmart_BopisLocationCheckIn" />
+        </sequence>
+    </module>
+</config>

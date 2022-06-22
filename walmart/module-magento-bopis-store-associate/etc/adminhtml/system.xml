@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="bopis">
+            <group id="store_associate" translate="label" type="text" sortOrder="110" showInDefault="1">
+                <label>Store Fulfillment App</label>
+                <fieldset_css>bopis-custom-group top-line</fieldset_css>
+                <depends>
+                    <field id="bopis/general/enabled">1</field>
+                </depends>
+                <group id="security" translate="label" type="text" sortOrder="100" showInDefault="1">
+                    <label>Security</label>
+                    <frontend_model>Walmart\BopisBase\Block\System\Config\Form\Custom</frontend_model>
+                    <fieldset_css>bopis-custom-group</fieldset_css>
+                    <field id="session_lifetime" translate="label comment" sortOrder="30" showInDefault="1" canRestore="1">
+                        <label>User Session Lifetime</label>
+                        <comment>Timeframe in seconds that a user session remains active before automatic logout. Valid values range from 60 to 31536000.</comment>
+                        <backend_model>Magento\Backend\Model\Config\SessionLifetime\BackendModel</backend_model>
+                        <validate>validate-digits validate-digits-range digits-range-60-31536000</validate>
+                    </field>
+                    <field id="lockout_failures" translate="label comment" sortOrder="100" showInDefault="1" canRestore="1">
+                        <label>Maximum Login Failures to Lockout Account</label>
+                        <comment>If the value is set to 0, this functionality will be disabled.</comment>
+                        <validate>validate-zero-or-greater validate-digits</validate>
+                    </field>
+                    <field id="lockout_threshold" translate="label" sortOrder="110" showInDefault="1" canRestore="1">
+                        <label>Lockout Time (minutes)</label>
+                        <validate>validate-zero-or-greater validate-digits</validate>
+                        <comment>Number of minutes to lock an account after login failure.</comment>
+                    </field>
+                    <field id="password_is_forced" translate="label comment" sortOrder="120" type="select" showInDefault="1" canRestore="1">
+                        <label>Password Change</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>
+                            <![CDATA[
+                            Determines if users are required to change their passwords.
+                            ]]>
+                        </comment>
+                    </field>
+                    <field id="password_lifetime" translate="label comment" sortOrder="130" showInDefault="1" canRestore="1">
+                        <depends>
+                            <field id="bopis/store_associate/security/password_is_forced">1</field>
+                        </depends>
+                        <label>Password Lifetime</label>
+                        <comment>Days a password remains valid before required password change</comment>
+                        <validate>validate-zero-or-greater validate-digits</validate>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

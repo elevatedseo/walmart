@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Sales\Controller\Adminhtml\Order\Create\Save">
+        <plugin name="walmart_bopis_checkout_pick_in_store_admin_ui_set_order_pickup_option"
+                type="Walmart\BopisCheckoutPickInStoreAdminUi\Plugin\Sales\Controller\AdminOrder\Create\SetPickupOptionFromPost"/>
+    </type>
+</config>

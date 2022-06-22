@@ -1,0 +1,40 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div id="store-selector" data-bind="blockLoader: $parent.isLoading">
+    <each if="!quoteIsVirtual()" args="getRegion('customer-email')" render=""></each>
+    <div id="checkout-step-store-selector" class="step-content" data-role="content">
+        <each args="getRegion('after-selected-location')" render=""></each>
+        <div class="pickup-store">
+            <div class="step-title" data-role="title">
+                <span data-bind="i18n: 'Store Pickup'"></span>
+            </div>
+
+            <div class="pickup-location-wrapper">
+                <h3 data-bind="i18n: 'Pickup Location'"></h3>
+                <each args="getRegion('store-selector-modal-trigger')" render=""></each>
+                <each args="getRegion('location-pickup-time')" render=""></each>
+            </div>
+
+            <each args="getRegion('store-selector-pickup-options')" render=""></each>
+
+            <div class="pickup-contact-wrapper">
+                <h3 data-bind="i18n: 'Alternative Pickup Person'"></h3>
+                <each args="getRegion('pickup-contact')" render=""></each>
+            </div>
+        </div>
+        <form class="form-continue" submit="setPickupInformation" novalidate="novalidate">
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button data-role="opc-continue" type="submit" class="button action continue primary"
+                            css="disabled: !selectedLocation()" enable="selectedLocation()" disabled>
+                        <span data-bind="i18n: 'Next'"></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

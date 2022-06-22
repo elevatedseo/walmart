@@ -1,0 +1,22 @@
+{
+    "name": "walmart/module-magento-bopis-store-associate",
+    "version": "1.0.0",
+    "description": "This module provides the services relating to store associate authentication and management.",
+    "type": "magento2-module",
+    "require": {
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-base": "^1.0.0",
+        "walmart/module-magento-bopis-store-associate-api": "^1.0.0"
+    },
+    "license": [
+        "Proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisStoreAssociate\\": ""
+        }
+    }
+}

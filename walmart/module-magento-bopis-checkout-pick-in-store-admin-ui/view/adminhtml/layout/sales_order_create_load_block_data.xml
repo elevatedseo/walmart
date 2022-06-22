@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="order.create.shipping.method.sources_form">
+            <action method="setTemplate" ifconfig="bopis/general/enabled">
+                <argument name="template" xsi:type="string">Walmart_BopisCheckoutPickInStoreAdminUi::order/create/shipping/method/sources_and_pickup_options_form.phtml</argument>
+            </action>
+            <arguments>
+                <argument name="pickup_options_view_model" xsi:type="object">Walmart\BopisCheckoutPickInStoreAdminUi\ViewModel\CreateOrder\PickupOptionsForm</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

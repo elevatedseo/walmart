@@ -1,0 +1,96 @@
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<!-- ko if: locationsToShow().length > 0 -->
+    <ul data-bind="foreach: {data: locationsToShow, as: 'location'}" class="bopis-location-items">
+        <!-- // TODO: find a better solution -->
+        <!-- ko if: $parent.getStockInfo(location.pickup_location_code) --><!-- /ko -->
+        <li class="bopis-location-item" data-bind="css: $parent.stockInfo() && $parent.stockInfo().status.code || 'no-stock'">
+            <input name="locationItem" type="radio"
+                   data-bind="checked: $parent.selectedLocationCode,
+                   value: location.pickup_location_code,
+                   attr: {
+                       id: 'location_item_' + pickup_location_code, name: $parent.index + '_item',
+                       disabled: $parent.stockInfo() && $parent.stockInfo().status.code == 'out_of_stock'
+                   }"
+            />
+            <label data-bind="attr: {for: 'location_item_' + pickup_location_code , class: 'detail-label'}">
+                <span class="bopis-location-name">
+                    <span data-bind="text: name"></span>
+                    <!-- ko if: $parent.stockInfo() -->
+                        <span class="location-stock-status" data-bind="i18n: $parent.stockInfo().status.label, css: $parent.stockInfo().status.code"></span>
+                    <!-- /ko -->
+                </span>
+                <span class="bopis-location-address">
+                    <!-- ko text: location.city --><!-- /ko -->,
+                    <!-- ko if: location.region -->
+                        <!-- ko text: location.region --><!-- /ko -->,
+                    <!-- /ko -->
+                    <!-- ko text: location.street --><!-- /ko --> -
+                    <!-- ko text: location.postcode --><!-- /ko --><br>
+                    <!-- ko text: location.phone --><!-- /ko -->
+                </span>
+                <!-- ko if: location.pickup_options && location.pickup_options.length -->
+                    <ul class="pickup-options">
+                        <!-- ko foreach: {data: location.pickup_options, as: 'option'} -->
+                            <li class="pickup-option" data-bind="css: option.code">
+                                <span data-bind="text: option.title"></span>
+                            </li>
+                        <!-- /ko -->
+                    </ul>
+                <!-- /ko -->
+                <!-- // TODO: find a better solution -->
+                <!-- ko if: $parent.stockInfo() && $parent.stockInfo().status.code == 'partially_stocked' -->
+                    <div data-bind="mageInit: {'collapsible':{'openedState': 'active'}}" class="bopis-out-of-stock">
+                        <div data-role="title" class="trigger">
+                            <!-- ko text: $parent.stockInfo().out_of_stock_items.length --><!-- /ko -->
+                            <!-- ko i18n: 'Item(s) out stock' --><!-- /ko -->
+                        </div>
+                        <ul data-role="content" class="items" data-bind="foreach: {data: $parent.stockInfo().out_of_stock_items, as: 'item'}">
+                            <li class="product-item">
+                                <div class="product photo product-item-photo">
+                                    <!-- TODO: replace image with Image with borders template -->
+                                    <img data-bind="attr: {src: item.image_url, alt: $t('Item out of stock')}"/>
+                                </div>
+                                <div class="product details product-item-details">
+                                    <strong class="product name product-item-name"
+                                            data-bind="i18n: item.name, attr: {href: item.product_url, title: item.name}"></strong>
+                                    <div class="product options list">
+                                        <div class="option">
+                                            <strong class="label" data-bind="i18n: 'Qty: '"></strong>
+                                            <span data-bind="text: item.qty"></span>
+                                        </div>
+                                        <!-- ko foreach: { data: item.options, as: 'option' } -->
+                                            <div class="option">
+                                                <strong class="label" data-bind="text: JSON.parse(option).label + ': '"></strong>
+                                                <!-- ko if: Array.isArray(option.value) -->
+                                                <span data-bind="html: JSON.parse(option).value.join(', ')"></span>
+                                                <!-- /ko -->
+                                                <!-- ko if: !Array.isArray(option.value) -->
+                                                <span data-bind="text: JSON.parse(option).value"></span>
+                                                <!-- /ko -->
+                                            </div>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                <!-- /ko -->
+            </label>
+        </li>
+    </ul>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button class="action primary" data-bind="click: selectLocation, attr: {disabled: !selectedLocationCode()}" >
+                <span data-bind="text: saveBtnText"></span>
+            </button>
+        </div>
+    </div>
+<!-- /ko -->
+<!-- ko ifnot: locationsToShow().length > 0-->
+    <p data-bind="i18n: 'Your search returned no results.'"></p>
+<!-- /ko -->

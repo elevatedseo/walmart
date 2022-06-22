@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="SelectStorePickupAndStoreFromStorefrontProductPageActionGroup">
+        <annotations>
+            <description>Select Store Pickup Method and select store.</description>
+        </annotations>
+        <arguments>
+            <argument name="sourceCode" type="string"/>
+            <argument name="sourceName" type="string"/>
+        </arguments>
+
+        <wait time="5" stepKey="waitForDeliveryMethodsGeneration"/>
+        <click selector="{{StorefrontProductActionSection.storePickup}}" stepKey="selectStorePickup"/>
+        <waitForElementVisible selector="{{StorefrontBopisModalSection.bopisModalTrigger}}" stepKey="waitForBopisModalTrigger"/>
+        <click selector="{{StorefrontBopisModalSection.bopisModalTrigger}}" stepKey="openBopisModalTrigger"/>
+        <waitForElementVisible selector="{{StorefrontBopisModalSection.bopisModal}}" stepKey="waitForBopisModal"/>
+        <click selector="{{StorefrontBopisModalSection.storeOption(sourceCode)}}" stepKey="selectStore"/>
+        <click selector="{{StorefrontBopisModalSection.selectStoreForPickupButton}}" stepKey="clickOnSelectStoreForPickupButton"/>
+        <waitForElementVisible selector="{{StorefrontProductActionSection.storePickup}}" stepKey="waitForBopisModalClose"/>
+        <see selector="{{StorefrontProductActionSection.selectedStoreName}}" userInput="{{sourceName}}" stepKey="seeSelectedStoreName"/>
+    </actionGroup>
+</actionGroups>

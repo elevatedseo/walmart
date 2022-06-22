@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="bopis">
+            <group id="ship_to_store" translate="label" type="text" sortOrder="40" showInDefault="1">
+                <label>Ship To Store Functionality</label>
+                <frontend_model>Walmart\BopisBase\Block\System\Config\Form\Custom</frontend_model>
+                <fieldset_css>bopis-custom-group</fieldset_css>
+                <depends>
+                    <field id="bopis/general/enabled">1</field>
+                </depends>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" canRestore="1">
+                    <label>Enable Ship To Store</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If set to "Yes", you can configure which stores can be used as a shipping source to ship items to other stores.</comment>
+                </field>
+            </group>
+            <group id="ship_from_store" translate="label" type="text" sortOrder="50" showInDefault="1">
+                <label>Ship From Store Functionality</label>
+                <frontend_model>Walmart\BopisBase\Block\System\Config\Form\Custom</frontend_model>
+                <fieldset_css>bopis-custom-group</fieldset_css>
+                <depends>
+                    <field id="bopis/general/enabled">1</field>
+                </depends>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" canRestore="1">
+                    <label>Enable Ship From Store</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

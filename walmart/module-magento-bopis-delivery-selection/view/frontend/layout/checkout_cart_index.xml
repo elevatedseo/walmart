@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Original work
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Modified work
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.cart.shipping">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="block-summary" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="bopis-block-rates" xsi:type="array">
+                                    <item name="component" xsi:type="string">Walmart_BopisDeliverySelection/js/view/cart/shipping-rates</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="template" xsi:type="string">Walmart_BopisDeliverySelection/cart/shipping-rates</item>
+                                    </item>
+                                    <item name="children" xsi:type="array">
+                                        <item name="instore" xsi:type="array">
+                                            <item name="component" xsi:type="string">uiComponent</item>
+                                            <item name="displayArea" xsi:type="string">instore</item>
+                                            <item name="children" xsi:type="array">
+                                                <item name="location-pickup-time" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Walmart_BopisPreferredLocationFrontend/js/view/location-pickup-time</item>
+                                                    <item name="config" xsi:type="array">
+                                                        <item name="defaultText" xsi:type="helper" helper="Walmart\BopisDeliverySelection\ViewModel\BopisMethodSelection::getStorePickupDesc" />
+                                                    </item>
+                                                </item>
+                                                <item name="modal_trigger" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Walmart_BopisPreferredLocationFrontend/js/view/link</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                                <item name="bopis-block-shipping" xsi:type="array">
+                                    <item name="component" xsi:type="string">Walmart_BopisDeliverySelection/js/view/cart/shipping-estimation</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

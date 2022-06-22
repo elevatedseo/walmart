@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.form.content">
+            <block name="walmart.bopis.grouped.inventory"
+                   template="Walmart_BopisPreferredLocationFrontend::product/view/type/grouped.phtml" after="-">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Walmart\BopisPreferredLocationFrontend\ViewModel\PreferredLocation</argument>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="bopisGrouped" xsi:type="array">
+                                <item name="component" xsi:type="string">bopisGrouped</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="idSkuMap" xsi:type="helper" helper="Walmart\BopisPreferredLocationFrontend\ViewModel\GroupedInventory::getIdToSkuMap" />
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

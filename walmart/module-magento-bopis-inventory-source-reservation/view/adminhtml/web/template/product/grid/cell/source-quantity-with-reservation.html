@@ -1,0 +1,19 @@
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<div class="data-grid-cell-content">
+    <ul data-bind="foreach: { data: $col.getSourceQuantityWithReservationDataCut($row()), as: '$sourceQuantityData' }">
+        <li>
+            <strong data-bind="text: $sourceQuantityData.stock_name"></strong>
+            <ul style="margin-left: 10px;" data-bind="foreach: { data: $sourceQuantityData.sources, as: '$sourcesDataItem' }">
+                <li>
+                    <strong data-bind="text: $sourcesDataItem.source_name"></strong>:
+                    <span data-bind="text: $sourcesDataItem.qty"></span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/carts/mine/pickup-contact" method="GET">
+        <service class="Walmart\BopisAlternatePickupContactApi\Api\PickupContactManagementInterface"
+                 method="get"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+
+    <route url="/V1/carts/mine/pickup-contact" method="POST">
+        <service class="Walmart\BopisAlternatePickupContactApi\Api\PickupContactManagementInterface"
+                 method="save"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+
+    <route url="/V1/carts/mine/pickup-contact" method="DELETE">
+        <service class="Walmart\BopisAlternatePickupContactApi\Api\PickupContactManagementInterface"
+                 method="delete"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+
+    <!-- Managing guest pickup contact -->
+    <route url="/V1/guest-carts/:cartId/pickup-contact" method="GET">
+        <service class="Walmart\BopisAlternatePickupContactApi\Api\GuestPickupContactManagementInterface"
+                 method="get" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/guest-carts/:cartId/pickup-contact" method="POST">
+        <service class="Walmart\BopisAlternatePickupContactApi\Api\GuestPickupContactManagementInterface"
+                 method="save" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/guest-carts/:cartId/pickup-contact" method="DELETE">
+        <service class="Walmart\BopisAlternatePickupContactApi\Api\GuestPickupContactManagementInterface"
+                 method="delete" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+</routes>

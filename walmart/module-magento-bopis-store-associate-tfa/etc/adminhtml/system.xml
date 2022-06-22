@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="bopis">
+            <group id="store_associate" >
+                <group id="twofactorauth" translate="label" type="text" sortOrder="100" showInDefault="1">
+                    <label>2FA</label>
+                    <frontend_model>Walmart\BopisBase\Block\System\Config\Form\Custom</frontend_model>
+                    <fieldset_css>bopis-custom-group</fieldset_css>
+                    <field id="enabled" translate="label" type="select" showInDefault="1" canRestore="1">
+                        <label>APP User 2FA</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="tfa_policy" translate="label" type="select" sortOrder="20" showInDefault="1"
+                           showInWebsite="0" showInStore="0">
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                        <label>APP 2FA Policy</label>
+                        <source_model>Walmart\BopisStoreAssociateTfa\Model\Config\Source\TfaPolicyOptions</source_model>
+                    </field>
+                    <field canRestore="1" id="force_providers" translate="label" type="multiselect" sortOrder="30"
+                           showInDefault="1" showInWebsite="0" showInStore="0">
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                        <label>2FA Providers</label>
+                        <source_model>Walmart\BopisStoreAssociateTfa\Model\Config\Source\Providers</source_model>
+                        <comment>Two-factor authorization providers for admin users to use during login</comment>
+                        <backend_model>Walmart\BopisStoreAssociateTfa\Model\Config\Backend\ForceProviders</backend_model>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

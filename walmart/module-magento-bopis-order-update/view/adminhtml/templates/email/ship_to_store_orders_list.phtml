@@ -1,0 +1,32 @@
+<?php
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+
+/* @var $block \Magento\Framework\View\Element\Template */
+?>
+<table class="post-action error-email-report"
+       cellspacing="5" cellpadding="10" width="100%" border="1"
+       style="border-collapse:collapse;color:#1f2240;background-color:#ffffff;text-align:left;">
+    <thead>
+    <tr>
+        <th>Order IDs</th>
+        <th>Ship To Store Products</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($block->getData('orders') as $order): ?>
+        <tr class="error-row">
+            <td><?= /* @noEscape */ $order['increment_id']; ?></td>
+            <td>
+                <ul>
+                <?php foreach ($order['items'] as $item): ?>
+                    <li><?= /* @noEscape */ $item['name'] ?> (<?= /* @noEscape */ $item['sku']?>)</li>
+                <?php endforeach; ?>
+                </ul>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

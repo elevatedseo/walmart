@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Walmart_BopisInventoryCatalog">
+        <sequence>
+            <module name="Magento_CatalogInventory"/>
+            <module name="Magento_Inventory"/>
+            <module name="Magento_InventorySales"/>
+            <module name="Magento_InventoryCatalogAdminUi"/>
+            <module name="Magento_InventoryBundleProduct"/>
+            <module name="Walmart_BopisBase" />
+            <module name="Walmart_BopisHomeDelivery"/>
+            <module name="Walmart_BopisPreferredLocation"/>
+        </sequence>
+    </module>
+</config>

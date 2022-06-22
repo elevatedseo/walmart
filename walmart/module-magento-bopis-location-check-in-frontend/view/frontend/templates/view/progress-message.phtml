@@ -1,0 +1,59 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+declare(strict_types=1);
+
+use Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/**
+ * @var Template $block
+ * @var Escaper $escaper
+ */
+
+/** @var CheckIn $viewModel */
+$viewModel = $block->getData('view_model');
+
+$checkIn = $viewModel->getCheckIn();
+?>
+<?php if ($viewModel->isCheckInStarted() && !$viewModel->isCheckInFinished()): ?>
+    <div class="progress-message <?= $escaper->escapeHtmlAttr($block->getCss()) ?>">
+        <div class="pickup-block">
+            <svg class="pickup-block-icon">
+                <use xlink:href="<?= $escaper->escapeHtmlAttr($block->getProgressMessageIcon()) ?>"></use>
+            </svg>
+            <div class="pickup-block-content">
+                <h3 class="pickup-block-title">
+                    <?= $escaper->escapeHtml(__($block->getProgressMessageTitle())) ?>
+                </h3>
+                <div>
+                    <?= $escaper->escapeHtml(__($block->getProgressMessage())) ?>
+                </div>
+                <?php if ($viewModel->isCurbside()): ?>
+                    <div>
+                        <?= $escaper->escapeHtml(__($block->getProgressMessageCurbside())) ?>
+                    </div>
+                <?php endif ?>
+            </div>
+        </div>
+    </div>
+<?php elseif ($viewModel->isCheckInFinished()): ?>
+    <div class="progress-message <?= $escaper->escapeHtmlAttr($block->getCss()) ?>">
+        <div class="pickup-block">
+            <svg class="pickup-block-icon">
+                <use xlink:href="<?= $escaper->escapeHtmlAttr($block->getFinishedMessageIcon()) ?>"></use>
+            </svg>
+            <div class="pickup-block-content">
+                <h3 class="pickup-block-title">
+                    <?= $escaper->escapeHtml(__($block->getFinishedMessageTitle())) ?>
+                </h3>
+                <div>
+                    <?= $escaper->escapeHtml(__($block->getFinishedMessage())) ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

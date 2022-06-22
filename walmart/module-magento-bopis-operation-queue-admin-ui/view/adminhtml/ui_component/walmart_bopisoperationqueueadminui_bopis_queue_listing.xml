@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider"
+                  xsi:type="string">walmart_bopisoperationqueueadminui_bopis_queue_listing.walmart_bopisoperationqueueadminui_bopis_queue_listing_data_source
+            </item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>walmart_bopisoperationqueueadminui_bopis_queue_columns</spinner>
+        <deps>
+            <dep>walmart_bopisoperationqueueadminui_bopis_queue_listing.walmart_bopisoperationqueueadminui_bopis_queue_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="walmart_bopisoperationqueueadminui_bopis_queue_listing_data_source"
+                component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">queue_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Walmart_BopisOperationQueueAdminUi::walmart_bopisoperationqueueadminui_bopis_queue</aclResource>
+        <dataProvider name="walmart_bopisoperationqueueadminui_bopis_queue_listing_data_source"
+                      class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>queue_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="walmart_bopisoperationqueueadminui_bopis_queue_columns">
+        <column name="queue_id">
+            <settings>
+                <filter>text</filter>
+                <sorting>asc</sorting>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="entity_type" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Walmart\BopisOperationQueue\Model\Config\Queue\EntityType"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Entity Type</label>
+            </settings>
+        </column>
+        <column name="operation_type" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Walmart\BopisOperationQueue\Model\Config\Queue\OperationType"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Operation Type</label>
+            </settings>
+        </column>
+        <column name="entity_id" class="Walmart\BopisOperationQueueAdminUi\Ui\Component\Listing\Column\EntityId" >
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Entity Id</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+            </settings>
+        </column>
+        <column name="error_code">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Error Code</label>
+            </settings>
+        </column>
+        <column name="total_retries">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Total Retries</label>
+            </settings>
+        </column>
+        <column name="error_message">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Error Message</label>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Walmart\BopisOperationQueue\Model\Config\Queue\Status"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

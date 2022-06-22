@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="SelectHomeDeliveryAndAddConfigurableToCartFromStorefrontProductPageActionGroup">
+        <annotations>
+            <description>Select Home Delivery Method add configurable product to cart</description>
+        </annotations>
+        <arguments>
+            <argument name="urlKey" type="string"/>
+            <argument name="productAttribute" type="string"/>
+            <argument name="productOption" type="string"/>
+            <argument name="qty" type="string"/>
+        </arguments>
+
+        <amOnPage url="{{urlKey}}.html" stepKey="goToStorefrontPage1"/>
+        <waitForPageLoad stepKey="waitForProductFrontPageToLoad1"/>
+        <amOnPage url="{{urlKey}}.html" stepKey="goToStorefrontPage2"/>
+        <waitForPageLoad stepKey="waitForProductFrontPageToLoad2"/>
+
+       <!-- Select Home Delivery Method -->
+        <click selector="{{StorefrontProductActionSection.homeDelivery}}" stepKey="selectStorePickup"/>
+
+        <!-- Add the product to cart and check message-->
+        <selectOption selector="{{StorefrontProductInfoMainSection.productOptionSelect(productAttribute)}}" userInput="{{productOption}}" stepKey="selectOption1"/>
+        <fillField selector="{{StorefrontProductPageSection.qtyInput}}" userInput="{{qty}}" stepKey="fillProductQuantity"/>
+        <click selector="{{StorefrontProductActionSection.addToCart}}" stepKey="clickOnAddToCartButton"/>
+        <waitForPageLoad stepKey="waitForProductToAddInCart"/>
+        <waitForElementVisible selector="{{StorefrontMessagesSection.success}}" stepKey="waitForSuccessMessage"/>
+        <seeElement selector="{{StorefrontProductPageSection.successMsg}}" stepKey="seeSuccessSaveMessage"/>
+
+    </actionGroup>
+</actionGroups>

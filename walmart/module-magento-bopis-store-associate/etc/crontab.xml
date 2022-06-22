@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="store_fulfillment">
+        <job name="store_fulfillment_clear_expired_sessions"
+             instance="Walmart\BopisStoreAssociate\Cron\ClearExpiredSessions" method="execute">
+            <schedule>*/5 * * * *</schedule>
+        </job>
+        <job name="store_fulfillment_check_expired_passwords"
+             instance="Walmart\BopisStoreAssociate\Cron\CheckExpiredPasswords" method="execute">
+            <schedule>0 0 * * *</schedule>
+        </job>
+        <job name="store_fulfillment_clear_old_passwords"
+             instance="Walmart\BopisStoreAssociate\Cron\ClearOldPasswords" method="execute">
+            <schedule>0 0 * * *</schedule>
+        </job>
+    </group>
+</config>

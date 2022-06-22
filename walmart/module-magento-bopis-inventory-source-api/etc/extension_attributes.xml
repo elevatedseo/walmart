@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\InventoryApi\Api\Data\SourceInterface">
+        <attribute code="allow_ship_to_store" type="boolean"/>
+        <attribute code="use_as_shipping_source" type="boolean"/>
+        <attribute code="store_pickup_enabled" type="boolean"/>
+        <attribute code="curbside_enabled" type="boolean"/>
+        <attribute code="pickup_lead_time" type="int"/>
+        <attribute code="pickup_time_label" type="string"/>
+        <attribute code="timezone" type="string"/>
+        <attribute code="store_pickup_instructions" type="string"/>
+        <attribute code="curbside_instructions" type="string"/>
+        <attribute code="parking_spots_enabled" type="boolean"/>
+        <attribute code="parking_spot_mandatory" type="boolean"/>
+        <attribute code="custom_parking_spot_enabled" type="boolean"/>
+        <attribute code="use_car_color" type="boolean"/>
+        <attribute code="car_color_mandatory" type="boolean"/>
+        <attribute code="use_car_make" type="boolean"/>
+        <attribute code="car_make_mandatory" type="boolean"/>
+        <attribute code="use_additional_information" type="boolean"/>
+        <attribute code="additional_information_mandatory" type="boolean"/>
+    </extension_attributes>
+</config>

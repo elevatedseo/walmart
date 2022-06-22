@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Walmart, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="bopis">
+            <group id="synchronization_error_management" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1">
+                <label>Synchronization Error Management</label>
+                <frontend_model>Walmart\BopisBase\Block\System\Config\Form\Custom</frontend_model>
+                <fieldset_css>bopis-custom-group</fieldset_css>
+                <depends>
+                    <field id="bopis/general/enabled">1</field>
+                </depends>
+                <field id="error_retry_count" translate="label comment" type="text" sortOrder="60" showInDefault="1" canRestore="1">
+                    <label>Number of Retry Attempts for Errors</label>
+                    <validate>required integer</validate>
+                    <comment>Defines the number of times that a record will be retried before being placed in the Store Fulfillment Exception Queue.</comment>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="sync_exception_email_enabled" translate="label" type="select" sortOrder="70" showInDefault="1" canRestore="1">
+                    <label>Enable Error Notification Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="sync_exception_email_recipients" translate="label comment" type="text" sortOrder="80" showInDefault="1">
+                    <label>Send Error Notification Email To</label>
+                    <comment>Specify a comma-separated list of emails addresses to receive notifications.</comment>
+                    <validate>required</validate>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                        <field id="bopis/synchronization_error_management/sync_exception_email_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

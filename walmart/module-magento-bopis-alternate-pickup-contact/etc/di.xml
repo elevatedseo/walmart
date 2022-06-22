@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Walmart\BopisAlternatePickupContactApi\Api\GuestPickupContactManagementInterface"
+                type="Walmart\BopisAlternatePickupContact\Model\GuestPickupContactManagement" />
+    <preference for="Walmart\BopisAlternatePickupContactApi\Api\PickupContactManagementInterface"
+                type="Walmart\BopisAlternatePickupContact\Model\PickupContactManagement" />
+
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="walmart_bopis_alternate_pickup_contact_get_alternate_pickup_for_order"
+                type="Walmart\BopisAlternatePickupContact\Plugin\Sales\Order\GetAlternatePickupContact"/>
+    </type>
+
+    <type name="Magento\Quote\Api\CartRepositoryInterface">
+        <plugin name="walmart_bopis_alternate_pickup_contactget_alternate_pickup_for_quote"
+                type="Walmart\BopisAlternatePickupContact\Plugin\Sales\Quote\GetAlternatePickupContact"/>
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Address\Validator">
+        <plugin name="walmart_bopis_alternate_pickup_contactremove_address_type_validation_for_pickup"
+                type="Walmart\BopisAlternatePickupContact\Plugin\Order\Address\RemoveTypeValidation" />
+    </type>
+
+    <type name="Magento\Checkout\Api\ShippingInformationManagementInterface">
+        <plugin name="walmart_bopis_alternate_pickup_contact_manage_alternate_pickup_contact"
+                type="Walmart\BopisAlternatePickupContact\Plugin\Checkout\ManagePickupContact" />
+    </type>
+</config>

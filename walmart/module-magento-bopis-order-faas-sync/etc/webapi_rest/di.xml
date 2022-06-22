@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Sales\Api\Data\OrderInterface">
+        <plugin name="walmart_bopis_order_faas_sync_cancel_process"
+                disabled="true" />
+    </type>
+    <type name="Magento\Sales\Model\Service\CreditmemoService">
+        <plugin name="walmart_bopis_order_faas_sync_creditmemo_create_queue_item"
+                disabled="true" />
+    </type>
+    <type name="Magento\Sales\Model\Order\Creditmemo">
+        <plugin name="walmart_bopis_order_faas_sync_creditmemo_can_refund"
+                disabled="true" />
+    </type>
+</config>

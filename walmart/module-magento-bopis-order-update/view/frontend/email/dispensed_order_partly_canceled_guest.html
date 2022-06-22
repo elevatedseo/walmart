@@ -1,0 +1,163 @@
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<!--@subject {{trans "Your %store_name order has been picked up" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var order.increment_id":"Order Id",
+"layout handle=\"sales_email_order_items\" order=$order area=\"frontend\"":"Order Items Grid",
+"var payment_html|raw":"Payment Details",
+"var comment|escape|nl2br":"Order Comment",
+"var order.shipping_description":"Delivery Description",
+"var shipping_msg":"Delivery message",
+"var created_at_formatted":"Order Created At (datetime)",
+"var store.frontend_name":"Store Frontend Name",
+"var store_email":"Store Email",
+"var order":"Order",
+"var order_data.is_not_virtual":"Order Type",
+"var order_data.customer_name":"Customer Name",
+"var order_id": "Order DB Id",
+"var checkin_url": "Checkin Url",
+"var this.getUrl($store,'customer/account/',[_nosid:1])":"Customer Account URL",
+"var order_url',[_nosid:1])":"Order View URL",
+"var formattedBillingAddress|raw":"Billing Address",
+"var formattedShippingAddress|raw":"Delivery Address",
+"var formattedStoreAddress|raw":"Store Address",
+"var formattedOpeningHours|raw":"Store Address",
+"var pickupInstructions|raw":"Pick-up Instructions",
+"var this.getUrl($store,'customer/account/create/',[_nosid:1])":"Create Account URL"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table style="width: 100%;">
+    <tr class="email-intro">
+        <td>
+            <h2 style="text-align: center;">{{trans "Your order has been picked up"}}</h2>
+
+            <table class="progress-bar" align="center" style="margin-top: 40px; margin-bottom: 40px;">
+                <tr class="icons" style="color: #91959C;">
+                    <td align="center">
+                        <img src="{{view url='Walmart_BopisOrderUpdate/images/confirm.png'}}" width="24" alt="{{trans 'Confirmed'}}" />
+                    </td>
+                    <td align="center">
+                        <hr style="margin: 10px 0; width: 175px; border-top: 4px solid #cccccc; border-radius: 15px;">
+                    </td>
+                    <td align="center">
+                        <img src="{{view url='Walmart_BopisOrderUpdate/images/store.png'}}" width="24" alt="{{trans 'Ready for pickup'}}" />
+                    </td>
+                    <td align="center">
+                        <hr style="margin: 10px 0; width: 175px; border-top: 4px solid #cccccc; border-radius: 15px;">
+                    </td>
+                    <td align="center">
+                        <img src="{{view url='Walmart_BopisOrderUpdate/images/package_selected.png'}}" width="24" alt="{{trans 'Pakage Icon'}}" />
+                    </td>
+                </tr>
+                <tr class="labels">
+                    <td align="center">
+                        <span>{{trans "Confirmed"}}</span>
+                    </td>
+                    <td></td>
+                    <td align="center">
+                        <span>{{trans "Ready for pickup"}}</span>
+                    </td>
+                    <td></td>
+                    <td align="center">
+                        <span>{{trans "Delivered"}}</span>
+                    </td>
+                </tr>
+            </table>
+
+            <p class="greeting">{{trans "Dear %customer_name," customer_name=$order.getCustomerFirstname()}}</p>
+            <p>
+                {{trans "Some items in your order were <b>rejected</b>. Unfortunately, we had to cancel part of your order. If a payment was already made, the cost of canceled items will be refunded to your original payment account with a few business days. We are sorry for the inconvenience." |raw}}
+            </p>
+        </td>
+    </tr>
+    {{depend pickupInstructions}}
+    <tr class="pickup-instructions" style="margin-bottom: 40px;">
+        <td>
+            <img src="{{view url='Walmart_BopisOrderUpdate/images/instructions.png'}}" width="14" alt="{{trans 'instructions Icon'}}" />
+            <h3 style="display: inline-block; margin-left: 5px;">
+                <span style="font-weight: 300;">Pickup instructions</span>
+            </h3>
+            <hr style="margin: 0 0 10px 0;">
+            {{var pickupInstructions|raw}}
+        </td>
+    </tr>
+    {{/depend}}
+    <tr class="pickup-store">
+        <td>
+            <img src="{{view url='Walmart_BopisOrderUpdate/images/store.png'}}" width="14" alt="{{trans 'Store Icon'}}" />
+            <h3 style="display: inline-block; margin-left: 5px;">
+                <span style="font-weight: 300;">Pickup store</span>
+            </h3>
+            <hr style="margin: 0 0 10px 0;">
+            <p style="margin-bottom: 0;">{{var formattedStoreAddress|raw}}</p>
+            <p style="margin-bottom: 0;">{{var formattedOpeningHours|raw}}</p>
+        </td>
+    </tr>
+    <tr class="email-summary">
+        <td>
+            <h3>{{trans 'Your Order <span class="no-link">#%increment_id</span>' increment_id=$order.increment_id |raw}}</h3>
+            <p>{{trans 'Placed on <span class="no-link">%created_at</span>' created_at=$created_at_formatted |raw}}</p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            {{depend comment}}
+            <table class="message-info">
+                <tr>
+                    <td>
+                        {{var comment|escape|nl2br}}
+                    </td>
+                </tr>
+            </table>
+            {{/depend}}
+            <table class="order-details">
+                <tr>
+                    <td class="address-details">
+                        <h3>{{trans "Billing Info"}}</h3>
+                        <p>{{var formattedBillingAddress|raw}}</p>
+                    </td>
+                    {{depend order_data.is_not_virtual}}
+                    <td class="address-details">
+                        <h3>{{trans "Delivery Info"}}</h3>
+                        <p>{{var formattedShippingAddress|raw}}</p>
+                    </td>
+                    {{/depend}}
+                </tr>
+                <tr>
+                    <td class="method-info">
+                        <h3>{{trans "Payment Method"}}</h3>
+                        {{var payment_html|raw}}
+                    </td>
+                    {{depend order_data.is_not_virtual}}
+                    <td class="method-info">
+                        <h3>{{trans "Delivery Method"}}</h3>
+                        <p>{{var order.shipping_description}}</p>
+                        {{if shipping_msg}}
+                        <p>{{var shipping_msg}}</p>
+                        {{/if}}
+                    </td>
+                    {{/depend}}
+                </tr>
+            </table>
+            {{layout handle="sales_email_order_items_partly_canceled" action_type="dispensed" order_id=$order_id area="frontend"}}
+        </td>
+    </tr>
+    <tr class="email-additional">
+        <td>
+            <p style="text-align: center; margin: 20px 0;">
+                {{trans 'Don't have an account? <a href="%account_url">Sign up here</a>.' account_url=$this.getUrl($store,'customer/account/',[_nosid:1]) |raw}}
+            </p>
+            <p style="text-align: center; margin: 20px 0;">
+                {{trans 'If you have questions, reply to this email or <a href="mailto:%store_email">contact us</a>.' store_email=$store_email |raw}}
+            </p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

@@ -1,0 +1,29 @@
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<div class="pickup-contact">
+    <div class="field choice">
+        <input type="checkbox" class="checkbox" id="pickupPersonCheckbox" data-bind="checked: isFormVisible"/>
+        <label class="label" for="pickupPersonCheckbox">
+            <span data-bind="i18n: 'Add alternative pickup person'"></span><i data-bind="i18n: ' - Optional'"></i>
+        </label>
+    </div>
+    <form id="pickup-contact-form" class="form"
+          data-bind="
+            attr: {'data-hasrequired': $t('* Required Fields')},
+            visible: isFormVisible
+          ">
+        <fieldset class="fieldset">
+            <!-- ko foreach: getRegion('pickup-contact-form-fields') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+            <strong class="preferred-contact-notice" data-bind="i18n: 'Preferred contact option'"></strong>
+            <!-- ko foreach: getRegion('pickup-contact-form-preferred-fields') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </fieldset>
+    </form>
+</div>

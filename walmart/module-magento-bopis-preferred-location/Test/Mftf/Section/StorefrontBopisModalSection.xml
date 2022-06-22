@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+    <section name="StorefrontBopisModalSection">
+        <element name="bopisModalTrigger" type="button" selector=".bopis-modal-trigger" timeout="60"/>
+        <element name="bopisModal" type="text" selector="#bopis-modal" timeout="60"/>
+        <element name="storeOption" type="input" selector="//input[contains(@id, '{{sourceCode}}')]" parameterized="true" />
+        <element name="storeOptionStockStatus" type="input" selector="//label[contains(@for, '{{sourceCode}}')]//span[@class='bopis-location-name']//span[contains(@class, 'location-stock-status')]" parameterized="true" />
+        <element name="selectStoreForPickupButton" type="button" selector="#bopis-modal .bopis-location-list .actions-toolbar button" timeout="60"/>
+        <element name="acceptButton" type="button" selector="button.action-accept" timeout="60"/>
+    </section>
+</sections>

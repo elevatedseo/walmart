@@ -1,0 +1,26 @@
+{
+    "name": "walmart/module-magento-bopis-location-check-in",
+    "description": "This module provides the services relating to retail store check-in events for customers.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-base": "^1.0.0",
+        "walmart/module-magento-bopis-location-check-in-api": "^1.0.0",
+        "walmart/module-magento-bopis-store-associate": "^1.0.0",
+        "walmart/module-magento-bopis-api-connector": "^1.0.0",
+        "walmart/module-magento-bopis-logging": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisLocationCheckIn\\": ""
+        }
+    }
+}

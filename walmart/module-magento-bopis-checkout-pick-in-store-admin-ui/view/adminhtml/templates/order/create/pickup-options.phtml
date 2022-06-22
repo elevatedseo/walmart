@@ -1,0 +1,15 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+?>
+<?php $pickupOptions = $block->getPickupOptionsFromSource(); ?>
+<?php foreach ($pickupOptions as $code => $name): ?>
+    <option value="<?= $block->escapeHtml($code) ?>">
+        <?= $block->escapeHtml($name) ?>
+    </option>
+<?php endforeach; ?>
+
+
+

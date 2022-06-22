@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="sync_status" sortOrder="400" class="Walmart\BopisInventorySourceFaasSync\Ui\Component\Form\InventorySourceSyncStatusFieldset">
+        <settings>
+            <collapsible>true</collapsible>
+            <dataScope>general</dataScope>
+            <label translate="true">Sync Status</label>
+        </settings>
+        <field name="sync_error" formElement="textarea">
+            <settings>
+                <label translate="true">Sync Error</label>
+                <dataScope>extension_attributes.sync_error</dataScope>
+                <dataType>string</dataType>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+    </fieldset>
+</form>

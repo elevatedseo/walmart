@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="store-pickup" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="bopis-store-selector" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Walmart_BopisCheckoutPickInStoreFrontend/js/view/store-selector</item>
+                                                    <item name="displayArea" xsi:type="string">store-selector</item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="customer-email" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Magento_InventoryInStorePickupFrontend/js/view/form/element/email</item>
+                                                            <item name="displayArea" xsi:type="string">customer-email</item>
+                                                            <item name="tooltip" xsi:type="array">
+                                                                <item name="description" xsi:type="string" translate="true">We'll send your order confirmation here.</item>
+                                                            </item>
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="before-login-form" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">uiComponent</item>
+                                                                    <item name="displayArea" xsi:type="string">before-login-form</item>
+                                                                    <item name="children" xsi:type="array">
+                                                                        <!-- before login form fields -->
+                                                                    </item>
+                                                                </item>
+                                                                <item name="additional-login-form-fields" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">uiComponent</item>
+                                                                    <item name="displayArea" xsi:type="string">additional-login-form-fields</item>
+                                                                    <item name="children" xsi:type="array">
+                                                                        <!-- additional login form fields -->
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                        <item name="modal_trigger" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Walmart_BopisPreferredLocationFrontend/js/view/link</item>
+                                                            <item name="displayArea" xsi:type="string">store-selector-modal-trigger</item>
+                                                        </item>
+                                                        <item name="location-pickup-time" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Walmart_BopisPreferredLocationFrontend/js/view/location-pickup-time</item>
+                                                            <item name="displayArea" xsi:type="string">location-pickup-time</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="defaultText" xsi:type="helper" helper="Walmart\BopisDeliverySelection\ViewModel\BopisMethodSelection::getStorePickupDesc" />
+                                                            </item>
+                                                        </item>
+                                                        <item name="pickup_options" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Walmart_BopisCheckoutPickInStoreFrontend/js/view/pickup-options</item>
+                                                            <item name="displayArea" xsi:type="string">store-selector-pickup-options</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="bopis.location.modal">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="bopis-modal" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="bopis-location-list" xsi:type="array">
+                                    <item name="component" xsi:type="string">Walmart_BopisCheckoutPickInStoreFrontend/js/view/list</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
+

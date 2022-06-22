@@ -1,0 +1,20 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+
+use Magento\Framework\View\Element\Template;
+use Walmart\BopisInventorySourceAdminUi\ViewModel\Config;
+
+?>
+<?php /** @var $block Template */ ?>
+<?php
+    /** @var $viewModel Config */
+    $viewModel = $block->getViewModel();
+?>
+
+<script>
+    window.validateSourceCodeUrl = '<?= /** @noEscape */ $block->getUrl('inventory/source/validate')?>';
+    window.wctModuleEnabled = '<?= /** @noEscape */ $viewModel->getWctModuleEnabled()?>';
+</script>

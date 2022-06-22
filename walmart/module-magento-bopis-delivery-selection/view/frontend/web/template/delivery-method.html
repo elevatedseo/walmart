@@ -1,0 +1,22 @@
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<li class="delivery-method" data-bind="hidden: !isVisible, css: {'hidden': !isEnabled, 'selected': $parent.selectedMethod() == index}">
+    <div class="field choice">
+        <input type="radio"
+               class="radio"
+               data-bind="checked: $parent.selectedMethod, attr: {id: index, name: 'delivery_method', value: index, disabled: !isEnabled}"/>
+        <label class="label" data-bind="attr: {for: index}">
+            <span data-bind="text: $data.title" class="delivery-method-title"></span>
+            <span class="delivery-method-label"
+                  if="isFree"
+                  data-bind="i18n: 'Free'"></span>
+        </label>
+    </div>
+    <!-- ko foreach: elems() -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+</li>

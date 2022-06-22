@@ -1,0 +1,29 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+
+use Magento\Framework\View\Element\Template;
+use Walmart\BopisPreferredLocationFrontend\ViewModel\PreferredLocation;
+
+/**
+ * @var Template $block
+ * @var PreferredLocation $viewModel
+ */
+$viewModel = $block->getViewModel();
+if (!$viewModel) {
+    return '';
+}
+$isEnabled = $viewModel->isEnabled();
+if (!$isEnabled) {
+    return '';
+}
+?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+                "Magento_Ui/js/core/app": <?= /* @escapeNotVerified */ $block->getJsLayout();?>
+        }
+    }
+</script>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+   <preference for="Walmart\BopisLocationCheckInApi\Api\Data\CheckInInterface"
+               type="Walmart\BopisLocationCheckIn\Model\CheckIn" />
+   <preference for="Walmart\BopisLocationCheckInApi\Api\Data\CarMakeInterface"
+               type="Walmart\BopisLocationCheckIn\Model\CarMake" />
+   <preference for="Walmart\BopisLocationCheckInApi\Api\Data\CarColorInterface"
+               type="Walmart\BopisLocationCheckIn\Model\CarColor" />
+   <preference for="Walmart\BopisLocationCheckInApi\Api\CheckInRepositoryInterface"
+               type="Walmart\BopisLocationCheckIn\Model\CheckInRepository" />
+   <preference for="Walmart\BopisLocationCheckInApi\Api\CarMakeRepositoryInterface"
+               type="Walmart\BopisLocationCheckIn\Model\CarMakeRepository" />
+   <preference for="Walmart\BopisLocationCheckInApi\Api\CarColorRepositoryInterface"
+               type="Walmart\BopisLocationCheckIn\Model\CarColorRepository" />
+   <preference for="Walmart\BopisLocationCheckInApi\Api\Data\CarMakeSearchResultsInterface"
+               type="Walmart\BopisLocationCheckIn\Model\CarMakeSearchResults" />
+   <preference for="Walmart\BopisLocationCheckInApi\Api\Data\CarColorSearchResultsInterface"
+               type="Walmart\BopisLocationCheckIn\Model\CarColorSearchResults" />
+   <preference for="Walmart\BopisLocationCheckInApi\Api\Data\CheckInSearchResultsInterface"
+               type="Walmart\BopisLocationCheckIn\Model\CheckInSearchResults" />
+   <preference for="Walmart\BopisLocationCheckIn\Api\Mapper\CheckInToChaasInterface"
+               type="Walmart\BopisLocationCheckIn\Model\Mapper\RequestPayload" />
+   <preference for="Walmart\BopisLocationCheckIn\Api\CheckInClientInterface"
+               type="Walmart\BopisLocationCheckIn\Model\CheckInClient" />
+   <preference for="Walmart\BopisLocationCheckIn\Api\CheckInHashProviderInterface"
+               type="Walmart\BopisLocationCheckIn\Model\CheckInHashProvider" />
+   <preference for="Walmart\BopisLocationCheckIn\Api\UrlProviderInterface"
+               type="Walmart\BopisLocationCheckIn\Model\UrlProvider" />
+</config>

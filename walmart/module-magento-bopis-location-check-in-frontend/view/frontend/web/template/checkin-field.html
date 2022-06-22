@@ -1,0 +1,57 @@
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<div class="fieldset pickup-block" data-bind="visible: isVisible, css: {started: isStarted, 'update-active': isUpdateActive}">
+    <!-- ko if: updateIconColorVar -->
+        <svg class="pickup-block-icon" data-bind="attr: {style: '--icon-color-var:'+currentValue()}">
+            <use xlink:href data-bind="attr: {'xlink:href': icon}"></use>
+        </svg>
+    <!-- /ko -->
+    <!-- ko ifnot: updateIconColorVar -->
+    <svg class="pickup-block-icon">
+        <use xlink:href data-bind="attr: {'xlink:href': icon}"></use>
+    </svg>
+    <!-- /ko -->
+    <div class="field pickup-block-content" data-bind="css: {required: isRequired}">
+        <label class="label pickup-block-title" data-bind="attr: {for: index}">
+            <span data-bind="i18n: fieldTitle"></span>
+        </label>
+        <div class="control" if="!isStarted || isUpdateActive()">
+            <!-- ko if: fieldType == 'select' -->
+                <select data-bind="
+                    options: options,
+                    optionsCaption: placeholder,
+                    optionsText: 'text',
+                    optionsValue: 'value',
+                    value: currentValue,
+                    valueAllowUnset: true,
+                    attr: {name: index, id: index, 'data-validate': JSON.stringify({required:isRequired}), 'data-msg-required': requiredMessage}"></select>
+
+                <input type="text" class="input-text other-option" if="hasOtherOption && currentValue() == 'other'" data-bind="attr: {name: 'other_'+index,placeholder: otherOptionPlaceholder, 'data-validate': JSON.stringify({required:isRequired}), 'data-msg-required': requiredMessage}">
+            <!-- /ko -->
+            <!-- ko if: fieldType == 'textarea' -->
+            <textarea rows="4" data-bind="mageInit: {
+                'Magento_Catalog/js/product/remaining-characters': {
+                    maxLength: textareaMaxLength,
+                    noteSelector: '.note',
+                    counterSelector: '.note .character-counter'
+                }},
+                value: currentValue,
+                attr: {
+                    name: index,
+                     id: index,
+                     'data-validate': JSON.stringify({required:isRequired}),
+                     placeholder: $t(placeholder),
+                     'data-msg-required': requiredMessage
+                }"></textarea>
+                <p class="note">
+                    <span class="character-counter"></span>
+                </p>
+            <!-- /ko -->
+        </div>
+        <div class="selected-value" data-bind="i18n: savedLabel || 'Not Set'" if="isStarted && !isUpdateActive()"></div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <sales_email>
+            <order_ready_for_pickup>
+                <alternate_template>sales_email_order_ready_for_pickup_alternate_template</alternate_template>
+            </order_ready_for_pickup>
+            <order_in_store>
+                <enabled>1</enabled>
+                <template>sales_email_order_in_store_template</template>
+                <guest_template>sales_email_order_in_store_guest_template</guest_template>
+                <identity>sales</identity>
+                <copy_method>bcc</copy_method>
+            </order_in_store>
+            <order_has_been_picked_up>
+                <enabled>1</enabled>
+                <template>sales_email_order_has_been_picked_up_template</template>
+                <guest_template>sales_email_order_has_been_picked_up_guest_template</guest_template>
+                <identity>general</identity>
+                <copy_method>bcc</copy_method>
+            </order_has_been_picked_up>
+            <order_delayed>
+                <enabled>1</enabled>
+                <template>sales_email_order_delayed_template</template>
+                <guest_template>sales_email_order_delayed_guest_template</guest_template>
+                <identity>general</identity>
+                <copy_method>bcc</copy_method>
+            </order_delayed>
+            <order_canceled>
+                <enabled>1</enabled>
+                <template>sales_email_order_canceled_template</template>
+                <alternate_template>sales_email_order_canceled_alternate_template</alternate_template>
+                <guest_template>sales_email_order_canceled_guest_template</guest_template>
+                <identity>general</identity>
+                <copy_method>bcc</copy_method>
+            </order_canceled>
+            <order_partly_canceled>
+                <enabled>1</enabled>
+                <template>sales_email_order_partly_canceled_template</template>
+                <alternate_template>sales_email_order_partly_canceled_alternate_template</alternate_template>
+                <guest_template>sales_email_order_partly_canceled_guest_template</guest_template>
+                <dispensed_template>sales_email_order_partly_canceled_dispensed_template</dispensed_template>
+                <dispensed_alternate_template>sales_email_order_partly_canceled_dispensed_alternate_template</dispensed_alternate_template>
+                <dispensed_guest_template>sales_email_order_partly_canceled_dispensed_guest_template</dispensed_guest_template>
+                <identity>general</identity>
+                <copy_method>bcc</copy_method>
+            </order_partly_canceled>
+            <ship_to_store>
+                <template>sales_email_ship_to_store_template</template>
+                <identity>general</identity>
+            </ship_to_store>
+        </sales_email>
+    </default>
+</config>

@@ -1,0 +1,23 @@
+{
+    "name": "walmart/module-magento-bopis-inventory-catalog-api",
+    "description": "This module defines the internal API specifications for management of inventory availability messaging. Requires one or more companion implementation modules. ",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-inventory-catalog": "^1.0.0",
+        "walmart/module-magento-bopis-inventory-source-api": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisInventoryCatalogApi\\": ""
+        }
+    }
+}

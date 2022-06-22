@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="SelectStorePickupAndAddConfigurableToCartFromStorefrontProductPageActionGroup">
+        <annotations>
+            <description>Select Store Pickup Method and select store and add configurable product to cart</description>
+        </annotations>
+        <arguments>
+            <argument name="urlKey" type="string"/>
+            <argument name="sourceCode" type="string"/>
+            <argument name="sourceName" type="string"/>
+            <argument name="productAttribute" type="string"/>
+            <argument name="productOption" type="string"/>
+            <argument name="qty" type="string"/>
+        </arguments>
+
+        <amOnPage url="{{urlKey}}.html" stepKey="goToStorefrontPage1"/>
+        <waitForPageLoad stepKey="waitForProductFrontPageToLoad1"/>
+        <amOnPage url="{{urlKey}}.html" stepKey="goToStorefrontPage2"/>
+        <waitForPageLoad stepKey="waitForProductFrontPageToLoad2"/>
+
+       <!-- Select Store Pickup Method and select store-->
+        <click selector="{{StorefrontProductActionSection.storePickup}}" stepKey="selectStorePickup"/>
+        <waitForElementVisible selector="{{StorefrontBopisModalSection.bopisModalTrigger}}" stepKey="waitForBopisModalTrigger"/>
+        <click selector="{{StorefrontBopisModalSection.bopisModalTrigger}}" stepKey="openBopisModalTrigger"/>
+        <waitForElementVisible selector="{{StorefrontBopisModalSection.bopisModal}}" stepKey="waitForBopisModal"/>
+        <click selector="{{StorefrontBopisModalSection.storeOption(sourceCode)}}" stepKey="selectStore"/>
+        <click selector="{{StorefrontBopisModalSection.selectStoreForPickupButton}}" stepKey="clickOnSelectStoreForPickupButton"/>
+        <waitForElementVisible selector="{{StorefrontProductActionSection.storePickup}}" stepKey="waitForBopisModalClose"/>
+        <see selector="{{StorefrontProductActionSection.selectedStoreName}}" userInput="{{sourceName}}" stepKey="seeSelectedStoreName"/>
+
+        <!-- Add the product to cart and check message-->
+        <selectOption selector="{{StorefrontProductInfoMainSection.productOptionSelect(productAttribute)}}" userInput="{{productOption}}" stepKey="selectOption1"/>
+        <fillField selector="{{StorefrontProductPageSection.qtyInput}}" userInput="{{qty}}" stepKey="fillProductQuantity"/>
+        <click selector="{{StorefrontProductActionSection.addToCart}}" stepKey="clickOnAddToCartButton"/>
+        <waitForPageLoad stepKey="waitForProductToAddInCart"/>
+        <wait time="5" stepKey="waitForCustomerSectionUpdate"/>
+        <waitForElementVisible selector="{{StorefrontMessagesSection.success}}" stepKey="waitForSuccessMessage"/>
+        <seeElement selector="{{StorefrontProductPageSection.successMsg}}" stepKey="seeSuccessSaveMessage"/>
+
+    </actionGroup>
+</actionGroups>

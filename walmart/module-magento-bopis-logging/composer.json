@@ -1,0 +1,21 @@
+{
+    "name": "walmart/module-magento-bopis-logging",
+    "version": "1.0.0",
+    "description": "This module defines common logging utilities for all other modules.",
+    "type": "magento2-module",
+    "require": {
+	"php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*"
+    },
+    "license": [
+        "Proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisLogging\\": ""
+        }
+    }
+}

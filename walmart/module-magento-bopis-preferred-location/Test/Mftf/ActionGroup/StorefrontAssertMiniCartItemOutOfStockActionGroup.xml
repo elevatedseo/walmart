@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="StorefrontAssertMiniCartItemOutOfStockActionGroup">
+        <annotations>
+            <description>Validates that the provided Product is out of stock</description>
+        </annotations>
+        <arguments>
+            <argument name="productOutOfStockText" type="string"/>
+        </arguments>
+
+        <see selector="{{StorefrontMinicartSection.notice}}" userInput="{{productOutOfStockText}}" stepKey="seeOutOfStockMessage"/>
+    </actionGroup>
+</actionGroups>

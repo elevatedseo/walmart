@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Walmart\BopisInventorySourceReservation\Model\GetReservationsQuantityPerSourceInterface" type="Walmart\BopisInventorySourceReservation\Model\ResourceModel\GetReservationsQuantityPerSource"/>
+    <type name="Magento\InventoryReservations\Model\ResourceModel\SaveMultiple">
+        <plugin name="walmart_bopis_inventory_source_reservation_save_source_code_to_inventory_reservation"
+                type="Walmart\BopisInventorySourceReservation\Plugin\InventoryReservations\SaveMultiplePlugin"
+                sortOrder="1" disabled="false" />
+    </type>
+    <type name="Walmart\BopisInventorySourceReservation\Plugin\InventoryReservations\SaveMultiplePlugin">
+        <arguments>
+            <argument name="quoteSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+</config>

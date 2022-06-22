@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17.915" height="21.498" viewBox="0 0 17.915 21.498">
+    <g id="Group_11" data-name="Group 11" transform="translate(0.024)">
+        <g id="Group_14" data-name="Group 14" transform="translate(-0.133)">
+            <path id="Path_25" data-name="Path 25" d="M17.019,0H.9A.9.9,0,0,0,0,.9V15.228a.89.89,0,0,0,0,.089c0,.022.006.044.01.066,0,.007,0,.014,0,.02.005.026.012.052.019.077l0,.007c.008.026.017.051.027.076l0,.007c.01.023.021.046.033.069l.005.011c.011.021.024.041.037.061l.009.014c.013.02.027.038.042.057L.2,15.8q.028.034.059.066l5.373,5.373q.031.031.066.059l.014.01c.019.015.037.029.057.042l.014.009c.02.013.04.025.061.037l.011.005c.022.012.045.023.069.033l.007,0c.025.01.05.019.075.027l.007,0c.025.007.051.014.077.019l.02,0c.022,0,.044.008.066.01s.059,0,.089,0H17.019a.9.9,0,0,0,.9-.9V.9a.9.9,0,0,0-.9-.9M5.374,18.439,3.058,16.123H5.374Zm10.749,1.267H7.166V15.228a.9.9,0,0,0-.9-.9H1.791V1.791H16.123Z" transform="translate(0.109)" fill="currentColor"/>
+            <path id="Path_27" data-name="Path 27" d="M36.9,73.791H42.27a.9.9,0,0,0,0-1.791H36.9a.9.9,0,0,0,0,1.791" transform="translate(-29.308 -64.834)" fill="currentColor"/>
+            <path id="Path_28" data-name="Path 28" d="M127.529,73.529a.9.9,0,1,0-1.267,0,.9.9,0,0,0,1.267,0" transform="translate(-122.308 -64.834)" fill="currentColor"/>
+            <path id="Path_29" data-name="Path 29" d="M36.9,109.791H42.27a.9.9,0,1,0,0-1.791H36.9a.9.9,0,1,0,0,1.791" transform="translate(-29.308 -97.251)" fill="currentColor"/>
+            <path id="Path_30" data-name="Path 30" d="M127.529,109.529a.9.9,0,1,0-1.267,0,.9.9,0,0,0,1.267,0" transform="translate(-122.308 -97.251)" fill="currentColor"/>
+            <path id="Path_31" data-name="Path 31" d="M36.9,37.791H42.27a.9.9,0,0,0,0-1.791H36.9a.9.9,0,0,0,0,1.791" transform="translate(-29.308 -32.417)" fill="currentColor"/>
+            <path id="Path_32" data-name="Path 32" d="M127.529,37.529a.9.9,0,1,0-1.267,0,.9.9,0,0,0,1.267,0" transform="translate(-122.308 -32.417)" fill="currentColor"/>
+        </g>
+    </g>
+</svg>

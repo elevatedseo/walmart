@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Walmart\BopisHomeDeliveryApi\Api\IsAvailableForQtyInterface"
+                type="Walmart\BopisHomeDeliveryApi\Model\IsAvailableForQty" />
+    <virtualType name="ResultItemBuilder" type="Walmart\BopisInventoryCatalog\Model\InventoryAvailability\Builder\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="product" xsi:type="string">Walmart\BopisInventoryCatalog\Model\InventoryAvailability\Builder\ProductDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Walmart\BopisHomeDeliveryApi\Model\IsAvailableForQty">
+        <arguments>
+            <argument name="oosItemBuilder" xsi:type="object">ResultItemBuilder</argument>
+        </arguments>
+    </type>
+</config>

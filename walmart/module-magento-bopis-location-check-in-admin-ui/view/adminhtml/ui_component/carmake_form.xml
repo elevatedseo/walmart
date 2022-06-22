@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">carmake_form.carmake_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Car Make</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <dataScope>data</dataScope>
+        <namespace>carmake_form</namespace>
+        <deps>
+            <dep>carmake_form.carmake_form_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="back">
+                <url path="*/*/"/>
+                <class>back</class>
+                <label translate="true">Back</label>
+            </button>
+            <button name="delete" class="Walmart\BopisLocationCheckInAdminUi\Block\Adminhtml\CarMake\Edit\DeleteButton"/>
+            <button name="save">
+                <class>primary</class>
+                <label translate="true">Save</label>
+            </button>
+        </buttons>
+    </settings>
+    <dataSource name="carmake_form_data_source" component="Magento_Ui/js/form/provider">
+        <settings>
+            <submitUrl path="wct_fulfillment/carmake/save"/>
+        </settings>
+        <dataProvider class="Walmart\BopisLocationCheckInAdminUi\Ui\DataProvider\CarMake\FormDataProvider" name="carmake_form_data_source">
+            <settings>
+                <requestFieldName>carmake_id</requestFieldName>
+                <primaryFieldName>carmake_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="carmake">
+        <settings>
+            <label translate="true">Information</label>
+        </settings>
+        <field name="carmake_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="value" formElement="input" sortOrder="20">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Value</label>
+            </settings>
+        </field>
+    </fieldset>
+</form>

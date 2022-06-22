@@ -1,0 +1,24 @@
+{
+    "name": "walmart/module-magento-bopis-delivery-selection",
+    "description": "This module represents the storefront UI features for available delivery options, such as Home Delivery and Store Pickup, in the PDP, cart, and checkout.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-base": "^1.0.0",
+        "walmart/module-magento-bopis-preferred-location-frontend": "^1.0.0",
+        "walmart/module-magento-bopis-inventory-catalog-api": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisDeliverySelection\\": ""
+        }
+    }
+}

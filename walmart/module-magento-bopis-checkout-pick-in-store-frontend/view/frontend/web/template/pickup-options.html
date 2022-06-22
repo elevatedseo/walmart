@@ -1,0 +1,27 @@
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<!-- ko if: selectedLocation() && selectedLocation().pickup_options.length -->
+<div class="pickup-options-wrapper">
+    <h3 data-bind="i18n: 'Pickup Options'" if="selectedLocation().pickup_options.length > 1"></h3>
+    <ul class="pickup-options" data-bind="foreach: {data: selectedLocation().pickup_options, as: 'option'}, visible: selectedLocation().pickup_options.length > 1">
+        <li class="pickup-option" data-bind="css: option.code">
+            <div class="field choice">
+                <label class="label" data-bind="attr: {for: $parent.index + '_item_' + option.code}">
+                    <input type="radio"
+                       class="radio"
+                       data-bind="checked: $parent.selectedOption, attr: {id: $parent.index + '_item_' + option.code, name: $parent.index, value: option.code}"/>
+                    <span>
+                        <span data-bind="text: option.title" class="pickup-option-title"></span>
+                        <span data-bind="html: option.description" class="pickup-option-description"></span>
+                    </span>
+                </label>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- /ko -->
+

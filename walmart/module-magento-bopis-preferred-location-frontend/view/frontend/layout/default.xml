@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="after.body.start">
+            <block name="init_google_maps"
+                   class="Magento\Framework\View\Element\Template"
+                   template="Walmart_BopisPreferredLocationFrontend::google_maps_init.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Walmart\BopisPreferredLocationFrontend\ViewModel\BopisLocationSelection</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="before.body.end">
+            <block name="script"  class="Magento\Framework\View\Element\Template" template="Walmart_BopisPreferredLocationFrontend::script.phtml" />
+        </referenceBlock>
+    </body>
+</page>

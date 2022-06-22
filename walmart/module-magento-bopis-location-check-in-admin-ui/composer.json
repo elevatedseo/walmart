@@ -1,0 +1,22 @@
+{
+    "name": "walmart/module-magento-bopis-location-check-in-admin-ui",
+    "description": "This module represents the administrative UI features, including configuration, for check-in services.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-location-check-in": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisLocationCheckInAdminUi\\": ""
+        }
+    }
+}

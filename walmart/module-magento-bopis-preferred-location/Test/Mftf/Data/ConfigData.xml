@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <!-- Enable Store Fulfillment by Walmart Commerce Technologies module -->
+    <entity name="WCTEnabled">
+        <data key="path">bopis/general/enabled</data>
+        <data key="value">1</data>
+    </entity>
+    <!-- Enable Instore Pickup -->
+    <entity name="WCTInstorePickupEnabled">
+        <data key="path">carriers/instore/active</data>
+        <data key="value">1</data>
+    </entity>
+</entities>

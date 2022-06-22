@@ -1,0 +1,13 @@
+{
+    "inventory_reservation": {
+        "column": {
+            "source_code": true
+        },
+        "index": {
+            "INVENTORY_RESERVATION_SOURCE_CODE": true
+        },
+        "constraint": {
+            "INVENTORY_RESERVATION_SOURCE_CODE_INVENTORY_SOURCE_SOURCE_CODE": true
+        }
+    }
+}

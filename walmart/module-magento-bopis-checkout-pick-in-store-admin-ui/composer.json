@@ -1,0 +1,22 @@
+{
+    "name": "walmart/module-magento-bopis-checkout-pick-in-store-admin-ui",
+    "description": "This module represents the administrative UI features for in-store pickup options, such as display of the selected option on orders, and the ability to set the options during manual fulfillment.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-checkout-pick-in-store": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisCheckoutPickInStoreAdminUi\\": ""
+        }
+    }
+}

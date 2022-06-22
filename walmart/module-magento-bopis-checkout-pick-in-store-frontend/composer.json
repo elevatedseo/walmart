@@ -1,0 +1,23 @@
+{
+    "name": "walmart/module-magento-bopis-checkout-pick-in-store-frontend",
+    "description": "This module represents the storefront UI features for in-store pickup options during checkout, such as curbside delivery or estimated pickup time.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-preferred-location-frontend": "^1.0.0",
+        "walmart/module-magento-bopis-preferred-location-api": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisCheckoutPickInStoreFrontend\\": ""
+        }
+    }
+}

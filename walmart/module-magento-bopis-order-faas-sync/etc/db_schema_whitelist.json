@@ -1,0 +1,15 @@
+{
+    "walmart_bopis_order_line_items": {
+        "column": {
+            "entity_id": true,
+            "line_item": true,
+            "order_increment_id": true,
+            "order_item_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "ORDER_LINE_ITEMS_ORDER_INCREMENT_ID_SALES_ORDER_INCREMENT_ID": true,
+            "ORDER_LINE_ITEMS_ORDER_ITEM_ID_SALES_ORDER_ITEM_ITEM_ID": true
+        }
+    }
+}

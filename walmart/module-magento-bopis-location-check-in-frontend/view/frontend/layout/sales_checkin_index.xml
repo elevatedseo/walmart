@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="cms-full-width" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="pickup-page"/>
+
+        <referenceBlock name="top.search" remove="true" />
+        <referenceBlock name="minicart" remove="true" />
+        <referenceBlock name="bopis.location.selections" remove="true" />
+        <referenceBlock name="copyright" remove="true" />
+        <referenceContainer name="header.panel.wrapper" remove="true" />
+        <referenceContainer name="page.top" remove="true" />
+        <referenceContainer name="compare-link-wrapper" remove="true" />
+        <referenceContainer name="footer" remove="true" />
+
+        <referenceBlock name="page.main.title">
+            <arguments>
+                <argument name="css_class" xsi:type="string">pickup-heading</argument>
+            </arguments>
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Pickup order</argument>
+            </action>
+            <block class="Magento\Framework\View\Element\Template" name="pickup.heading" template="Walmart_BopisLocationCheckInFrontend::view/heading.phtml" cacheable="false">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+        <referenceContainer name="columns.top">
+            <block class="Magento\Framework\View\Element\Template" name="pickup.progress.message" template="Walmart_BopisLocationCheckInFrontend::view/progress-message.phtml" before="page.messages">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn</argument>
+                    <argument name="progress_message_title" xsi:type="string" translate="true">We'll See you soon!</argument>
+                    <argument name="progress_message" xsi:type="string" translate="true">You can go to the pick up point. Please have your order number ready to be shared with the Store associate.</argument>
+                    <argument name="progress_message_curbside" xsi:type="string" translate="true">Store associate is on it’s way. Open the trunk if you want us to place the items in the car.</argument>
+                    <argument name="progress_message_icon" xsi:type="string">#sand-clock</argument>
+                    <argument name="finished_message_title" xsi:type="string" translate="true">You're all set!</argument>
+                    <argument name="finished_message" xsi:type="string" translate="true">Thank you for picking up the order</argument>
+                    <argument name="finished_message_icon" xsi:type="string">#check</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        <referenceContainer name="content">
+            <container name="pickup" htmlClass="pickup-content" htmlTag="div">
+                <block class="Magento\Framework\View\Element\Template" name="pickup.instructions" template="Walmart_BopisLocationCheckInFrontend::view/instructions.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Template" name="pickup.checkin.curbside" template="Walmart_BopisLocationCheckInFrontend::view/curbside.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn</argument>
+                        <argument name="jsLayout" xsi:type="array">
+                            <item name="components" xsi:type="array">
+                                <item name="pickup-checkin-form" xsi:type="array">
+                                    <item name="component" xsi:type="string">uiComponent</item>
+                                    <item name="children" xsi:type="array">
+                                        <item name="parking_spot" xsi:type="array">
+                                            <item name="component" xsi:type="string">Walmart_BopisLocationCheckInFrontend/js/checkin-field</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="isRequired" xsi:type="boolean">true</item>
+                                                <item name="hasOtherOption" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::canAddCustomParkingSpot" />
+                                                <item name="otherOptionPlaceholder" xsi:type="string" translate="true">Enter parking spot...</item>
+                                                <item name="icon" xsi:type="string" translate="true">#parking</item>
+                                                <item name="fieldTitle" xsi:type="string" translate="true">Parking spot</item>
+                                                <item name="placeholder" xsi:type="string" translate="true">Select parking spot...</item>
+                                                <item name="requiredMessage" xsi:type="string" translate="true">Please select your parking spot.</item>
+                                                <item name="options" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::getParkingSpots" />
+                                                <item name="savedValue" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::getSavedParkingSpot" />
+                                                <item name="savedLabel" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::getSavedParkingSpot" />
+                                                <item name="isStarted" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::isCheckinStarted" />
+                                            </item>
+                                        </item>
+                                        <item name="car_color" xsi:type="array">
+                                            <item name="component" xsi:type="string">Walmart_BopisLocationCheckInFrontend/js/checkin-field</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="isRequired" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::isCarColorMandatory" />
+                                                <item name="isVisible" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::isCarColorEnabled" />
+                                                <item name="updateIconColorVar" xsi:type="boolean">true</item>
+                                                <item name="icon" xsi:type="string" translate="true">#car-color</item>
+                                                <item name="fieldTitle" xsi:type="string" translate="true">Car color</item>
+                                                <item name="placeholder" xsi:type="string" translate="true">Select car color...</item>
+                                                <item name="options" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::getColors" />
+                                                <item name="savedValue" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::getSavedColor" />
+                                                <item name="savedLabel" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::getSavedColorLabel" />
+                                                <item name="isStarted" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::isCheckinStarted" />
+                                            </item>
+                                        </item>
+                                        <item name="car_make" xsi:type="array">
+                                            <item name="component" xsi:type="string">Walmart_BopisLocationCheckInFrontend/js/checkin-field</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="isRequired" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::isCarMakeMandatory" />
+                                                <item name="isVisible" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::isCarMakeEnabled" />
+                                                <item name="icon" xsi:type="string" translate="true">#car</item>
+                                                <item name="fieldTitle" xsi:type="string" translate="true">Car make</item>
+                                                <item name="placeholder" xsi:type="string" translate="true">Select car make...</item>
+                                                <item name="options" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::getCarMakes" />
+                                                <item name="savedValue" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::getSavedMake" />
+                                                <item name="savedLabel" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::getSavedMakeLabel" />
+                                                <item name="isStarted" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::isCheckinStarted" />
+                                            </item>
+                                        </item>
+                                        <item name="additional_notes" xsi:type="array">
+                                            <item name="component" xsi:type="string">Walmart_BopisLocationCheckInFrontend/js/checkin-field</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="isRequired" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::isAdditionalInfoMandatory" />
+                                                <item name="isVisible" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::isAdditionalInfoEnabled" />
+                                                <item name="fieldType" xsi:type="string">textarea</item>
+                                                <item name="icon" xsi:type="string" translate="true">#additional</item>
+                                                <item name="fieldTitle" xsi:type="string" translate="true">Additional information</item>
+                                                <item name="placeholder" xsi:type="string" translate="true">Enter a message for the store...</item>
+                                                <item name="savedValue" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::getSavedMessage" />
+                                                <item name="savedLabel" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::getSavedMessage" />
+                                                <item name="isStarted" xsi:type="helper" helper="Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn::isCheckinStarted" />
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+
+        <referenceContainer name="footer-container">
+            <block class="Magento\Framework\View\Element\Template" name="pickup.location" template="Walmart_BopisLocationCheckInFrontend::view/location.phtml" before="-">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

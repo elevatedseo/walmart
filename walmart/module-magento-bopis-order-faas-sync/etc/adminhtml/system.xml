@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="bopis">
+            <group id="synchronization_error_management">
+                <field id="order_sync_exception_email_template" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order Sync Exception Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                        <field id="bopis/synchronization_error_management/sync_exception_email_enabled">1</field>
+                    </depends>
+                </field>
+
+                <group id="order_synchronization" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1">
+                    <label>Order Synchronization</label>
+                    <frontend_model>Walmart\BopisBase\Block\System\Config\Form\Custom</frontend_model>
+                    <fieldset_css>bopis-custom-group</fieldset_css>
+                    <field id="barcode_source" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Barcode Source</label>
+                        <source_model>Walmart\BopisOrderFaasSync\Model\Config\Source\BarcodeSource</source_model>
+                        <config_path>bopis/order_synchronization/barcode_source</config_path>
+                    </field>
+                    <field id="barcode_type" translate="label" type="select" sortOrder="115" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                        <label>Barcode Type</label>
+                        <source_model>Walmart\BopisOrderFaasSync\Model\Config\Source\BarcodeType</source_model>
+                        <config_path>bopis/order_synchronization/barcode_type</config_path>
+                    </field>
+                    <field id="max_number_of_items" translate="label comment" type="text" sortOrder="120" showInDefault="1" canRestore="1">
+                        <label>Max Number Of Items</label>
+                        <comment>Max number of the items to process per cron run.</comment>
+                        <config_path>bopis/order_synchronization/max_number_of_items</config_path>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

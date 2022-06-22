@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Walmart\BopisHomeDeliveryApi\Api\Data\RequestInterface"
+                type="Walmart\BopisHomeDelivery\Model\Request\Request" />
+    <preference for="Walmart\BopisHomeDeliveryApi\Api\Data\RequestItemInterface"
+                type="Walmart\BopisHomeDelivery\Model\Request\RequestItem" />
+    <preference for="Walmart\BopisHomeDeliveryApi\Api\Data\ResultItemInterface"
+                type="Walmart\BopisHomeDelivery\Model\Request\ResultItem" />
+    <preference for="Walmart\BopisHomeDeliveryApi\Api\Data\ResultInterface"
+                type="Walmart\BopisHomeDelivery\Model\Request\Result" />
+
+    <type name="Walmart\BopisHomeDeliveryApi\Api\IsAvailableForQtyInterface">
+        <plugin name="walmart_bopis_home_delivery_add_cart_product_to_request"
+                type="Walmart\BopisHomeDelivery\Plugin\HomeDeliveryRequestPlugin"
+                sortOrder="20" />
+    </type>
+
+    <type name="Walmart\BopisPreferredLocationFrontend\Plugin\InventoryAvailabilityRequestPlugin">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+</config>

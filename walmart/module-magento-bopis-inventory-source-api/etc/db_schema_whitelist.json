@@ -1,0 +1,54 @@
+{
+    "inventory_source": {
+        "column": {
+            "for_store_pickup_enabled": false,
+            "instore_pickup_enabled": false,
+            "store_pickup_enabled": true,
+            "curbside_enabled": true,
+            "pickup_time_label": true,
+            "lead_time": false,
+            "timezone": true,
+            "instore_pickup_instructions": false,
+            "store_pickup_instructions": true,
+            "curbside_instructions": true,
+            "daylight_saving": false,
+            "parking_spots_enabled": true,
+            "parking_spot_mandatory": true,
+            "custom_parking_spot_enabled": true,
+            "use_as_shipping_source": true,
+            "allow_ship_to_store": true,
+            "use_car_color": true,
+            "car_color_mandatory": true,
+            "use_car_make": true,
+            "car_make_mandatory": true,
+            "use_additional_information": true,
+            "additional_information_mandatory": true,
+            "pickup_lead_time": true
+        }
+    },
+    "walmart_bopis_source_opening_hours": {
+        "column": {
+            "source_open_hours_id": true,
+            "source_code": true,
+            "day_of_week": true,
+            "open_hour": true,
+            "close_hour": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "INV_SOURCE_OPENING_HOURS_SOURCE_CODE_INV_SOURCE_SOURCE_CODE": true
+        }
+    },
+    "walmart_bopis_inventory_source_parking_spot": {
+        "column": {
+            "source_parking_spot_id": true,
+            "source_code": true,
+            "enabled": true,
+            "name": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "INV_SOURCE_PARKING_SPOT_SOURCE_CODE_INV_SOURCE_SOURCE_CODE": true
+        }
+    }
+}

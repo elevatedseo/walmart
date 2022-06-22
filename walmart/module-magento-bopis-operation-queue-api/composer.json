@@ -1,0 +1,23 @@
+{
+    "name": "walmart/module-magento-bopis-operation-queue-api",
+    "description": "This module defines the internal API specifications for queue management services. Requires one or more companion implementation modules.\u00a0",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-operation-queue": "^1.0.0",
+        "walmart/module-magento-bopis-logging": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisOperationQueueApi\\": ""
+        }
+    }
+}

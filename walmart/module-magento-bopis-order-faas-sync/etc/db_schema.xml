@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="walmart_bopis_order_line_items" resource="default" engine="innodb" comment="Order Line Items">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="smallint" name="line_item" padding="6" nullable="false" comment="Line Item"/>
+        <column xsi:type="varchar" name="order_increment_id" nullable="false" length="32" comment="Order Increment ID"/>
+        <column xsi:type="int" name="order_item_id" unsigned="true" nullable="false" comment="Order Item ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="ORDER_LINE_ITEMS_ORDER_INCREMENT_ID_SALES_ORDER_INCREMENT_ID"
+                    table="walmart_bopis_order_line_items" column="order_increment_id" referenceTable="sales_order"
+                    referenceColumn="increment_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="ORDER_LINE_ITEMS_ORDER_ITEM_ID_SALES_ORDER_ITEM_ITEM_ID"
+                    table="walmart_bopis_order_line_items" column="order_item_id" referenceTable="sales_order_item"
+                    referenceColumn="item_id" onDelete="CASCADE"/>
+    </table>
+</schema>

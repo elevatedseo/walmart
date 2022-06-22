@@ -1,0 +1,70 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+declare(strict_types=1);
+
+use Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/**
+ * @var Template $block
+ * @var Escaper $escaper
+ */
+// @codingStandardsIgnoreFile
+
+/** @var CheckIn $viewModel */
+$viewModel = $block->getData('view_model');
+
+$pickupLocation = $viewModel->getPickupLocation();
+?>
+<?php if ($viewModel->getInstructions()): ?>
+    <div class="pickup-block location">
+        <svg class="pickup-block-icon">
+            <use xlink:href="#marker"></use>
+        </svg>
+        <div class="pickup-block-content">
+            <div>
+                <h3 class="pickup-block-title">
+                    <?= $escaper->escapeHtml(__('Pickup Store')) ?>
+                </h3>
+
+                <p>
+                    <?php if ($pickupLocation->getName()): ?>
+                        <?php if ($viewModel->locationHasCords()): ?>
+                            <a href="<?= $escaper->escapeUrl($viewModel->getMapUrl())?>"
+                               title="<?= $escaper->escapeHtmlAttr($pickupLocation->getName()) ?>"
+                               target="_blank">
+                                <?= $escaper->escapeHtml(__($pickupLocation->getName())) ?>
+                            </a><br>
+                        <?php else: ?>
+                            <?= $escaper->escapeHtml(__($pickupLocation->getName())) ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?= /* @noEscape */ $pickupLocation->getStreet() ?> <?= /* @noEscape */ $pickupLocation->getCity() ?>, <?= /* @noEscape */ $pickupLocation->getRegion() ?>
+                    <br />
+                    <?= /* @noEscape */ $pickupLocation->getPostcode() ?> <?= /* @noEscape */ $pickupLocation->getCountryId() ?>
+                </p>
+            </div>
+
+            <p class="phone">
+                <strong><?= $escaper->escapeHtml(__('Phone')) ?></strong>
+                <a href="tel:<?= $escaper->escapeHtmlAttr($pickupLocation->getPhone()) ?>" title="<?= $escaper->escapeHtmlAttr(__('Phone')) ?>">
+                    <?= $escaper->escapeHtml($pickupLocation->getPhone()) ?>
+                </a>
+            </p>
+
+            <div class="location-open-hours">
+                <strong><?= $escaper->escapeHtml(__('Store Hours')) ?></strong>
+                <dl>
+                    <?php foreach ($viewModel->getOpenHours() as $openHourObj): ?>
+                        <dt><?= $escaper->escapeHtml(__($viewModel->getDayOfWeekName((int)$openHourObj->getDayOfWeek()))) ?></dt>
+                        <dd><?= $escaper->escapeHtml(__('%1 - %2', $openHourObj->getOpenHour(), $openHourObj->getCloseHour())) ?></dd>
+                    <?php endforeach; ?>
+                </dl>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

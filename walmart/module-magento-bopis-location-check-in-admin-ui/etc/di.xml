@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="carmake_listing_data_source" xsi:type="string">CarMakeGridCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="CarMakeGridCollection" type="Walmart\BopisLocationCheckInAdminUi\Model\ResourceModel\CarMake\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">walmart_bopis_carmake</argument>
+            <argument name="eventPrefix" xsi:type="string">carmake_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">carmake_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Walmart\BopisLocationCheckIn\Model\ResourceModel\CarMake</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="carcolor_listing_data_source" xsi:type="string">CarColorGridCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="CarColorGridCollection" type="Walmart\BopisLocationCheckInAdminUi\Model\ResourceModel\CarColor\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">walmart_bopis_carcolor</argument>
+            <argument name="eventPrefix" xsi:type="string">carcolor_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">carcolor_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Walmart\BopisLocationCheckIn\Model\ResourceModel\CarColor</argument>
+        </arguments>
+    </virtualType>
+</config>

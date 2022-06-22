@@ -1,0 +1,79 @@
+{
+    "walmart_bopis_associate_role": {
+        "column": {
+            "role_id": true,
+            "name": true,
+            "all_permissions": true,
+            "permission_list": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "walmart_bopis_associate_user": {
+        "column": {
+            "user_id": true,
+            "username": true,
+            "password": true,
+            "firstname": true,
+            "lastname": true,
+            "role_id": true,
+            "all_locations": true,
+            "locale": false,
+            "user_locale": true,
+            "is_active": true,
+            "active_from": true,
+            "active_to": true,
+            "last_logged_at": true,
+            "created_at": true,
+            "updated_at": true,
+            "failures_num": true,
+            "lock_expires": true,
+            "password_generated": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "ASSOCIATE_USER_USERNAME": true,
+            "ASSOCIATE_USER_ROLE_ID_ASSOCIATE_ROLE_ROLE_ID": true
+        }
+    },
+    "walmart_bopis_associate_passwords": {
+        "column": {
+            "password_id": true,
+            "user_id": true,
+            "password": true,
+            "is_active": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "ASSOCIATE_PASSWORDS_USER_ID_ASSOCIATE_USER_USER_ID": true
+        }
+    },
+    "walmart_bopis_associate_locations": {
+        "column": {
+            "associate_location_id": true,
+            "user_id": true,
+            "source_code": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "ASSOCIATE_LOCATIONS_USER_ID_ASSOCIATE_USER_USER_ID": true,
+            "ASSOCIATE_LOCATIONS_SOURCE_CODE_INVENTORY_SOURCE_SOURCE_CODE": true
+        }
+    },
+    "walmart_bopis_associate_session": {
+        "column": {
+            "session_id": true,
+            "token": true,
+            "user_id": true,
+            "status": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "ASSOCIATE_SESSION_USER_ID_ASSOCIATE_USER_USER_ID": true
+        }
+    }
+}

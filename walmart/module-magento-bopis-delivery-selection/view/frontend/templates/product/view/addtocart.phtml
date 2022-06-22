@@ -1,0 +1,69 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+
+/**
+ * @var $block \Magento\Catalog\Block\Product\View
+ * @var $escaper \Magento\Framework\Escaper
+ */
+
+$_product = $block->getProduct();
+$buttonTitle = __('Add to Cart');
+?>
+<?php if ($_product->isSaleable()): ?>
+<div class="box-tocart" id="box-tocart">
+    <div class="fieldset">
+        <?php if ($block->shouldRenderQuantity()): ?>
+        <div class="field qty">
+            <label class="label" for="qty"><span><?= $escaper->escapeHtml(__('Qty')) ?></span></label>
+            <div class="control">
+                <input type="number"
+                       name="qty"
+                       id="qty"
+                       min="0"
+                       value="<?= $block->getProductDefaultQty() * 1 ?>"
+                       title="<?= $escaper->escapeHtmlAttr(__('Qty')) ?>"
+                       class="input-text qty"
+                       data-validate="<?= $escaper->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       />
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <div class="field bopis-delivery-methods" data-bind="scope:'deliveryMethods'">
+            <h3>
+                <span><?= $escaper->escapeHtml(__('Delivery Method')) ?></span>
+            </h3>
+            <ul class="delivery-methods-list">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </ul>
+        </div>
+
+
+        <div class="actions">
+            <div id="product-addtocart" data-bind="scope:'addToCart'">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </div>
+            <?= $block->getChildHtml('', true) ?>
+        </div>
+    </div>
+</div>
+    <?php if (!$_product->isVirtual()): ?>
+        <script type="text/x-magento-init">
+            {
+                "#box-tocart": {
+                    "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
+                }
+            }
+        </script>
+    <?php endif ?>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>

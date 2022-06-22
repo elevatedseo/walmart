@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <bopis>
+            <ship_to_store>
+                <enabled>0</enabled>
+            </ship_to_store>
+            <ship_from_store>
+                <enabled>0</enabled>
+            </ship_from_store>
+        </bopis>
+        <carriers>
+            <instore>
+                <delivery_methods_titles>
+                    <store_pickup_instructions>Please customize your instructions for in-store pickup here.</store_pickup_instructions>
+                    <curbside_instructions>Please customize your instructions for curbside pickup here.</curbside_instructions>
+                    <pickup_lead_time>120</pickup_lead_time>
+                    <pickup_time_label>Ready for Pickup in %1 minutes.</pickup_time_label>
+                </delivery_methods_titles>
+            </instore>
+        </carriers>
+    </default>
+</config>

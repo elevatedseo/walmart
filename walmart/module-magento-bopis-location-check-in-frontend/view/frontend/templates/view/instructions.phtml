@@ -1,0 +1,49 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+declare(strict_types=1);
+
+use Walmart\BopisLocationCheckInFrontend\ViewModel\CheckIn;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/**
+ * @var Template $block
+ * @var Escaper $escaper
+ */
+// @codingStandardsIgnoreFile
+/** @var CheckIn $viewModel */
+$viewModel = $block->getData('view_model');
+
+$pickupLocation = $viewModel->getPickupLocation();
+$checkIn = $viewModel->getCheckIn();
+?>
+<?php if ($viewModel->getInstructions() && !$viewModel->isCurbside() && !$viewModel->isCheckInFinished()): ?>
+    <div class="pickup-block">
+        <svg class="pickup-block-icon">
+            <use xlink:href="#instructions"></use>
+        </svg>
+        <div class="pickup-block-content">
+            <h3 class="pickup-block-title">
+                <?= $escaper->escapeHtml(__('Pickup Instructions')) ?>
+            </h3>
+            <?= /* @noEscape */ nl2br($viewModel->getInstructions()) ?>
+        </div>
+    </div>
+    <?php if (!$viewModel->isCheckInStarted()): ?>
+        <form action="<?= $escaper->escapeUrl($viewModel->getCheckinActionUrl()) ?>"
+              method="post"
+              class="pickup-checkin-form <?= $escaper->escapeHtmlAttr($viewModel->isCheckInStarted() ? 'started' : '') ?>">
+            <?= $block->getBlockHtml('formkey') ?>
+            <div class="actions-toolbar">
+                <button type="submit"
+                        class="action primary"
+                        title="<?= $escaper->escapeHtmlAttr(__('Confirm Arrival')) ?>">
+                    <span><?= $escaper->escapeHtml(__('Confirm Arrival')) ?></span>
+                </button>
+            </div>
+        </form>
+    <?php endif; ?>
+<?php endif; ?>

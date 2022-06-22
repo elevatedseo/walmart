@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="check_in_save_after">
+        <observer name="walmart_bopis_location_check_in_after_save_sync"
+                  instance="Walmart\BopisLocationCheckIn\Observer\AfterSaveCheckIn"/>
+    </event>
+</config>

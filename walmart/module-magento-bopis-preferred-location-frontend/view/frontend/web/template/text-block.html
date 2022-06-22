@@ -1,0 +1,8 @@
+<!-- ko if: text -->
+    <div class="text-block">
+        <span data-bind="text:text"></span>
+        <!-- ko foreach: elems() -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+    </div>
+<!-- /ko -->

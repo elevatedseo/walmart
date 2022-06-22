@@ -1,0 +1,14 @@
+{
+    "walmart_bopis_associate_tfa_config": {
+        "column": {
+            "config_id": true,
+            "user_id": true,
+            "provider": true,
+            "encoded_config": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "ASSOCIATE_TFA_CONFIG_USER_ID_ASSOCIATE_USER_USER_ID": true
+        }
+    }
+}

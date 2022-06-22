@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="bopis">
+            <resource>Walmart_BopisApiConnector::api_connector</resource>
+            <group id="general">
+                <frontend_model>Walmart\BopisBase\Block\System\Config\Form\Custom</frontend_model>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="account_credentials" translate="label" type="text" sortOrder="30" showInDefault="1">
+                <label>Account Credentials</label>
+                <frontend_model>Walmart\BopisBase\Block\System\Config\Form\Custom</frontend_model>
+                <fieldset_css>bopis-custom-group</fieldset_css>
+                <depends>
+                    <field id="bopis/general/enabled">1</field>
+                </depends>
+                <field id="environment" translate="label" type="select" sortOrder="20" showInDefault="1">
+                    <label>Environment</label>
+                    <source_model>Walmart\BopisApiConnector\Model\Adminhtml\Source\Environment</source_model>
+                    <config_path>bopis/general/environment</config_path>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="server_url" translate="label" type="text" sortOrder="22" showInDefault="1">
+                    <label>API Server URL</label>
+                    <config_path>bopis/general/server_url</config_path>
+                    <validate>required-entry validate-url</validate>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                        <field id="environment">production</field>
+                    </depends>
+                </field>
+                <field id="token_auth_url" translate="label" type="text" sortOrder="23" showInDefault="1">
+                    <label>Token Auth Server URL</label>
+                    <config_path>bopis/general/token_auth_url</config_path>
+                    <validate>required-entry validate-url</validate>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                        <field id="environment">production</field>
+                    </depends>
+                </field>
+                <field id="client_id" translate="label" type="text" sortOrder="25" showInDefault="1">
+                    <label>Merchant Id</label>
+                    <config_path>bopis/general/client_id</config_path>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                        <field id="environment">production</field>
+                    </depends>
+                </field>
+                <field id="consumer_id" translate="label" type="text" sortOrder="30" showInDefault="1">
+                    <label>Consumer Id</label>
+                    <config_path>bopis/general/consumer_id</config_path>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                        <field id="environment">production</field>
+                    </depends>
+                </field>
+                <field id="consumer_secret" translate="label" type="obscure" sortOrder="40" showInDefault="1">
+                    <label>Consumer Secret</label>
+                    <config_path>bopis/general/consumer_secret</config_path>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                        <field id="environment">production</field>
+                    </depends>
+                </field>
+                <field id="sandbox_server_url" translate="label" type="text" sortOrder="22" showInDefault="1">
+                    <label>Sandbox API Server URL</label>
+                    <config_path>bopis/general/sandbox_server_url</config_path>
+                    <validate>required-entry validate-url</validate>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                        <field id="environment">sandbox</field>
+                    </depends>
+                </field>
+                <field id="sandbox_token_auth_url" translate="label" type="text" sortOrder="23" showInDefault="1">
+                    <label>Token Auth Server URL</label>
+                    <config_path>bopis/general/sandbox_token_auth_url</config_path>
+                    <validate>required-entry validate-url</validate>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                        <field id="environment">sandbox</field>
+                    </depends>
+                </field>
+                <field id="sandbox_client_id" translate="label" type="text" sortOrder="45" showInDefault="1">
+                    <label>Sandbox Merchant Id</label>
+                    <config_path>bopis/general/sandbox_client_id</config_path>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                        <field id="environment">sandbox</field>
+                    </depends>
+                </field>
+                <field id="sandbox_consumer_id" translate="label" type="text" sortOrder="50" showInDefault="1">
+                    <label>Sandbox Consumer Id</label>
+                    <config_path>bopis/general/sandbox_consumer_id</config_path>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                        <field id="environment">sandbox</field>
+                    </depends>
+                </field>
+                <field id="sandbox_consumer_secret" translate="label" type="obscure" sortOrder="55" showInDefault="1">
+                    <label>Sandbox Consumer Secret</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <config_path>bopis/general/sandbox_consumer_secret</config_path>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                        <field id="environment">sandbox</field>
+                    </depends>
+                </field>
+                <field id="test_connection" translate="label comment" sortOrder="60" showInDefault="1">
+                    <frontend_model>Walmart\BopisApiConnector\Block\System\Config\Form\Field\TestConnectionBtn</frontend_model>
+                    <comment><![CDATA[You must enter <b>Merchant ID</b>, <b>Consumer ID</b>, and <b>Consumer Secret</b> and click "Save Config" before validating connection.]]></comment>
+                    <depends>
+                        <field id="bopis/general/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

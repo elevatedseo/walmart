@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\InventoryReservations\Model\ResourceModel\SaveMultiple">
+        <plugin name="walmart_bopis_inventory_source_save_source_code_to_inventory_reservation_admin"
+                type="Walmart\BopisInventorySourceReservation\Plugin\InventoryReservations\SaveMultiplePlugin"
+                sortOrder="1" disabled="false" />
+    </type>
+    <type name="Walmart\BopisInventorySourceReservation\Plugin\InventoryReservations\SaveMultiplePlugin">
+        <arguments>
+            <argument name="quoteSession" xsi:type="object">Magento\Backend\Model\Session\Quote\Proxy</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="source_quantity_with_reservation" xsi:type="array">
+                    <item name="class" xsi:type="string">Walmart\BopisInventorySourceReservation\Ui\DataProvider\Product\Form\Modifier\SourceQuantityWithReservation</item>
+                    <item name="sortOrder" xsi:type="number">310</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Walmart_BopisStoreAssociateAdminUi::system"
+             title="Store Fulfillment App Permissions"
+             translate="title"
+             module="Walmart_BopisStoreAssociateAdminUi"
+             parent="Magento_Backend::system"
+             sortOrder="65"
+             resource="Walmart_BopisStoreAssociate::users_acl"
+             dependsOnConfig="bopis/general/enabled"/>
+        <add id="Walmart_BopisStoreAssociateAdminUi::user_listing"
+             title="All Store Fulfillment App Users"
+             translate="title"
+             module="Walmart_BopisStoreAssociateAdminUi"
+             parent="Walmart_BopisStoreAssociateAdminUi::system"
+             action="wct-fulfillment/user"
+             sortOrder="10"
+             resource="Walmart_BopisStoreAssociate::user"/>
+        <add id="Walmart_BopisStoreAssociateAdminUi::role_listing"
+             title="Store Fulfillment App Roles"
+             translate="title"
+             module="Walmart_BopisStoreAssociateAdminUi"
+             parent="Walmart_BopisStoreAssociateAdminUi::system"
+             action="wct-fulfillment/role"
+             sortOrder="20"
+             resource="Walmart_BopisStoreAssociate::role"/>
+    </menu>
+</config>

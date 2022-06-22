@@ -1,0 +1,22 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ *
+ * @var $block \Walmart\BopisBase\Block\Adminhtml\System\Config\InStoreHeader\Content
+ * @var $escaper \Magento\Framework\Escaper
+ */
+?>
+<div style="display:flex;" class="walmart-info-block">
+    <div>
+        <img alt="<?= $escaper->escapeHtml(__('Walmart Logo')) ?>" class="walmart-logo"
+             src="<?= $escaper->escapeHtml($block->getLogoSrc()); ?>"/>
+    </div>
+    <div style="margin-left: 20px;">
+        <p>
+            <?= $escaper->escapeHtml(
+                __('Configure the settings to fulfill customer orders using Store Fulfilment feature')
+            ); ?>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Walmart\BopisOperationQueueApi\Model\ResourceModel\BopisQueue\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">walmart_bopis_queue</argument>
+            <argument name="resourceModel"
+                      xsi:type="string">Walmart\BopisOperationQueueApi\Model\ResourceModel\BopisQueue\Collection
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="walmart_bopisoperationqueueadminui_bopis_queue_listing_data_source"
+                      xsi:type="string">Walmart\BopisOperationQueueApi\Model\ResourceModel\BopisQueue\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,26 @@
+{
+    "name": "walmart/module-magento-bopis-preferred-location-frontend",
+    "version": "1.0.0",
+    "description": "This module provides the storefront UI features to the customer, such as searching for store locations, checking store inventory, and setting their preferred store location.",
+    "type": "magento2-module",
+    "require": {
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-base": "^1.0.0",
+        "walmart/module-magento-bopis-preferred-location-api": "^1.0.0",
+        "walmart/module-magento-bopis-api-connector": "^1.0.0",
+        "walmart/module-magento-bopis-delivery-selection": "^1.0.0",
+        "walmart/module-magento-bopis-home-delivery-api": "^1.0.0",
+        "walmart/module-magento-bopis-inventory-catalog-api": "^1.0.0"
+    },
+    "license": [
+        "Proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisPreferredLocationFrontend\\": ""
+        }
+    }
+}

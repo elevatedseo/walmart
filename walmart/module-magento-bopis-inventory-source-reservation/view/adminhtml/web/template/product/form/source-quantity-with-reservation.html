@@ -1,0 +1,22 @@
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<div class="admin__field-complex" css="$data.additionalClasses" visible="visible" attr="'data-index': index">
+    <div class="admin__field-complex-content">
+        <div repeat="foreach: $data.source_quantity_with_reservation || [], item: '$stockDataItem'">
+                <div>
+                    <strong text="$stockDataItem().stock_name"></strong>
+                    <div style="margin-left: 10px;" repeat="foreach: $stockDataItem().sources || [], item: '$sourcesDataItem'">
+                        <div>
+                            <strong text="$sourcesDataItem().source_name"></strong>
+                            :
+                            <span text="$sourcesDataItem().qty"></span>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

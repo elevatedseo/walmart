@@ -1,0 +1,22 @@
+{
+    "name": "walmart/module-magento-bopis-order-update-api",
+    "description": "This module defines the web API endpoints for the receiving and processing of order update information from the Walmart FaaS.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-order-faas-sync": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisOrderUpdateApi\\": ""
+        }
+    }
+}

@@ -1,0 +1,264 @@
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+
+//
+//  Component Walmart_BopisLocationCheckInFrontend
+//  _____________________________________________
+
+//
+//  Variables
+//  _____________________________________________
+
+@pickup-content__max-width: 40rem;
+
+@pickup-icon__width: 2rem;
+@pickup-icon__height: 2rem;
+
+@location-open-hours__day__min-width: 10rem;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .pickup-page {
+        &.btn-fixed .page-footer {
+            padding-bottom: 7rem;
+        }
+
+        .page-header {
+            border-bottom: @border-width__base solid @border-color__base;
+            margin-bottom: @indent__base;
+        }
+
+        .logo {
+            margin-left: 0;
+        }
+
+        .nav-toggle {
+            display: none;
+        }
+
+        .column.main {
+            padding-bottom: 0;
+        }
+    }
+
+    .progress-message {
+        & {
+            background: @message-success__background;
+        }
+
+        .pickup-block-icon {
+            color: @message-success__color;
+        }
+    }
+
+    .pickup-block {
+        & {
+            .lib-vendor-prefix-display(flex);
+            max-width: @pickup-content__max-width;
+            margin: 0 auto;
+            padding-bottom: @indent__base;
+            padding-right: @layout__width-xs-indent;
+            padding-left: @layout__width-xs-indent;
+            box-sizing: border-box;
+            --icon-color-var: @color-white;
+        }
+
+        &:first-child {
+            border-top: none;
+        }
+
+        &-icon {
+            width: @pickup-icon__width;
+            height: @pickup-icon__height;
+            margin-top: @h3__margin-top;
+            margin-right: @indent__s;
+            .lib-vendor-prefix-flex-shrink(0);
+        }
+
+        &-content {
+            .lib-vendor-prefix-flex-grow(1);
+        }
+
+        &-title {
+            line-height: @pickup-icon__height;
+        }
+
+        &.location {
+            max-width: 100%;
+            background: @color-gray-light0;
+        }
+    }
+
+    .location-open-hours {
+        max-width: 35rem;
+    }
+
+    .pickup-heading {
+        & {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-box-align(baseline);
+            justify-content: space-between;
+            max-width: @pickup-content__max-width;
+            margin: 0 auto;
+            padding-left: @layout__width-xs-indent;
+            padding-right: @layout__width-xs-indent;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: @h2__font-size;
+            line-height: @h2__font-size;
+        }
+
+        strong {
+            font-size: @font-size__l;
+            line-height: @h2__font-size;
+        }
+    }
+
+    .location-open-hours {
+        dl {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-wrap(wrap);
+        }
+
+        dt {
+            min-width: @location-open-hours__day__min-width;
+            padding-right: @indent__s;
+            font-weight: @font-weight__regular;
+            .lib-vendor-prefix-flex-basis(40%);
+            box-sizing: border-box;
+        }
+
+        dd {
+            .lib-vendor-prefix-flex-basis(50%);
+            max-width: 60%;
+            white-space: nowrap;
+        }
+    }
+
+    .field.pickup-block-content {
+        & {
+            margin-top: @h3__margin-top;
+        }
+
+        .label {
+            display: block;
+            position: relative;
+            padding-right: @indent__xl;
+            font-size: 16px;
+            margin: 0 0 12px;
+        }
+    }
+
+    .pickup-checkin-form {
+        .update-trigger {
+            position: absolute;
+            right: 0;
+        }
+
+        .other-option {
+            margin-top: @indent__base;
+        }
+
+        .actions-toolbar {
+            & {
+                width: 100%;
+                padding: @indent__s;
+                box-sizing: border-box;
+                background: @page__background-color;
+                text-align: center;
+            }
+
+            &.curbside {
+                position: fixed;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                border-top: @border-width__base solid @border-color__base;
+            }
+        }
+
+        .started + .actions-toolbar {
+            display: none;
+        }
+
+        .started.update-active ~ .actions-toolbar {
+            display: block;
+        }
+
+        .action.primary {
+            width: 100%;
+            max-width: @pickup-content__max-width;
+            margin: 0;
+            padding: 1.5rem;
+            float: none;
+        }
+    }
+}
+
+//
+//  Mobile only
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+}
+
+//
+//  Tablet +
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .pickup-block {
+        &.location {
+            & {
+                margin-left: auto;
+                margin-right: auto;
+                max-width: @layout__max-width;
+                padding-left: @layout-indent__width;
+                padding-right: @layout-indent__width;
+                font-size: @h3__font-size;
+            }
+
+            .pickup-block-content {
+                .lib-vendor-prefix-display(flex);
+                .lib-vendor-box-align(flex-start);
+                justify-content: space-between;
+            }
+
+            strong {
+                display: block;
+                margin-top: @h3__margin-top;
+                margin-bottom: @h3__margin-bottom;
+                line-height: @h3__line-height;
+                font-weight: @h3__font-weight;
+            }
+
+            .phone,
+            .location-open-hours {
+
+            }
+        }
+    }
+}
+
+//
+//  Tablet only
+//  _____________________________________________
+
+& when (@media-target = 'desktop') {
+    @media all and (max-width: (@screen__l - 1)) {
+    }
+}
+
+//
+//  Desktop +
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+}

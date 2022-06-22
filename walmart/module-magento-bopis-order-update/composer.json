@@ -1,0 +1,31 @@
+{
+    "name": "walmart/module-magento-bopis-order-update",
+    "description": "This module provides the services relating to order synchronization between Adobe Commerce and the Walmart FaaS.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*",
+        "walmart/module-magento-bopis-base": "^1.0.0",
+        "walmart/module-magento-bopis-order-update-api": "^1.0.0",
+        "walmart/module-magento-bopis-inventory-source-api": "^1.0.0",
+        "walmart/module-magento-bopis-inventory-source-admin-ui": "^1.0.0",
+        "walmart/module-magento-bopis-location-check-in": "^1.0.0",
+        "walmart/module-magento-bopis-alternate-pickup-contact": "^1.0.0",
+        "walmart/module-magento-bopis-checkout-pick-in-store": "^1.0.0",
+        "walmart/module-magento-bopis-inventory-catalog-api": "^1.0.0",
+        "walmart/module-magento-bopis-api-connector": "^1.0.0",
+        "walmart/module-magento-bopis-logging": "^1.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisOrderUpdate\\": ""
+        }
+    }
+}

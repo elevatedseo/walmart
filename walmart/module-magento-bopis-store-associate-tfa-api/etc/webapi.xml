@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/wct-fulfillment/associate/tfa/google/configure" method="POST">
+        <service class="Walmart\BopisStoreAssociateTfaApi\Api\GoogleConfigureInterface" method="execute"/>
+        <resources>
+            <resource ref="Walmart_BopisStoreAssociate::user"/>
+        </resources>
+    </route>
+    <route url="/V1/wct-fulfillment/associate/tfa/google/authenticate" method="POST">
+        <service class="Walmart\BopisStoreAssociateTfaApi\Api\GoogleAuthenticateInterface" method="execute"/>
+        <resources>
+            <resource ref="Walmart_BopisStoreAssociate::user"/>
+        </resources>
+    </route>
+</routes>

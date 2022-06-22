@@ -1,0 +1,21 @@
+{
+    "name": "walmart/module-magento-bopis-preferred-location-admin-ui",
+    "version": "1.0.0",
+    "description": "This module represents the administrative UI features for the customer\u2019s preferred (default) retail store location.",
+    "type": "magento2-module",
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*"
+    },
+    "license": [
+        "Proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisPreferredLocationAdminUi\\": ""
+        }
+    }
+}

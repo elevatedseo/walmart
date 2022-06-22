@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="walmart_bopis_associate_tfa_config" resource="default" engine="innodb" comment="Associate Tfa Config">
+        <column xsi:type="int" name="config_id" unsigned="true" nullable="false" identity="true"
+                comment="Config ID"/>
+        <column xsi:type="int" name="user_id" unsigned="true" nullable="false" comment="User ID"/>
+        <column xsi:type="varchar" name="provider" nullable="false" length="64" comment="Provider"/>
+        <column xsi:type="text" name="encoded_config" comment="Encoded Config"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="config_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="ASSOCIATE_USER_USER_ID_ASSOCIATE_TFA_CONFIG_USER_ID"
+                    table="walmart_bopis_associate_tfa_config" column="user_id" referenceTable="walmart_bopis_associate_user"
+                    referenceColumn="user_id" onDelete="CASCADE"/>
+    </table>
+</schema>

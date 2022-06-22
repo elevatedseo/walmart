@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="general" class="Walmart\BopisInventorySourceAdminUi\Ui\Component\Form\InventorySourceGeneralFieldset">
+        <field name="is_pickup_location_active">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <notice translate="true">The Default Source can not be used as the Pickup Location for In-Store Delivery</notice>
+            </settings>
+        </field>
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="validation" xsi:type="array">
+                        <item name="bopis-unique-fields-validation" xsi:type="array">
+                            <item name="validate" xsi:type="boolean">true</item>
+                            <item name="field" xsi:type="string">name</item>
+                            <item name="message" xsi:type="string">Name is already in use.</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="source_code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="validation" xsi:type="array">
+                        <item name="bopis-unique-fields-validation" xsi:type="array">
+                            <item name="validate" xsi:type="boolean">true</item>
+                            <item name="field" xsi:type="string">source_code</item>
+                            <item name="message" xsi:type="string">Code is already in use.</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="allow_ship_to_store" formElement="checkbox" sortOrder="80">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataScope>extension_attributes.allow_ship_to_store</dataScope>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Ship to Store</label>
+                <notice translate="true">This source can fulfill and ship orders to another source</notice>
+                <imports>
+                    <link name="visible">${ $.parentName}.is_pickup_location_active:checked</link>
+                </imports>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="use_as_shipping_source" formElement="checkbox" sortOrder="90">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataScope>extension_attributes.use_as_shipping_source</dataScope>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Ship From Store</label>
+                <notice translate="true">If turned off, location will not be considered as inventory source when selecting shipping.</notice>
+                <imports>
+                    <link name="visible">${ $.parentName}.is_pickup_location_active:checked</link>
+                </imports>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="latitude">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="longitude">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="pickup_location" sortOrder="20" class="Walmart\BopisInventorySourceAdminUi\Ui\Component\Form\InventorySourcePickupLocationFieldset">
+        <settings>
+            <label translate="true">Pickup Location Configurations</label>
+            <level>2</level>
+        </settings>
+        <field name="frontend_name">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="frontend_description">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="store_pickup_enabled" formElement="checkbox" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataScope>extension_attributes.store_pickup_enabled</dataScope>
+                <dataType>boolean</dataType>
+                <label translate="true">Allow In-Store Pickup</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="store_pickup_instructions" formElement="textarea">
+            <settings>
+                <label translate="true">In-Store Pickup Instructions</label>
+                <dataType>text</dataType>
+                <dataScope>extension_attributes.store_pickup_instructions</dataScope>
+                <placeholder translate="true">Use system value</placeholder>
+                <notice translate="true">This information will be sent to the shopper in the Ready for pickup email</notice>
+                <imports>
+                    <link name="visible">${ $.parentName}.store_pickup_enabled:checked</link>
+                </imports>
+            </settings>
+        </field>
+        <field name="curbside_enabled" formElement="checkbox" sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataScope>extension_attributes.curbside_enabled</dataScope>
+                <dataType>boolean</dataType>
+                <label translate="true">Allow Curbside</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="curbside_instructions" formElement="textarea">
+            <settings>
+                <label translate="true">Curbside Instructions</label>
+                <dataType>text</dataType>
+                <dataScope>extension_attributes.curbside_instructions</dataScope>
+                <placeholder translate="true">Use system value</placeholder>
+                <notice translate="true">This information will be sent to the shopper in the Ready for pickup email</notice>
+                <imports>
+                    <link name="visible">${ $.parentName}.curbside_enabled:checked</link>
+                </imports>
+            </settings>
+        </field>
+        <field name="pickup_lead_time" formElement="input" sortOrder="30" component="Magento_InventoryInStorePickupAdminUi/js/form/element/conditional-required">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="notice" xsi:type="string"
+                          translate="true">The number of minutes required before an order is received, fulfilled and ready to be picked up.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataScope>extension_attributes.pickup_lead_time</dataScope>
+                <dataType>text</dataType>
+                <label translate="true">Estimated Pickup Lead Time</label>
+                <placeholder translate="true">Use system value</placeholder>
+                <validation>
+                    <rule name="validate-integer" xsi:type="boolean">true</rule>
+                    <rule name="not-negative-amount" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="pickup_time_label" formElement="input" sortOrder="40" component="Magento_InventoryInStorePickupAdminUi/js/form/element/conditional-required">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="notice" xsi:type="string"
+                          translate="true">Displays lead time to customer. Ex: ‘Ready for Pickup in %1 minutes.' %1 is required to display lead time above.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataScope>extension_attributes.pickup_time_label</dataScope>
+                <dataType>text</dataType>
+                <placeholder translate="true">Use system value</placeholder>
+                <label translate="true">Estimated Pickup Time Label</label>
+                <validation>
+                    <rule name="bopis-pickup-time-label-validation" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <fieldset name="opening_hours">
+            <settings>
+                <label translate="true">Opening Hours</label>
+                <level>3</level>
+                <collapsible>false</collapsible>
+                <opened>true</opened>
+            </settings>
+            <field name="timezone" formElement="select" sortOrder="40">
+                <settings>
+                    <dataScope>extension_attributes.timezone</dataScope>
+                    <dataType>text</dataType>
+                    <label translate="true">Location Timezone</label>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="Walmart\BopisInventorySourceAdminUi\Model\Config\Source\Locale\Timezone"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+            <dynamicRows name="inventory_source_opening_hours_dynamic_rows">
+                <settings>
+                    <label translate="true">Opening Hours</label>
+                    <addButtonLabel translate="true">Add Day</addButtonLabel>
+                    <componentType>dynamicRows</componentType>
+                </settings>
+                <container name="record" component="Magento_Ui/js/dynamic-rows/record">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="isTemplate" xsi:type="boolean">true</item>
+                            <item name="is_collection" xsi:type="boolean">true</item>
+                            <item name="componentType" xsi:type="string">container</item>
+                        </item>
+                    </argument>
+                    <hidden name="source_open_hours_id">
+                        <settings>
+                            <dataScope>source_open_hours_id</dataScope>
+                        </settings>
+                    </hidden>
+                    <field name="day_of_week" formElement="select">
+                        <settings>
+                            <validation>
+                                <rule name="required-entry" xsi:type="boolean">true</rule>
+                            </validation>
+                            <dataScope>day_of_week</dataScope>
+                            <dataType>text</dataType>
+                            <label translate="true">Day</label>
+                        </settings>
+                        <formElements>
+                            <select>
+                                <settings>
+                                    <options class="Walmart\BopisInventorySourceAdminUi\Model\Config\Source\OpeningHours\DayOfWeek"/>
+                                    <caption translate="true">-- Please Select --</caption>
+                                </settings>
+                            </select>
+                        </formElements>
+                    </field>
+                    <field name="openhour" formElement="input">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="options" xsi:type="array">
+                                    <item name="timeFormat" xsi:type="string">hh:mm a</item>
+                                    <item name="showsTime" xsi:type="boolean">true</item>
+                                    <item name="timeOnly" xsi:type="boolean">true</item>
+                                </item>
+                                <item name="storeTimeZone" xsi:type="string">string</item>
+                            </item>
+                        </argument>
+                        <settings>
+                            <validation>
+                                <rule name="required-entry" xsi:type="boolean">true</rule>
+                                <rule name="time12h" xsi:type="boolean">true</rule>
+                            </validation>
+                            <notice>Example: 08:00 am</notice>
+                            <dataScope>openhour</dataScope>
+                            <dataType>text</dataType>
+                            <label>Open Hour</label>
+                        </settings>
+                    </field>
+                    <field name="closehour" formElement="input">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="options" xsi:type="array">
+                                    <item name="timeFormat" xsi:type="string">hh:mm a</item>
+                                    <item name="showsTime" xsi:type="boolean">true</item>
+                                    <item name="timeOnly" xsi:type="boolean">true</item>
+                                </item>
+                                <item name="storeTimeZone" xsi:type="string">string</item>
+                            </item>
+                        </argument>
+                        <settings>
+                            <validation>
+                                <rule name="required-entry" xsi:type="boolean">true</rule>
+                                <rule name="time12h" xsi:type="boolean">true</rule>
+                            </validation>
+                            <notice>Example: 10:30 pm</notice>
+                            <dataScope>closehour</dataScope>
+                            <dataType>text</dataType>
+                            <label>Close Hour</label>
+                        </settings>
+                    </field>
+                    <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">
+                        <settings>
+                            <componentType>actionDelete</componentType>
+                            <dataType>text</dataType>
+                            <label>Action</label>
+                            <additionalClasses>
+                                <class name="data-grid-actions-cell">true</class>
+                            </additionalClasses>
+                        </settings>
+                    </actionDelete>
+                </container>
+            </dynamicRows>
+        </fieldset>
+        <fieldset name="checkin_experience">
+            <settings>
+                <label translate="true">Check-in Experience</label>
+                <level>3</level>
+                <collapsible>false</collapsible>
+                <opened>true</opened>
+                <imports>
+                    <link name="visible">${ $.parentName}.curbside_enabled:checked</link>
+                </imports>
+            </settings>
+            <container name="checkin_experience_note">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="template" xsi:type="string">ui/form/components/complex</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                        <item name="label" xsi:type="string"></item>
+                        <item name="text" xsi:type="string" translate="true"><![CDATA[Define which fields will need to completed by the shopper during the Checkin experience]]></item>
+                    </item>
+                </argument>
+            </container>
+            <field name="parking_spots_enabled" formElement="checkbox" sortOrder="70">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataScope>extension_attributes.parking_spots_enabled</dataScope>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Use Parking Spots</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="parking_spot_mandatory" formElement="checkbox" sortOrder="80">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataScope>extension_attributes.parking_spot_mandatory</dataScope>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Is Parking Spot a Mandatory Field?</label>
+                    <imports>
+                        <link name="visible">${ $.parentName}.parking_spots_enabled:checked</link>
+                    </imports>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <dynamicRows name="inventory_source_parking_spot_dynamic_rows">
+                <settings>
+                    <label translate="true">Parking Spots List</label>
+                    <addButtonLabel translate="true">Add Parking Spot</addButtonLabel>
+                    <componentType>parkingDynamicRows</componentType>
+                    <imports>
+                        <link name="visible">${ $.parentName}.parking_spots_enabled:checked</link>
+                    </imports>
+                </settings>
+                <container name="record" component="Magento_Ui/js/dynamic-rows/record">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="isTemplate" xsi:type="boolean">true</item>
+                            <item name="is_collection" xsi:type="boolean">true</item>
+                            <item name="componentType" xsi:type="string">container</item>
+                        </item>
+                    </argument>
+                    <field name="parking_spot_name" formElement="input">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="fit" xsi:type="boolean">false</item>
+                            </item>
+                        </argument>
+                        <settings>
+                            <validation>
+                                <rule name="required-entry" xsi:type="boolean">true</rule>
+                            </validation>
+                            <dataScope>parking_spot_name</dataScope>
+                            <dataType>text</dataType>
+                            <label>Name</label>
+                        </settings>
+                    </field>
+                    <field name="parking_spot_enabled" formElement="checkbox">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="default" xsi:type="number">1</item>
+                            </item>
+                        </argument>
+                        <settings>
+                            <dataScope>parking_spot_enabled</dataScope>
+                            <dataType>boolean</dataType>
+                            <label>Enabled</label>
+                        </settings>
+                        <formElements>
+                            <checkbox>
+                                <settings>
+                                    <valueMap>
+                                        <map name="false" xsi:type="number">0</map>
+                                        <map name="true" xsi:type="number">1</map>
+                                    </valueMap>
+                                    <prefer>toggle</prefer>
+                                </settings>
+                            </checkbox>
+                        </formElements>
+                    </field>
+                    <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">
+                        <settings>
+                            <componentType>actionDelete</componentType>
+                            <dataType>text</dataType>
+                            <label>Action</label>
+                            <additionalClasses>
+                                <class name="data-grid-actions-cell">true</class>
+                            </additionalClasses>
+                        </settings>
+                    </actionDelete>
+                </container>
+            </dynamicRows>
+            <field name="custom_parking_spot_enabled" formElement="checkbox" sortOrder="90">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">1</item>
+                        <item name="notice" xsi:type="string" translate="true">
+                            This will allow the shopper to enter a customized value for parking spot
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataScope>extension_attributes.custom_parking_spot_enabled</dataScope>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Allow “Other” Parking Spot Field</label>
+                    <imports>
+                        <link name="visible">${ $.parentName}.parking_spots_enabled:checked</link>
+                    </imports>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="use_car_color" formElement="checkbox" sortOrder="100">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataScope>extension_attributes.use_car_color</dataScope>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Use Car Color</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="car_color_mandatory" formElement="checkbox" sortOrder="110">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataScope>extension_attributes.car_color_mandatory</dataScope>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Is Car Color a Mandatory Field?</label>
+                    <imports>
+                        <link name="visible">${ $.parentName}.use_car_color:checked</link>
+                    </imports>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="use_car_make" formElement="checkbox" sortOrder="120">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataScope>extension_attributes.use_car_make</dataScope>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Use Car Make</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="car_make_mandatory" formElement="checkbox" sortOrder="130">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataScope>extension_attributes.car_make_mandatory</dataScope>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Is Car Make a Mandatory Field?</label>
+                    <imports>
+                        <link name="visible">${ $.parentName}.use_car_make:checked</link>
+                    </imports>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="use_additional_information" formElement="checkbox" sortOrder="140">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataScope>extension_attributes.use_additional_information</dataScope>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Use Additional Information</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="additional_information_mandatory" formElement="checkbox" sortOrder="150">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataScope>extension_attributes.additional_information_mandatory</dataScope>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Is Additional Information a Mandatory Field?</label>
+                    <imports>
+                        <link name="visible">${ $.parentName}.use_additional_information:checked</link>
+                    </imports>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+        </fieldset>
+    </fieldset>
+    <fieldset name="contact_info" class="Walmart\BopisInventorySourceAdminUi\Ui\Component\Form\InventorySourceContactInfoFieldset">
+        <field name="phone">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="bopis-custom-phone-validation" xsi:type="boolean">true</rule>
+                </validation>
+                <notice translate="true">Phone number should contain 10 digits.</notice>
+            </settings>
+        </field>
+    </fieldset>
+</form>

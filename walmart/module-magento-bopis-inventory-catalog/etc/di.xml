@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\IsSkuSalableForInStorePickupInterface"
+                type="Walmart\BopisInventoryCatalog\Service\IsSkuSalableForInStorePickup" />
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\IsSkuSalableForInStorePickupResultInterface"
+                type="Walmart\BopisInventoryCatalog\Model\IsSkuSalableForInStorePickupResult" />
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\InventoryAvailabilityServiceInterface"
+                type="Walmart\BopisInventoryCatalog\Model\InventoryAvailabilityService"/>
+
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\Data\ItemRequestInterface"
+                type="Walmart\BopisInventoryCatalog\Model\InventoryAvailability\ItemRequest"/>
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\Data\InventoryAvailabilityRequestInterface"
+                type="Walmart\BopisInventoryCatalog\Model\InventoryAvailability\InventoryAvailabilityRequest"/>
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\Data\InventoryAvailabilityResultInterface"
+                type="Walmart\BopisInventoryCatalog\Model\InventoryAvailability\InventoryAvailabilityResult"/>
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\Data\StockSourceInterface"
+                type="Walmart\BopisInventoryCatalog\Model\InventoryAvailability\StockSource"/>
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\Data\StockSourceItemInterface"
+                type="Walmart\BopisInventoryCatalog\Model\InventoryAvailability\StockSourceItem"/>
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\Data\StockSourceStatusInterface"
+                type="Walmart\BopisInventoryCatalog\Model\InventoryAvailability\StockSourceStatus"/>
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\ProductDataProviderInterface"
+                type="Walmart\BopisInventoryCatalog\Model\InventoryAvailability\ProductDataProvider"/>
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\BuilderInterface"
+                type="Walmart\BopisInventoryCatalog\Model\InventoryAvailability\Builder\BuilderComposite"/>
+
+    <type name="Magento\InventoryCatalogAdminUi\Model\GetSourceItemsDataBySku">
+        <plugin name="walmart_bopis_inventory_catalog_load_source_items_data"
+                type="Walmart\BopisInventoryCatalog\Plugin\AfterGetSourceItemsDataBySkuPlugin"/>
+    </type>
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\AreProductsAvailableInterface"
+                type="Walmart\BopisInventoryCatalog\Model\AreProductsAvailableConditionChain" />
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\IsStorePickupAvailableInterface"
+                type="Walmart\BopisInventoryCatalog\Model\IsStorePickupAvailable" />
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\IsHomeDeliveryAvailableInterface"
+                type="Walmart\BopisInventoryCatalog\Model\IsHomeDeliveryAvailable" />
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\IsStorePickupAvailableForSkusInterface"
+                type="Walmart\BopisInventoryCatalog\Model\IsStorePickupAvailableForSkus" />
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\IsHomeDeliveryAvailableForSkusInterface"
+                type="Walmart\BopisInventoryCatalog\Model\IsHomeDeliveryAvailableForSkus" />
+    <preference for="Walmart\BopisInventoryCatalogApi\Api\GetSaleableQuantityInLocationsBySkuInterface"
+                type="Walmart\BopisInventoryCatalog\Model\GetSaleableQuantityInLocationsBySku" />
+
+    <type name="Walmart\BopisInventoryCatalog\Model\HomeDeliveryResolver">
+        <arguments>
+            <argument name="isProductAvailable" xsi:type="object">HomeDeliveryConditionChain</argument>
+        </arguments>
+    </type>
+    <type name="Walmart\BopisInventoryCatalog\Model\StorePickupResolver">
+        <arguments>
+            <argument name="isProductAvailable" xsi:type="object">StorePickupConditionChain</argument>
+        </arguments>
+    </type>
+
+    <!-- List of conditions for validation availability of specified product for StorePickup delivery method -->
+    <virtualType name="StorePickupConditionChain" type="Walmart\BopisInventoryCatalog\Model\AreProductsAvailableConditionChain">
+        <arguments>
+            <argument name="skuListProviders" xsi:type="array">
+                <item name="simple" xsi:type="object">Walmart\BopisInventoryCatalog\Model\SkuListProvider\Simple</item>
+                <item name="configurable" xsi:type="object">Walmart\BopisInventoryCatalog\Model\SkuListProvider\Configurable</item>
+                <item name="bundle" xsi:type="object">Walmart\BopisInventoryCatalog\Model\SkuListProvider\Bundle</item>
+                <item name="grouped" xsi:type="object">Walmart\BopisInventoryCatalog\Model\SkuListProvider\Grouped</item>
+            </argument>
+            <argument name="conditions" xsi:type="array">
+                <item name="allow_instore_pickup" xsi:type="array">
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sort_order" xsi:type="number">5</item>
+                    <item name="object" xsi:type="object">
+                        Walmart\BopisInventoryCatalog\Model\IsProductAvailableCondition\AllowInStorePickup
+                    </item>
+                </item>
+                <item name="store_pickup_available" xsi:type="array">
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sort_order" xsi:type="number">10</item>
+                    <item name="object" xsi:type="object">Walmart\BopisInventoryCatalog\Model\IsProductAvailableCondition\PickupSource</item>
+                </item>
+                <item name="ship_to_store" xsi:type="array">
+                    <item name="sort_order" xsi:type="number">20</item>
+                    <item name="object" xsi:type="object">Walmart\BopisInventoryCatalog\Model\IsProductAvailableCondition\ShipToStoreAvailVirtual</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- List of conditions for validation availability of specified product for HomeDelivery delivery method -->
+    <virtualType name="HomeDeliveryConditionChain" type="Walmart\BopisInventoryCatalog\Model\AreProductsAvailableConditionChain">
+        <arguments>
+            <argument name="skuListProviders" xsi:type="array">
+                <item name="simple" xsi:type="object">Walmart\BopisInventoryCatalog\Model\SkuListProvider\Simple</item>
+                <item name="configurable" xsi:type="object">Walmart\BopisInventoryCatalog\Model\SkuListProvider\Configurable</item>
+                <item name="bundle" xsi:type="object">Walmart\BopisInventoryCatalog\Model\SkuListProvider\Bundle</item>
+                <item name="grouped" xsi:type="object">Walmart\BopisInventoryCatalog\Model\SkuListProvider\Grouped</item>
+            </argument>
+            <argument name="conditions" xsi:type="array">
+                <item name="allow_home_delivery" xsi:type="array">
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sort_order" xsi:type="number">5</item>
+                    <item name="object" xsi:type="object">
+                        Walmart\BopisInventoryCatalog\Model\IsProductAvailableCondition\AllowHomeDelivery
+                    </item>
+                </item>
+                <item name="has_shipping_source" xsi:type="array">
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sort_order" xsi:type="number">10</item>
+                    <item name="object" xsi:type="object">
+                        Walmart\BopisInventoryCatalog\Model\IsProductAvailableCondition\ShippingSourceAvailVirtual
+                    </item>
+                </item>
+                <item name="back_order" xsi:type="array">
+                    <item name="sort_order" xsi:type="number">40</item>
+                    <item name="object" xsi:type="object">
+                        Walmart\BopisInventoryCatalog\Model\IsProductAvailableCondition\Backorder
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Walmart\BopisInventoryCatalog\Model\IsProductAvailableCondition\ShipToStoreAvailVirtual" type="Walmart\BopisInventoryCatalog\Model\AndLogicCondition">
+        <arguments>
+            <argument name="conditions" xsi:type="array">
+                <item name="is_any_ship_to_store_source_assigned" xsi:type="array">
+                    <item name="sort_order" xsi:type="number">30</item>
+                    <item name="object" xsi:type="object">Walmart\BopisInventoryCatalog\Model\IsProductAvailableCondition\ShipToStore</item>
+                </item>
+                <item name="has_shipping_source" xsi:type="array">
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sort_order" xsi:type="number">10</item>
+                    <item name="object" xsi:type="object">
+                        Walmart\BopisInventoryCatalog\Model\IsProductAvailableCondition\ShippingSourceAvailVirtual
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Walmart\BopisInventoryCatalog\Model\IsProductAvailableCondition\ShippingSourceAvailVirtual" type="Walmart\BopisInventoryCatalog\Model\OrLogicCondition">
+        <arguments>
+            <argument name="conditions" xsi:type="array">
+                <item name="ship_from_store" xsi:type="array">
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sort_order" xsi:type="number">10</item>
+                    <item name="object" xsi:type="object">Walmart\BopisInventoryCatalog\Model\IsProductAvailableCondition\ShipFromStore</item>
+                </item>
+                <item name="warehouse" xsi:type="array">
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sort_order" xsi:type="number">10</item>
+                    <item name="object" xsi:type="object">Walmart\BopisInventoryCatalog\Model\IsProductAvailableCondition\Warehouse</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Walmart\BopisInventoryCatalog\Model\InventoryAvailability\ProductDataProvider">
+        <arguments>
+            <argument name="productHandlers" xsi:type="array">
+                <item name="simple" xsi:type="object">Walmart\BopisInventoryCatalog\Model\InventoryAvailability\ProductType\Simple</item>
+                <item name="configurable" xsi:type="object">Walmart\BopisInventoryCatalog\Model\InventoryAvailability\ProductType\Configurable</item>
+                <item name="bundle" xsi:type="object">Walmart\BopisInventoryCatalog\Model\InventoryAvailability\ProductType\Bundle</item>
+            </argument>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="StockSourceItemBuilder" type="Walmart\BopisInventoryCatalog\Model\InventoryAvailability\Builder\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="product" xsi:type="string">Walmart\BopisInventoryCatalog\Model\InventoryAvailability\Builder\ProductDataBuilder</item>
+                <item name="ship_to_store" xsi:type="string">Walmart\BopisInventoryCatalog\Model\InventoryAvailability\Builder\ShipToStoreBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Walmart\BopisInventoryCatalog\Model\InventoryAvailabilityService">
+        <arguments>
+            <argument name="stockSourceItemBuilder" xsi:type="object">StockSourceItemBuilder</argument>
+        </arguments>
+        <plugin name="walmart_bopis_inventory_catalog_get_product_source_items_bundle"
+                type="Walmart\BopisInventoryCatalog\Plugin\InventoryAvailability\GetBundleSourceItemsPlugin"
+                sortOrder="20" />
+        <plugin name="walmart_bopis_inventory_catalog_bundle_available_qty"
+                type="Walmart\BopisInventoryCatalog\Plugin\InventoryAvailability\GetBundleAvailableQty"
+                sortOrder="20" />
+    </type>
+
+    <type name="Walmart\BopisInventoryCatalog\Plugin\InventoryAvailability\GetBundleSourceItemsPlugin">
+        <arguments>
+            <argument name="quoteSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Walmart\BopisInventoryCatalog\Plugin\InventoryAvailability\GetBundleAvailableQty">
+        <arguments>
+            <argument name="quoteSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Walmart\BopisInventoryCatalog\Model\InventoryAvailability\Builder\ShipToStoreBuilder">
+        <arguments>
+            <argument name="isProductAvailable" xsi:type="object">StorePickupConditionChain</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\InventorySalesApi\Api\AreProductsSalableForRequestedQtyInterface">
+        <plugin name="wmt_bopis_use_walmart_calculation_for_requested_qty"
+                type="Walmart\BopisInventoryCatalog\Plugin\AreProductsSalableForRequestedQtyPlugin"
+                sortOrder="10" />
+    </type>
+
+    <type name="Magento\InventoryBundleProduct\Model\GetBundleProductStockStatus">
+        <plugin name="wmt_bopis_catalog_disable_bundle_validation"
+                type="Walmart\BopisInventoryCatalog\Plugin\Bundle\GetBundleProductStockStatusPlugin"
+                sortOrder="10" />
+    </type>
+</config>

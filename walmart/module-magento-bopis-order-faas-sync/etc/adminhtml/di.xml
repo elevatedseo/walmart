@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Sales\Block\Adminhtml\Order\View">
+        <plugin name="walmart_bopis_order_faas_sync_add_sync_with_faas_button_to_order"
+                type="Walmart\BopisOrderFaasSync\Plugin\Order\AddSyncButtonPlugin"
+                disabled="false" sortOrder="1"/>
+    </type>
+    <type name="Magento\Sales\Controller\Adminhtml\Order\Creditmemo\Save">
+        <plugin name="walmart_bopis_order_faas_sync_change_new_creditmemo_message"
+                type="Walmart\BopisOrderFaasSync\Plugin\Sales\Controller\Adminhtml\Order\Creditmemo\SavePlugin" />
+    </type>
+    <type name="Walmart\BopisOrderFaasSync\Plugin\Order\PlaceAfterPlugin">
+        <arguments>
+            <argument name="quoteSession" xsi:type="object">Magento\Backend\Model\Session\Quote\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Sales\Model\ResourceModel\Order\Grid\Collection">
+        <plugin name="walmart_bopis_order_faas_sync_add_order_grid_column"
+                type="Walmart\BopisOrderFaasSync\Plugin\Order\Grid\Collection\AddSyncStatusColumnPlugin"
+                disabled="false" sortOrder="1"/>
+    </type>
+</config>

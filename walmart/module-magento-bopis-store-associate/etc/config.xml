@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <bopis>
+            <store_associate>
+                <security>
+                    <session_lifetime>7200</session_lifetime>
+                    <lockout_failures>6</lockout_failures>
+                    <lockout_threshold>30</lockout_threshold>
+                    <password_lifetime>90</password_lifetime>
+                    <password_is_forced>1</password_is_forced>
+                </security>
+            </store_associate>
+        </bopis>
+    </default>
+</config>

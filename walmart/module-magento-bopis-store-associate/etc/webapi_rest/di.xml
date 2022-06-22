@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Reflection\DataObjectProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="Walmart\BopisStoreAssociate\Model\LoginResponse"
+                      xsi:type="object">Walmart\BopisStoreAssociate\Model\Login\Webapi\ValidateResponse</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Reflection\DataObjectProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="Walmart\BopisStoreAssociate\Model\PasswordChangeResponse"
+                      xsi:type="object">Walmart\BopisStoreAssociate\Model\PasswordChange\Webapi\ValidateResponse</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

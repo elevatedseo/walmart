@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Walmart_BopisLocationCheckInAdminUi::system"
+             title="Check In"
+             translate="title"
+             module="Walmart_BopisLocationCheckInAdminUi"
+             parent="Magento_Backend::system"
+             sortOrder="90"
+             resource="Walmart_BopisLocationCheckInAdminUi::checkin_acl"
+             dependsOnConfig="bopis/general/enabled"/>
+        <add id="Walmart_BopisLocationCheckInAdminUi::carmake_listing"
+             title="Car Makes"
+             translate="title"
+             module="Walmart_BopisLocationCheckInAdminUi"
+             parent="Walmart_BopisLocationCheckInAdminUi::system"
+             action="wct-fulfillment/carmake"
+             sortOrder="10"
+             resource="Walmart_BopisLocationCheckInAdminUi::carmake"/>
+        <add id="Walmart_BopisLocationCheckInAdminUi::carcolor_listing"
+             title="Car Colors"
+             translate="title"
+             module="Walmart_BopisLocationCheckInAdminUi"
+             parent="Walmart_BopisLocationCheckInAdminUi::system"
+             action="wct-fulfillment/carcolor"
+             sortOrder="20"
+             resource="Walmart_BopisLocationCheckInAdminUi::carcolor"/>
+    </menu>
+</config>

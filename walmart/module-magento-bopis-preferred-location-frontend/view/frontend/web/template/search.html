@@ -1,0 +1,24 @@
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<form class="bopis-location-search" data-bind="submit: filterLocations">
+    <fieldset class="fieldset">
+        <div class="field">
+            <div class="control">
+                <input data-bind="value: searchTerm, attr: {placeholder: $t('Search by city or zip code')}"
+                       class="input-text"
+                       type="text"/>
+            </div>
+        </div>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button type="submit" class="action submit primary">
+                    <span data-bind="i18n: 'Search'"></span>
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</form>

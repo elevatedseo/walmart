@@ -1,0 +1,54 @@
+{
+    "walmart_bopis_sales_order_checkin": {
+        "column": {
+            "check_in_id": true,
+            "order_id": true,
+            "external_id": true,
+            "source_code": true,
+            "customer_id": true,
+            "status": true,
+            "alternate_pickup_contact": true,
+            "completed_by": true,
+            "parking_spot": true,
+            "car_make": true,
+            "car_color": true,
+            "additional_notes": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "SALES_ORDER_CHECKIN_CUSTOMER_ID": true,
+            "SALES_ORDER_CHECKIN_STATUS": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "SALES_ORDER_CHECKIN_EXTERNAL_ID": true,
+            "SALES_ORDER_CHECKIN_ORDER_ID_SALES_ORDER_ENTITY_ID": true,
+            "SALES_ORDER_CHECKIN_SOURCE_CODE_INVENTORY_SOURCE_SOURCE_CODE": true,
+            "FK_1F5EE19BCCCB77CF5F1BC7F4A11E6111": true,
+            "SALES_ORDER_CHECKIN_COMPLETED_BY_ASSOCIATE_USER_USER_ID": true
+        }
+    },
+    "walmart_bopis_carcolor": {
+        "column": {
+            "carcolor_id": true,
+            "scope": true,
+            "scope_id": true,
+            "value": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "walmart_bopis_carmake": {
+        "column": {
+            "carmake_id": true,
+            "scope": true,
+            "scope_id": true,
+            "value": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

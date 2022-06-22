@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Walmart\BopisOrderUpdateApi\Api\Data\ResponseInterface" type="Walmart\BopisOrderUpdateApi\Model\Response" />
+    <preference for="Walmart\BopisOrderUpdateApi\Api\CancelInterface" type="Walmart\BopisOrderUpdateApi\Model\Cancel" />
+    <preference for="Walmart\BopisOrderUpdateApi\Api\PickedInterface" type="Walmart\BopisOrderUpdateApi\Model\Picked" />
+    <preference for="Walmart\BopisOrderUpdateApi\Api\DispensedInterface" type="Walmart\BopisOrderUpdateApi\Model\Dispensed" />
+    <preference for="Magento\InventoryInStorePickupSalesApi\Api\NotifyOrdersAreReadyForPickupInterface" type="Walmart\BopisOrderUpdateApi\Model\NotifyOrdersAreReadyForPickup"/>
+    <preference for="Magento\InventoryInStorePickupSalesApi\Api\NotifyOrdersAreDispensedInterface" type="Walmart\BopisOrderUpdateApi\Model\NotifyOrdersAreDispensed"/>
+</config>

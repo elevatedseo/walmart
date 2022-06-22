@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+    <section name="StorefrontProductActionSection">
+        <element name="homeDelivery" type="input" selector="#home" timeout="60"/>
+        <element name="storePickup" type="input" selector="#instore_pickup" timeout="60"/>
+        <element name="selectedStoreName" type="text" selector="#selected-store-name" timeout="60"/>
+    </section>
+</sections>

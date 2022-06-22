@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\InventoryApi\Api\SourceRepositoryInterface">
+        <plugin name="walmart_bopis_preferred_location_reset_selected_source_customer_attribute"
+                type="Walmart\BopisPreferredLocation\Plugin\SourceRepositoryInterfacePlugin"
+                sortOrder="20" />
+    </type>
+
+    <type name="Walmart\BopisPreferredLocation\Model\Address\GetPickupLocationCodeAdapter">
+        <arguments>
+            <argument name="quoteSession" xsi:type="object">Magento\Backend\Model\Session\Quote\Proxy</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="SelectStorePickupAndCheckIfSourceIsOutOfStockFromStorefrontProductPageActionGroup">
+        <annotations>
+            <description>Select Store Pickup Method and check if store is out of stock.</description>
+        </annotations>
+        <arguments>
+            <argument name="sourceCode" type="string"/>
+            <argument name="sourceName" type="string"/>
+        </arguments>
+
+        <click selector="{{StorefrontProductActionSection.storePickup}}" stepKey="selectStorePickup"/>
+        <waitForElementVisible selector="{{StorefrontBopisModalSection.bopisModalTrigger}}" stepKey="waitForBopisModalTrigger"/>
+        <click selector="{{StorefrontBopisModalSection.bopisModalTrigger}}" stepKey="openBopisModalTrigger"/>
+        <waitForElementVisible selector="{{StorefrontBopisModalSection.bopisModal}}" stepKey="waitForBopisModal"/>
+
+        <assertElementContainsAttribute stepKey="assertSourceIsDisabled">
+            <expectedResult selector="{{StorefrontBopisModalSection.storeOption(sourceCode)}}" attribute="disabled" type="string">true</expectedResult>
+        </assertElementContainsAttribute>
+        <see selector="{{StorefrontBopisModalSection.storeOptionStockStatus(sourceCode)}}" userInput="Out-of-Stock" stepKey="seeSourceOutOfStockStatus"/>
+    </actionGroup>
+</actionGroups>

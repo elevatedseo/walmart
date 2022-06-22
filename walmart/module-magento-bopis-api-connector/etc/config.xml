@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <bopis>
+            <general>
+                <environment>sandbox</environment>
+                <enabled>0</enabled>
+                <sandbox_server_url>https://developer.api.us.stg.walmart.com/</sandbox_server_url>
+                <sandbox_token_auth_url>https://developer.api.us.stg.walmart.com/</sandbox_token_auth_url>
+            </general>
+        </bopis>
+    </default>
+</config>

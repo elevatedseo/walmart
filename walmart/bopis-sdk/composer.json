@@ -1,0 +1,19 @@
+{
+    "name": "walmart/bopis-sdk",
+    "description": "A software development kit for interacting with external Walmart systems, such as the FaaS or ChaaS. Maintains the API client specifications.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],    
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Walmart\\BopisSdk\\": ""
+        }
+    }
+}

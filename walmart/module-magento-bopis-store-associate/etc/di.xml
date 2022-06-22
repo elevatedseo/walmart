@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Walmart\BopisStoreAssociateApi\Api\Data\AssociateUserInterface"
+                type="Walmart\BopisStoreAssociate\Model\AssociateUser" />
+    <preference for="Walmart\BopisStoreAssociateApi\Api\AssociateUserRepositoryInterface"
+                type="Walmart\BopisStoreAssociate\Model\AssociateUserRepository" />
+    <preference for="Walmart\BopisStoreAssociateApi\Api\Data\AssociateUserSearchResultsInterface"
+                type="Walmart\BopisStoreAssociate\Model\AssociateUserSearchResults" />
+    <preference for="Walmart\BopisStoreAssociateApi\Api\Data\AssociateRoleInterface"
+                type="Walmart\BopisStoreAssociate\Model\AssociateRole" />
+    <preference for="Walmart\BopisStoreAssociateApi\Api\AssociateRoleRepositoryInterface"
+                type="Walmart\BopisStoreAssociate\Model\AssociateRoleRepository" />
+    <preference for="Walmart\BopisStoreAssociateApi\Api\Data\AssociateRoleSearchResultsInterface"
+                type="Walmart\BopisStoreAssociate\Model\AssociateRoleSearchResults" />
+    <preference for="Walmart\BopisStoreAssociateApi\Api\Data\AssociatePasswordsInterface"
+                type="Walmart\BopisStoreAssociate\Model\AssociatePasswords" />
+    <preference for="Walmart\BopisStoreAssociateApi\Api\AssociatePasswordsRepositoryInterface"
+                type="Walmart\BopisStoreAssociate\Model\AssociatePasswordsRepository" />
+    <preference for="Walmart\BopisStoreAssociateApi\Api\Data\AssociatePasswordsSearchResultsInterface"
+                type="Walmart\BopisStoreAssociate\Model\AssociatePasswordsSearchResults" />
+    <preference for="Walmart\BopisStoreAssociateApi\Api\Data\AssociateSessionInterface"
+                type="Walmart\BopisStoreAssociate\Model\AssociateSession" />
+    <preference for="Walmart\BopisStoreAssociateApi\Api\AssociateSessionRepositoryInterface"
+                type="Walmart\BopisStoreAssociate\Model\AssociateSessionRepository" />
+    <preference for="Walmart\BopisStoreAssociateApi\Api\Data\AssociateSessionSearchResultsInterface"
+                type="Walmart\BopisStoreAssociate\Model\AssociateSessionSearchResults" />
+
+    <preference for="Walmart\BopisStoreAssociateApi\Api\LoginInterface"
+                type="Walmart\BopisStoreAssociate\Model\Login"/>
+    <preference for="Walmart\BopisStoreAssociateApi\Api\PasswordChangeInterface"
+                type="Walmart\BopisStoreAssociate\Model\PasswordChange"/>
+    <preference for="Walmart\BopisStoreAssociateApi\Api\SessionVerifyInterface"
+                type="Walmart\BopisStoreAssociate\Model\SessionVerify"/>
+    <preference for="Walmart\BopisStoreAssociateApi\Api\Data\LoginResponseInterface"
+                type="Walmart\BopisStoreAssociate\Model\LoginResponse"/>
+    <preference for="Walmart\BopisStoreAssociateApi\Api\Data\ParametersResponseInterface"
+                type="Walmart\BopisStoreAssociate\Model\ParametersResponse"/>
+    <preference for="Walmart\BopisStoreAssociateApi\Api\Data\PasswordChangeResponseInterface"
+                type="Walmart\BopisStoreAssociate\Model\PasswordChangeResponse"/>
+    <preference for="Walmart\BopisStoreAssociateApi\Api\Data\SessionVerifyResponseInterface"
+                type="Walmart\BopisStoreAssociate\Model\SessionVerifyResponse"/>
+
+    <type name="Walmart\BopisStoreAssociate\Model\AssociateUserRepository">
+        <plugin name="walmart_bopis_store_associate_update_passwords_entity_after_user_save"
+                type="Walmart\BopisStoreAssociate\Plugin\Model\AssociateUserRepositoryPlugin"/>
+    </type>
+    <type name="Magento\InventoryApi\Api\SourceRepositoryInterface">
+        <plugin name="walmart_bopis_store_associate_remove_source_from_location_list"
+                type="Walmart\BopisStoreAssociate\Plugin\InventoryApi\Api\SourceRepositoryInterfacePlugin"/>
+    </type>
+</config>

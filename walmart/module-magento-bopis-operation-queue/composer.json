@@ -1,0 +1,21 @@
+{
+    "name": "walmart/module-magento-bopis-operation-queue",
+    "description": "This module provides system communication queue services to be used by other modules in the solution.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "magento/framework": "103.0.*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Walmart\\BopisOperationQueue\\": ""
+        }
+    }
+}

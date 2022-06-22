@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\InventoryInStorePickupSales\Model\Order\Email\ReadyForPickupSender"
+                type="Walmart\BopisOrderUpdate\Model\Order\Email\ReadyForPickupSender" />
+    <preference for="Magento\InventoryInStorePickupSales\Model\Order\Email\ReadyForPickupNotifier"
+                type="Walmart\BopisOrderUpdate\Model\Order\Email\ReadyForPickupNotifier" />
+    <preference for="Magento\Sales\Model\Order\Email\Sender\OrderSender"
+                type="Walmart\BopisOrderUpdate\Model\Order\Email\Sender\OrderSender" />
+
+    <preference for="Walmart\BopisOrderUpdateApi\Api\Data\OrderExtensionAttributesInterface"
+                type="Walmart\BopisOrderUpdate\Model\OrderExtensionAttributes" />
+    <preference for="Walmart\BopisOrderUpdateApi\Api\OrderExtensionAttributesRepositoryInterface"
+                type="Walmart\BopisOrderUpdate\Model\OrderExtensionAttributesRepository" />
+    <preference for="Walmart\BopisOrderUpdateApi\Api\Data\OrderExtensionAttributesSearchResultsInterface"
+                type="Walmart\BopisOrderUpdate\Model\OrderExtensionAttributesSearchResults" />
+
+    <preference for="Walmart\BopisOrderUpdateApi\Api\Data\OrderItemExtensionAttributesInterface"
+                type="Walmart\BopisOrderUpdate\Model\OrderItemExtensionAttributes" />
+    <preference for="Walmart\BopisOrderUpdateApi\Api\OrderItemExtensionAttributesRepositoryInterface"
+                type="Walmart\BopisOrderUpdate\Model\OrderItemExtensionAttributesRepository" />
+    <preference for="Walmart\BopisOrderUpdateApi\Api\Data\OrderItemExtensionAttributesSearchResultsInterface"
+                type="Walmart\BopisOrderUpdate\Model\OrderItemExtensionAttributesSearchResults" />
+
+    <type name="Walmart\BopisOrderUpdate\Model\Order\Email\ReadyForPickupSender">
+        <arguments>
+            <argument name="identityContainer" xsi:type="object">Walmart\BopisOrderUpdate\Model\Order\Email\Container\ReadyForPickupIdentity</argument>
+        </arguments>
+    </type>
+
+    <type name="Walmart\BopisOrderUpdate\Model\Order\Email\HasBeenPickedUpSender">
+        <arguments>
+            <argument name="identityContainer" xsi:type="object">Walmart\BopisOrderUpdate\Model\Order\Email\Container\HasBeenPickedUpIdentity</argument>
+        </arguments>
+    </type>
+
+    <type name="Walmart\BopisOrderUpdate\Model\Order\Email\CanceledSender">
+        <arguments>
+            <argument name="identityContainer" xsi:type="object">Walmart\BopisOrderUpdate\Model\Order\Email\Container\CanceledIdentity</argument>
+        </arguments>
+    </type>
+
+    <type name="Walmart\BopisOrderUpdate\Model\Order\Email\DelayedSender">
+        <arguments>
+            <argument name="identityContainer" xsi:type="object">Walmart\BopisOrderUpdate\Model\Order\Email\Container\DelayedIdentity</argument>
+        </arguments>
+    </type>
+
+    <type name="Walmart\BopisOrderUpdate\Model\Order\Email\PartlyCanceledSender">
+        <arguments>
+            <argument name="identityContainer" xsi:type="object">Walmart\BopisOrderUpdate\Model\Order\Email\Container\PartlyCanceledIdentity</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="dispensedPartlyCanceledSender"
+                 type="Walmart\BopisOrderUpdate\Model\Order\Email\PartlyCanceledSender">
+        <arguments>
+            <argument name="identityContainer" xsi:type="object">Walmart\BopisOrderUpdate\Model\Order\Email\Container\DispensedPartlyCanceledIdentity</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="dispensedPartlyCanceledNotifier"
+                 type="Walmart\BopisOrderUpdate\Model\Order\Email\PartlyCanceledNotifier">
+        <arguments>
+            <argument name="sender" xsi:type="object">dispensedPartlyCanceledSender</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Walmart\BopisOrderUpdateApi\Model\NotifyOrdersAreDispensed">
+        <arguments>
+            <argument name="partlyCanceledNotifier" xsi:type="object">dispensedPartlyCanceledNotifier</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sales\Model\ResourceModel\Order\Handler\State">
+        <plugin name="walmart_bopis_order_update_change_status_after_order_complete"
+                type="Walmart\BopisOrderUpdate\Plugin\Order\Handler\State" sortOrder="1" disabled="false"/>
+        <plugin name="walmart_bopis_order_update_status_ship_to_store"
+                type="Walmart\BopisOrderUpdate\Plugin\Order\Handler\ShipToStoreState" sortOrder="10" />
+    </type>
+
+    <type name="Walmart\BopisOrderUpdateApi\Model\NotifyOrdersAreReadyForPickup">
+        <plugin name="walmart_bopis_order_update_send_ship_to_store_email"
+                type="Walmart\BopisOrderUpdate\Plugin\SendShipToStoreEmailPlugin"
+                sortOrder="20" />
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Email\Sender\OrderSender">
+        <plugin name="walmart_bopis_order_update_send_order_delayed_email"
+                type="Walmart\BopisOrderUpdate\Plugin\SendOrderDelayedEmailPlugin"
+                sortOrder="20" />
+    </type>
+
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="walmart_bopis_order_update_set_order_extension_attributes"
+                type="Walmart\BopisOrderUpdate\Plugin\OrderRepositoryPlugin" />
+    </type>
+    <type name="Magento\Sales\Api\OrderItemRepositoryInterface">
+        <plugin name="walmart_bopis_order_update_set_order_item_extension_attributes"
+                type="Walmart\BopisOrderUpdate\Plugin\OrderItemRepositoryPlugin" />
+    </type>
+    <type name="Magento\Sales\Model\Order">
+        <plugin name="walmart_bopis_order_update_get_order_extension_attributes"
+                type="Walmart\BopisOrderUpdate\Plugin\Sales\Model\OrderPlugin" />
+    </type>
+</config>

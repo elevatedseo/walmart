@@ -1,0 +1,48 @@
+{
+    "walmart_bopis_sales_order_extension_attributes": {
+        "column": {
+            "entity_id": true,
+            "order_id": true,
+            "bopis_queue_status": true,
+            "wmt_sts_email_status": true,
+            "wmt_is_ship_to_store": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_40B56CB6D4D0C14F1A31D4884ABF85F8": true
+        }
+    },
+    "walmart_bopis_sales_order_item_extension_attributes": {
+        "column": {
+            "entity_id": true,
+            "order_item_id": true,
+            "wmt_ship_to_store": true,
+            "wmt_item_picked_status": true,
+            "wmt_item_dispensed_status": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_311AF2E443F95E31898F17B502DF36F6": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "bopis_queue_status": true,
+            "wmt_sts_email_status": true,
+            "wmt_is_ship_to_store": true
+        }
+    },
+    "sales_order_grid": {
+        "column": {
+            "bopis_queue_status": true
+        }
+    },
+    "sales_order_item": {
+        "column": {
+            "wmt_ship_to_store": true,
+            "wmt_item_picked_status": true,
+            "wmt_item_dispensed_status": true,
+            "wmt_upc": true
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "inventory_source": {
+        "column": {
+            "is_wmt_bopis_synced": true,
+            "sync_error": true
+        }
+    }
+}

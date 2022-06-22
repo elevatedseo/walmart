@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="inventory_source" resource="default" engine="innodb" comment="Inventory Source">
+        <column xsi:type="boolean" name="allow_ship_to_store" default="0" nullable="false" comment="Allow Ship To Store"/>
+        <column xsi:type="boolean" name="use_as_shipping_source" default="1" nullable="false" comment="Use as Shipping Source"/>
+        <column xsi:type="boolean" name="store_pickup_enabled" default="1" nullable="false" comment="store pickup enabled"/>
+        <column xsi:type="boolean" name="curbside_enabled" default="0" nullable="false" comment="Curbside Enabled"/>
+        <column xsi:type="text" name="pickup_lead_time" nullable="true" comment="Pickup Lead Time"/>
+        <column xsi:type="varchar" name="pickup_time_label" nullable="true" length="255" comment="Pickup Time Label"/>
+        <column xsi:type="varchar" name="timezone" nullable="true" length="255" comment="Timezone"/>
+        <column xsi:type="text" name="store_pickup_instructions" nullable="true" comment="Store Pickup Instructions"/>
+        <column xsi:type="text" name="curbside_instructions" nullable="true" comment="Curbside Instructions"/>
+        <column xsi:type="boolean" name="parking_spots_enabled" default="0" nullable="false" comment="Parking spots enabled"/>
+        <column xsi:type="boolean" name="parking_spot_mandatory" default="1" nullable="false" comment="Parking spots Mandatory"/>
+        <column xsi:type="boolean" name="custom_parking_spot_enabled" default="1" nullable="false" comment="Custom parking spots enabled"/>
+        <column xsi:type="boolean" name="use_car_color" default="1" nullable="false" comment="Use Car Color"/>
+        <column xsi:type="boolean" name="car_color_mandatory" default="0" nullable="false" comment="Car Color Mandatory"/>
+        <column xsi:type="boolean" name="use_car_make" default="1" nullable="false" comment="Use Car Make"/>
+        <column xsi:type="boolean" name="car_make_mandatory" default="0" nullable="false" comment="Car Make Mandatory"/>
+        <column xsi:type="boolean" name="use_additional_information" default="1" nullable="false" comment="Use Additional Information"/>
+        <column xsi:type="boolean" name="additional_information_mandatory" default="0" nullable="false" comment="Additional Information Mandatory"/>
+    </table>
+	<table name="walmart_bopis_inventory_source_opening_hours" resource="default" engine="innodb" comment="Inventory Source opening hours">
+        <column xsi:type="int" name="source_open_hours_id" nullable="false" identity="true" comment="Source open hours id"/>
+        <column xsi:type="varchar" name="source_code" nullable="false" length="255" comment="Source code"/>
+        <column xsi:type="smallint" name="day_of_week" unsigned="true" nullable="false" comment="Day of week"/>
+        <column xsi:type="varchar" name="open_hour" nullable="true" length="8" comment="Open hour"/>
+        <column xsi:type="varchar" name="close_hour" nullable="true" length="8" comment="Close hour"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="source_open_hours_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="INVENTORY_SOURCE_OPENING_HOURS_SOURCE_CODE"
+                    table="walmart_bopis_source_opening_hours" column="source_code"
+                    referenceTable="inventory_source" referenceColumn="source_code" onDelete="CASCADE"/>
+    </table>
+    <table name="walmart_bopis_inventory_source_parking_spot" resource="default" engine="innodb" comment="Inventory Source Parking Spot">
+        <column xsi:type="int" name="source_parking_spot_id" nullable="false" identity="true" comment="Source parking spot id"/>
+        <column xsi:type="varchar" name="source_code" nullable="false" length="255" comment="Source code"/>
+        <column xsi:type="boolean" name="enabled" default="1" nullable="false" comment="Enabled"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Name"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="source_parking_spot_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="INVENTORY_SOURCE_PARKING_SPOT_SOURCE_CODE"
+                    table="walmart_bopis_inventory_source_parking_spot" column="source_code"
+                    referenceTable="inventory_source" referenceColumn="source_code" onDelete="CASCADE"/>
+    </table>
+</schema>

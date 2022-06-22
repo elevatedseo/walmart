@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Walmart\BopisApiConnector\Api\TokenInterface"
+                type="Walmart\BopisApiConnector\Model\Token" />
+    <preference for="Walmart\BopisApiConnector\Api\TestConnectionInterface"
+                type="Walmart\BopisApiConnector\Model\TestConnection" />
+    <preference for="Walmart\BopisApiConnector\Api\StoreLocationApiInterface"
+                type="Walmart\BopisApiConnector\Model\StoreLocationApi" />
+</config>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.addtocart.bundle">
+            <action method="setTemplate" ifconfig="bopis/general/enabled">
+                <argument name="template" xsi:type="string">Walmart_BopisDeliverySelection::product/view/addtocart.phtml</argument>
+            </action>
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="deliveryMethods" xsi:type="array">
+                            <item name="component" xsi:type="string">Walmart_BopisDeliverySelection/js/view/product/delivery-methods</item>
+                            <item name="config" xsi:type="array">
+                                <item name="hasItemsModalContent" xsi:type="helper" helper="Walmart\BopisDeliverySelection\ViewModel\BopisMethodSelection::getItemsInCartAlert" />
+                            </item>
+                            <item name="children" xsi:type="array">
+                                <item name="home" xsi:type="array">
+                                    <item name="component" xsi:type="string">Walmart_BopisDeliverySelection/js/view/product/delivery-method</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="template" xsi:type="string">Walmart_BopisDeliverySelection/delivery-method</item>
+                                        <item name="title" xsi:type="helper" helper="Walmart\BopisDeliverySelection\ViewModel\BopisMethodSelection::getHomeDeliveryTitle" />
+                                        <item name="imports" xsi:type="array">
+                                            <item name="isEnabled" xsi:type="string">methodsConfig:home</item>
+                                        </item>
+                                    </item>
+                                    <item name="children" xsi:type="array">
+                                        <item name="description" xsi:type="array">
+                                            <item name="component" xsi:type="string">uiComponent</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="template" xsi:type="string">Walmart_BopisPreferredLocationFrontend/text-block</item>
+                                                <item name="text" xsi:type="helper" helper="Walmart\BopisDeliverySelection\ViewModel\BopisMethodSelection::getHomeDeliveryDesc" />
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                                <item name="instore_pickup" xsi:type="array">
+                                    <item name="component" xsi:type="string">Walmart_BopisDeliverySelection/js/view/product/delivery-method</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="template" xsi:type="string">Walmart_BopisDeliverySelection/delivery-method</item>
+                                        <item name="title" xsi:type="helper" helper="Walmart\BopisDeliverySelection\ViewModel\BopisMethodSelection::getStorePickupTitle" />
+                                        <item name="isFree" xsi:type="helper" helper="Walmart\BopisDeliverySelection\ViewModel\BopisMethodSelection::getIsInStoreFree" />
+                                        <item name="imports" xsi:type="array">
+                                            <item name="isEnabled" xsi:type="string">methodsConfig:instore</item>
+                                        </item>
+                                    </item>
+                                    <item name="children" xsi:type="array">
+                                        <item name="location-pickup-time" xsi:type="array">
+                                            <item name="component" xsi:type="string">Walmart_BopisPreferredLocationFrontend/js/view/location-pickup-time</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="defaultText" xsi:type="helper" helper="Walmart\BopisDeliverySelection\ViewModel\BopisMethodSelection::getStorePickupDesc" />
+                                            </item>
+                                        </item>
+                                        <item name="modal_trigger" xsi:type="array">
+                                            <item name="component" xsi:type="string">Walmart_BopisPreferredLocationFrontend/js/view/link</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                        <item name="addToCart" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="imports" xsi:type="array">
+                                    <item name="isEnabled" xsi:type="string">deliveryMethods:isAddToCartEnabled</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

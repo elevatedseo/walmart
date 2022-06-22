@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <instore>
+                <delivery_methods>
+                    <enabled_instore_pickup>1</enabled_instore_pickup>
+                    <enabled_curbside_pickup>0</enabled_curbside_pickup>
+                </delivery_methods>
+                <delivery_methods_titles>
+                    <home_delivery_title>Home Delivery</home_delivery_title>
+                    <store_pickup_title>Store Pickup</store_pickup_title>
+                    <instore_pickup_title>In-Store Pickup</instore_pickup_title>
+                    <curbside_pickup_title>Curbside</curbside_pickup_title>
+                    <pickup_time_disclaimer>The order will be ready for pickup at the stated time, but please keep in mind that store hours, holidays, weekends, staffing restrictions, weather, inventory movements between stores and other store closures will affect when your order is ready to be picked up.</pickup_time_disclaimer>
+                </delivery_methods_titles>
+                <stock_availability_status_titles>
+                    <in_stock>In-Stock</in_stock>
+                    <out_of_stock>Out-of-Stock</out_of_stock>
+                    <partially_in_stock>Partially In-Stock</partially_in_stock>
+                </stock_availability_status_titles>
+            </instore>
+        </carriers>
+    </default>
+</config>

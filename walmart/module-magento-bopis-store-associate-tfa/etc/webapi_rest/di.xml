@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Walmart\BopisStoreAssociate\Model\Login\Webapi\ValidateResponse">
+        <plugin name="walmart_bopis_store_associate_tfa_validate_tfa_and_add_additional_data_to_response"
+                type="Walmart\BopisStoreAssociateTfa\Plugin\BopisStoreAssociate\Model\Login\Webapi\ValidateResponsePlugin"/>
+    </type>
+</config>

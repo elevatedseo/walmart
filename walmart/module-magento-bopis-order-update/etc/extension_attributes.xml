@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\Sales\Api\Data\OrderInterface">
+        <attribute code="bopis_queue_status" type="int" />
+        <attribute code="wmt_sts_email_status" type="int">
+            <join reference_table="walmart_bopis_sales_order_extension_attributes" reference_field="order_id"
+                  join_on_field="entity_id">
+                <field>wmt_sts_email_status</field>
+            </join>
+        </attribute>
+        <attribute code="wmt_is_ship_to_store" type="int" />
+    </extension_attributes>
+    <extension_attributes for="Magento\Sales\Api\Data\OrderItemInterface">
+        <attribute code="wmt_ship_to_store" type="int" />
+        <attribute code="wmt_item_picked_status" type="string" />
+        <attribute code="wmt_item_dispensed_status" type="string" />
+    </extension_attributes>
+</config>

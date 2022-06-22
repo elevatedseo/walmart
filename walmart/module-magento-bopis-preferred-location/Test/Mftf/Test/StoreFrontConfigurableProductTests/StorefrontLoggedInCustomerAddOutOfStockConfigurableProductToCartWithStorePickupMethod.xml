@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright Walmart Inc. All Rights Reserved.
+ * @author    Blue Acorn iCi <code@blueacorn.com>
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="StorefrontLoggedInCustomerAddOutOfStockConfigurableProductToCartWithStorePickupMethod">
+        <annotations>
+            <stories value="Logged In Customer - As a store owner I would like to ensure that out of stock products can not be selected for in store pickup at locations that do not have any stock."/>
+            <title value="Attempt to add out of stock product to cart using store pickup method"/>
+            <description value="1) Create two sources and one stock and assign sources to stock. 2) Create category. 3) Create a configurable product. 4) Assign sources to product and set the quantiry 0 for the first source. 5) create a customer. 6) Go to the product page on frontend. 7) Select Store Pickup method and select store. 8) Add the product to cart. 9) Check that out of stock message is displayed on mini cart. 10) Disable created sources. 11) Delete product and category created."/>
+            <testCaseId value="WMTP-563"/>
+            <severity value="MAJOR"/>
+            <group value="checkout"/>
+        </annotations>
+
+        <before>
+            <!--Enable BOPIS Module and Instore Pickup before start testing -->
+            <magentoCLI command="config:set {{WCTEnabled.path}} {{WCTEnabled.value}}" stepKey="enableModule"/>
+            <magentoCLI command="config:set {{WCTInstorePickupEnabled.path}} {{WCTInstorePickupEnabled.value}}" stepKey="enableInstorePickup"/>
+
+            <!--Create a source and stock and assign source to stock -->
+            <createData entity="BopisStorePickupEnabledSource" stepKey="customSource1"/>
+            <createData entity="BopisStorePickupEnabledSource" stepKey="customSource2"/>
+            <createData entity="BasicMsiStock1" stepKey="customStock"/>
+            <actionGroup ref="AdminLoginActionGroup" stepKey="loginToAdminArea"/>
+            <waitForPageLoad stepKey="waitForDashboardLoad"/>
+
+            <comment userInput="Assign source and sales channel to stock." stepKey="assignSourceToStockComment"/>
+            <amOnPage url="{{AdminManageStockPage.url}}" stepKey="navigateToStockListPage"/>
+            <waitForPageLoad time="30" stepKey="waitForStockGridLoad"/>
+            <actionGroup ref="SearchAdminDataGridByKeywordActionGroup" stepKey="searchCustomStockByName">
+                <argument name="keyword" value="$$customStock.stock[name]$$"/>
+            </actionGroup>
+            <click selector="{{AdminGridRow.editByValue($$customStock.stock[name]$$)}}" stepKey="clickEditCustomStock"/>
+            <waitForPageLoad time="30" stepKey="waitForStockEditPageLoad"/>
+            <selectOption selector="{{AdminEditStockSalesChannelsSection.websites}}" userInput="Main Website" stepKey="selectWebsiteAsSalesChannelForCustomStock"/>
+
+            <click selector="{{AdminEditStockSourcesSection.assignSources}}" stepKey="clickOnAssignSources1"/>
+            <actionGroup ref="SearchAdminDataGridByKeywordActionGroup" stepKey="searchCustomSource1ByName">
+                <argument name="keyword" value="$$customSource1.source[name]$$"/>
+            </actionGroup>
+            <click selector="{{AdminGridRow.checkboxByValue($$customSource1.source[name]$$)}}" stepKey="selectCustomSource1ForCustomStock"/>
+            <click selector="{{AdminManageSourcesGridControls.done}}" stepKey="clickOnDoneCustomSourceAssignment1"/>
+            <click selector="{{AdminEditStockSourcesSection.assignSources}}" stepKey="clickOnAssignSources2"/>
+            <actionGroup ref="SearchAdminDataGridByKeywordActionGroup" stepKey="searchCustomSource2ByName">
+                <argument name="keyword" value="$$customSource2.source[name]$$"/>
+            </actionGroup>
+            <click selector="{{AdminGridRow.checkboxByValue($$customSource2.source[name]$$)}}" stepKey="selectCustomSource2ForCustomStock"/>
+            <click selector="{{AdminManageSourcesGridControls.done}}" stepKey="clickOnDoneCustomSourceAssignment2"/>
+
+            <click selector="{{AdminGridMainControls.saveAndContinue}}" stepKey="saveCustomStock"/>
+
+            <!--Set Display Cart Summary to display items quantities -->
+            <magentoCLI command="config:set {{DisplayItemsQuantities.path}} {{DisplayItemsQuantities.value}}" stepKey="setDisplayCartSummary"/>
+
+            <!-- Create category -->
+            <createData entity="_defaultCategory" stepKey="createCategory"/>
+
+            <!-- Create an attribute with three options to be used in the first child product -->
+            <createData entity="productAttributeWithTwoOptions" stepKey="createConfigProductAttribute"/>
+            <createData entity="productAttributeOption1" stepKey="createConfigProductAttributeOption1">
+                <requiredEntity createDataKey="createConfigProductAttribute"/>
+            </createData>
+
+            <!-- Add the attribute just created to default attribute set -->
+            <createData entity="AddToDefaultSet" stepKey="createConfigAddToAttributeSet">
+                <requiredEntity createDataKey="createConfigProductAttribute"/>
+            </createData>
+
+            <!-- Get the first option of the attribute created -->
+            <getData entity="ProductAttributeOptionGetter" index="1" stepKey="getConfigAttributeOption1">
+                <requiredEntity createDataKey="createConfigProductAttribute"/>
+            </getData>
+
+            <!-- Create Configurable product -->
+            <createData entity="BaseConfigurableProduct" stepKey="createConfigProduct">
+                <requiredEntity createDataKey="createCategory"/>
+            </createData>
+
+            <!-- Create a simple product and give it the attribute with the first option -->
+            <createData entity="ApiSimpleOne" stepKey="createConfigChildProduct1">
+                <requiredEntity createDataKey="createConfigProductAttribute"/>
+                <requiredEntity createDataKey="getConfigAttributeOption1"/>
+                <field key="price">10.00</field>
+            </createData>
+
+            <!-- Create the configurable product -->
+            <createData entity="ConfigurableProductThreeOptions" stepKey="createConfigProductOption">
+                <requiredEntity createDataKey="createConfigProduct"/>
+                <requiredEntity createDataKey="createConfigProductAttribute"/>
+                <requiredEntity createDataKey="getConfigAttributeOption1"/>
+            </createData>
+
+            <!-- Add the first simple product to the configurable product -->
+            <createData entity="ConfigurableProductAddChild" stepKey="createConfigProductAddChild1">
+                <requiredEntity createDataKey="createConfigProduct"/>
+                <requiredEntity createDataKey="createConfigChildProduct1"/>
+            </createData>
+
+            <comment userInput="Adding the comment to replace CliIndexerReindexActionGroup action group ('indexer:reindex' commands) for preserving Backward Compatibility" stepKey="reindex"/>
+            <comment userInput="Adding the comment to replace CliCacheFlushActionGroup action group ('cache:flush' command) for preserving Backward Compatibility" stepKey="flushCache"/>
+        </before>
+        <after>
+            <actionGroup ref="DisableSourceActionGroup" stepKey="disableFirstCreatedSource">
+                <argument name="sourceCode" value="$$customSource1.source[source_code]$$"/>
+            </actionGroup>
+
+            <deleteData createDataKey="createConfigChildProduct1" stepKey="deleteSimpleProduct1"/>
+            <deleteData createDataKey="createCategory" stepKey="deleteCategory"/>
+            <deleteData createDataKey="createConfigProduct" stepKey="deleteProduct"/>
+            <deleteData createDataKey="createConfigProductAttribute" stepKey="deleteProductAttribute"/>
+
+            <!-- Reindex invalidated indices after product attribute has been created/deleted -->
+            <magentoCron groups="index" stepKey="reindexInvalidatedIndices"/>
+
+            <magentoCLI command="config:set {{DisplayItemsQuantities.path}} {{DisplayItemsQuantities.value}}" stepKey="resetDisplayCartSummary"/>
+            <!--Disable BOPIS Module after testing -->
+            <magentoCLI command="config:set {{WCTEnabled.path}} 0" stepKey="disableModule"/>
+            <magentoCLI command="config:set {{WCTInstorePickupEnabled.path}} 0" stepKey="disableInstorePickup"/>
+            <actionGroup ref="AdminLogoutActionGroup" stepKey="logoutFromAdminArea"/>
+        </after>
+
+
+        <!-- Assign source to simple product 1. -->
+        <amOnPage url="{{AdminProductEditPage.url($$createConfigChildProduct1.id$$)}}" stepKey="openProductEditPageToAssignSources1"/>
+
+        <waitForPageLoad time="60" stepKey="waitForAssignSourcesToProduct1"/>
+        <actionGroup ref="AssignSourceToProductActionGroup" stepKey="assignFirstSourceToProduct1">
+            <argument name="sourceCode" value="$$customSource1.source[source_code]$$"/>
+        </actionGroup>
+        <actionGroup ref="AssignSourceToProductActionGroup" stepKey="assignSecondSourceToProduct1">
+            <argument name="sourceCode" value="$$customSource2.source[source_code]$$"/>
+        </actionGroup>
+        <fillField selector="{{AdminProductSourcesGrid.rowQty('1')}}" userInput="0" stepKey="setProduct1Quantity1"/>
+        <fillField selector="{{AdminProductSourcesGrid.rowQty('2')}}" userInput="100" stepKey="setProduct1Quantity2"/>
+        <click selector="{{AdminProductFormActionSection.saveButton}}" stepKey="saveProduct1"/>
+        <waitForPageLoad stepKey="waitForProductSave1"/>
+        <seeElement selector="{{AdminProductMessagesSection.successMessage}}" stepKey="seeSaveProductMessage1"/>
+
+        <!-- Create a user account -->
+        <actionGroup ref="RegisterCustomOnStorefrontActionGroup" stepKey="createAnAccount">
+            <argument name="Customer" value="MsiCustomer1"/>
+            <argument name="storeCode" value="customStore.code"/>
+        </actionGroup>
+
+        <!-- Go to the product page select Store Pickup method and add product to the cart. -->
+        <actionGroup ref="SelectStorePickupAndAddConfigurableToCartFromStorefrontProductPageActionGroup" stepKey="selectStorePickupAndStore" >
+            <argument name="urlKey" value="$$createConfigProduct.custom_attributes[url_key]$$" />
+            <argument name="sourceCode" value="$$customSource1.source[source_code]$$"/>
+            <argument name="sourceName" value="$$customSource1.source[name]$$"/>
+            <argument name="productAttribute" value="$$createConfigProductAttribute.default_value$$"/>
+            <argument name="productOption" value="$$getConfigAttributeOption1.label$$"/>
+            <argument name="qty" value="1"/>
+        </actionGroup>
+
+        <!-- Open Mini Cart -->
+        <actionGroup ref="StorefrontOpenMiniCartActionGroup" stepKey="openMiniCart"/>
+
+        <!-- Assert Out Of Stock message in Mini Cart -->
+        <actionGroup ref="StorefrontAssertMiniCartItemOutOfStockActionGroup" stepKey="assertProductOutOfStockTextInMiniCart">
+            <argument name="productOutOfStockText" value="This product is out of stock."/>
+        </actionGroup>
+    </test>
+</tests>

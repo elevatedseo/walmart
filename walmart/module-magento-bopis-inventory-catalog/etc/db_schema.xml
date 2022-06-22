@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="inventory_source_item">
+        <column xsi:type="decimal" name="out_of_stock_threshold" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Out Of Stock Threshold"/>
+        <column xsi:type="smallint" name="out_of_stock_threshold_use_default" unsigned="true" nullable="false"
+                identity="false" default="1" comment="Out Of Stock Threshold Use Default"/>
+        <column xsi:type="smallint" name="allow_store_pickup" unsigned="true" nullable="false"
+                identity="false" default="1" comment="Allow for Store Pickup"/>
+        <column xsi:type="smallint" name="allow_store_pickup_use_default" unsigned="true" nullable="false"
+                identity="false" default="1" comment="Allow for Store Pickup Use Default"/>
+    </table>
+</schema>

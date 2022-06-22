@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" as="pickup_contact"
+                   name="sales.order.pickup_contact"
+                   template="Walmart_BopisAlternatePickupContactFrontend::order/pickup_contact.phtml"
+                   after="sales.order.info">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Walmart\BopisAlternatePickupContactFrontend\ViewModel\GetCurrentOrder</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

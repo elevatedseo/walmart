@@ -1,0 +1,111 @@
+<?php
+/**
+ * @author    Blue Acorn iCi <code@blueacornici.com>
+ * @copyright Walmart Commerce Technologies. All Rights Reserved.
+ *
+ * @var $block \Walmart\BopisBase\Block\Adminhtml\System\Config\Information\Content
+ * @var $escaper \Magento\Framework\Escaper
+ */
+?>
+<div class="heading">
+    <h1 style="color: #41362f">
+        <strong><?= $escaper->escapeHtml(__('Store Fulfillment by Walmart Commerce Technologies')) ?></strong>
+    </h1>
+</div>
+<div style="display:flex;" class="walmart-info-block" id="bopis-head">
+    <div>
+        <img alt="<?= $escaper->escapeHtml(__('Walmart Logo')) ?>" class="walmart-logo"
+             src="<?= $escaper->escapeHtml($block->getLogoSrc()); ?>"/>
+    </div>
+    <div style="margin-left: 20px;">
+        <p>
+            <?= $escaper->escapeHtml(__(
+                "Store Fulfillment for Adobe Commerce by Walmart Commerce Technologies is an advanced omnichannel
+                fulfillment solution that  integrates your Commerce store with Walmart’s industry-leading store
+                fulfillment technologies to deliver an end-to-end buy-online-pickup-in-store (BOPIS) experience using
+                mobile devices."
+            )); ?>
+        </p>
+        <br/>
+        <p>
+            <?= $escaper->escapeHtml(
+                __("Setup the Staging environment for initial development and testing. Then, set up the Production
+                environment when you are prepared to launch.")
+            ); ?>
+        </p>
+        <br/>
+        <p>
+            <b>
+                <?= $escaper->escapeHtml(__("Setup instructions")); ?>
+            </b>
+        </p>
+        <br/>
+        <ol>
+            <li>
+                <p>
+                    <?= $escaper->escapeHtml(
+                        __("Enable the solution. Complete general configuration for the integration, its active features,
+                        and complete the onboarding intake form to connect to fulfillment services.")
+                    ); ?>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a href="<?= $escaper->escapeHtml($block->getCarriersConfigSrc()); ?>">
+                        <?= $escaper->escapeHtml(__("Configure Delivery Methods.")); ?>
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <?= $escaper->escapeHtml(__("Set up ")); ?>
+                    <a href="<?= $escaper->escapeHtml($block->getSourceInventorySrc()); ?>">
+                        <?= $escaper->escapeHtml(__("sources")); ?>
+                    </a>
+                    <?= $escaper->escapeHtml(__(" as your physical stores and ")); ?>
+                    <a href="<?= $escaper->escapeHtml($block->getProductCatalogSrc()); ?>">
+                        <?= $escaper->escapeHtml(__("Configure Products")); ?>
+                    </a>
+                    <?= $escaper->escapeHtml(__(" in your catalog.")); ?>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <?= $escaper->escapeHtml(__("Select and ")); ?>
+                    <a href="<?= $escaper->escapeHtml($block->getSalesEmailConfigSrc()); ?>">
+                        <?= $escaper->escapeHtml(__("configure the email templates")); ?>
+                    </a>
+                    <?= $escaper->escapeHtml(__(" for BOPIS-related customer communications.")); ?>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <?= $escaper->escapeHtml(__("Create ")); ?>
+                    <a href="<?= $escaper->escapeHtml($block->getUsersBopisStoreSrc()); ?>">
+                        <?= $escaper->escapeHtml(__("users")); ?>
+                    </a>
+                    <?= $escaper->escapeHtml(__(" and ")); ?>
+                    <a href="<?= $escaper->escapeHtml($block->getRolesBopisStoreSrc()); ?>">
+                        <?= $escaper->escapeHtml(__("roles")); ?>
+                    </a>
+                    <?= $escaper->escapeHtml(__(" for the Store Assist app.")); ?>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <?= $escaper->escapeHtml(__("Configure the schedules for ")); ?>
+                    <a href="<?= $escaper->escapeHtml($block->getSystemConfigSrc()); ?>">
+                        <?= $escaper->escapeHtml(__("for background processes")); ?>
+                    </a>
+                    <?= $escaper->escapeHtml(__(" to sync data to the fulfillment service.")); ?>
+                </p>
+            </li>
+        </ol>
+        <br/>
+        <p>
+            <a href="<?= $escaper->escapeHtml($block->getStoreFulfillmentServiceInstructionSrc()); ?>">
+                <?= $escaper->escapeHtml(__("Learn more about configuring the Store Fulfillment service")); ?>
+            </a>
+        </p>
+    </div>
+</div>
